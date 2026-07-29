@@ -1,0 +1,9 @@
+Da terminale visual code per salvare in locale -> 
+git add .
+git commit -m "Scrivo quello che ho fatto"
+git push origin main   invia il lavoro online
+
+latexmk -gg thesis.tex     compila
+makeglossaries -d build thesis    compila il glossario, poi rilancio latexmk come prima
+
+latexmk -C  cancella cache

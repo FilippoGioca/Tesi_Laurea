@@ -2,6 +2,8 @@
 
 \usepackage{colorprofiles}
 
+\usepackage{lmodern}
+
 % PDF/A
 % validate in https://www.pdf-online.com/osa/validate.aspx
 \usepackage[a-2b,mathxmp]{pdfx}
@@ -21,6 +23,14 @@
 
 \usepackage{caption}                    % didascalie
 
+\usepackage{array}                      % per tabelle
+\usepackage{amssymb}
+\usepackage[table]{xcolor}
+
+\usepackage{pgfplots}                   % per grafico nel capitolo conclusivo
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.18}
+
 \usepackage{changepage,calc}            % centra il frontespizio
 
 \usepackage{csquotes}                   % gestisce automaticamente i caratteri (")
@@ -34,6 +44,7 @@
 %\usepackage{indentfirst}               % rientra il primo paragrafo di ogni sezione
 
 \usepackage{graphicx}                   % immagini
+\usepackage{float}
 
 \usepackage{hyperref}                   % collegamenti ipertestuali
 
@@ -57,7 +68,11 @@
 
 \usepackage[toc, acronym]{glossaries}   % glossario
 
-\usepackage[backend=biber,style=verbose-ibid,hyperref,backref]{biblatex}
+% stile originale citazioni e bibliografia
+% \usepackage[backend=biber,style=verbose-ibid,hyperref,backref]{biblatex}
+% stile con numeri
+\usepackage[backend=biber, style=numeric, sorting=none]{biblatex}
 
 \usepackage{layaureo}                   % margini ottimizzati per l'A4
 \usepackage{fancyhdr}
+

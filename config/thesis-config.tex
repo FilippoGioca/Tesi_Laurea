@@ -8,21 +8,26 @@
 % \renewcommand{\labelitemiii}{$\diamond$}
 % \renewcommand{\labelitemiv}{$\ast$}
 
+\pagestyle{fancy} 
+\setlength{\headheight}{14.5pt}
+\fancyhf{} % Svuota le vecchie impostazioni
 
-\let\Chaptermark\chaptermark
-% \Chaptername gives current chapter name
-\def\chaptermark#1{\def\Chaptername{#1}\Chaptermark{#1}}
-\makeatletter
-% \currentname gives the current section name
-\newcommand*{\currentname}{\@currentlabelname}
-\makeatother
-
-% Uncomment the following line for a different header/footer style
-% \pagestyle{fancy} \setlength{\headheight}{14.5pt}
-\fancyhead[L]{\fontsize{12}{14.5} \selectfont \thechapter. \Chaptername}
-\fancyhead[R]{\fontsize{12}{14.5} \selectfont \currentname}
-% Page number always in footer
+% Configurazione delle intestazioni: testo non tutto in maiuscolo (nouppercase)
+\fancyhead[L]{\fontsize{12}{14.5}\selectfont\nouppercase{\leftmark}}
+\fancyhead[R]{\fontsize{12}{14.5}\selectfont\nouppercase{\rightmark}}
 \cfoot{\thepage}
+
+% Personalizzazione intestazione
+\makeatletter
+\renewcommand{\chaptermark}[1]{%
+  % Mostra solo "Numero. Titolo Capitolo" (es: 1. Contesto aziendale) ed elimina "Capitolo"
+  \markboth{\ifnum\c@secnumdepth>\m@ne \if@mainmatter \thechapter.\ \fi\fi #1}{}%
+}
+\renewcommand{\sectionmark}[1]{%
+  % Mostra solo il nome della sezione, eliminando completamente i numeri (es: Wintech Spa)
+  \markright{#1}%
+}
+\makeatother
 
 
 % Custom hyphenation rules
@@ -44,8 +49,11 @@
 % Load variables
 \input{config/variables}
 
-\input{appendix/glossary-entries}
+% \input{appendix/glossary-entries}
 \makeglossaries
+\defglsentryfmt[main]{\glsgenentryfmt\ifglsused{\glslabel}{}{\glsfirstoccur}}
+\loadglsentries{appendix/glossary-entries}
+% ESECUZIONE FORZATA NEL CASO NON ANDASSE IL GLOSSARIO: makeglossaries -d build thesis
 
 \bibliography{appendix/bibliography}
 
@@ -59,14 +67,23 @@
 % Spacing between entries
 \setlength\bibitemsep{1.5\itemsep}
 
+% CATEOGRIE E VOCI DELLA BIBLIOGRAFIA
 \DeclareBibliographyCategory{opere}
 \DeclareBibliographyCategory{web}
+\DeclareBibliographyCategory{report}
 
-\addtocategory{opere}{womak:lean-thinking}
+\addtocategory{web}{site:wintech}
 \addtocategory{web}{site:agile-manifesto}
+\addtocategory{report}{gartner:data-catalog-2017}
+\addtocategory{web}{site:awesome-data-catalogs}
+\addtocategory{web}{site:openmetadata-docs}
+\addtocategory{web}{site:gdpr}
+\addtocategory{web}{site:powerbi-docs}
+
 
 \defbibheading{opere}{\section*{Riferimenti bibliografici}}
 \defbibheading{web}{\section*{Siti Web consultati}}
+\defbibheading{report}{\section*{Report e studi}}
 
 
 \captionsetup{
@@ -134,7 +151,8 @@
 
 \newcommand{\glsfirstoccur}{\ap{{[g]}}}
 
-\newcommand{\intro}[1]{\emph{\textsf{#1}}}
+% ORIGINALE: \newcommand{\intro}[1]{\emph{\textsf{#1}}}
+\newcommand{\intro}[1]{\emph{#1}} % SENZA SANS-SERIF
 
 % Risks environment
 \newcounter{riskcounter}                % define a counter
@@ -176,13 +194,14 @@
     \medskip
 }
 
-\newcommand{\usecasename}{UC}
+\newcommand{\usecasename}{UC-}
 
-\newcommand{\usecaseactors}[1]{\textbf{\\Attori Principali:} #1. \vspace{4pt}}
-\newcommand{\usecasepre}[1]{\textbf{\\Precondizioni:} #1. \vspace{4pt}}
+\newcommand{\usecaseactors}[1]{\textbf{\\Attore Principale:} #1. \vspace{4pt}}
 \newcommand{\usecasedesc}[1]{\textbf{\\Descrizione:} #1. \vspace{4pt}}
+\newcommand{\usecasepre}[1]{\textbf{\\Precondizioni:} #1. \vspace{4pt}}
 \newcommand{\usecasepost}[1]{\textbf{\\Postcondizioni:} #1. \vspace{4pt}}
-\newcommand{\usecasealt}[1]{\textbf{\\Scenario Alternativo:} #1. \vspace{4pt}}
+\newcommand{\usecasemain}[1]{\textbf{\\Scenario principale:} \vspace{2pt} #1}
+\newcommand{\usecasealt}[1]{\textbf{\\Scenario alternativo:} \vspace{2pt} #1}
 
 % Namespace description environment
 \newenvironment{namespacedesc}{

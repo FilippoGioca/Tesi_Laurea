@@ -1,0 +1,172 @@
+% capitolo 1 (dopo introduzione): Analisi delle serie storiche finanziarie
+\chapter{Analisi delle serie storiche finanziarie}
+\label{cap:analisi-serie}
+
+Per comprendere le dinamiche dei mercati è necessario condurre un'analisi delle serie storiche, il cui scopo è tradurre le fluttuazioni dei 
+prezzi in metriche misurabili di rendimento e volatilità. Questo capitolo introduce tali concetti, indispensabili per poter valutare l'impatto dei dazi.
+
+Il capitolo analizza le modalità di calcolo dei rendimenti e definisce il concetto di volatilità, per poi concentrarsi sui principali 
+comportamenti tipici (i cosiddetti \emph{fatti stilizzati}) che caratterizzano i mercati finanziari.
+
+Lo studio di queste dinamiche serve a mostrare che i modelli lineari classici non sono sufficienti per descrivere la realtà dei mercati, 
+rendendo necessario l'utilizzo dei modelli econometrici della famiglia \gls{garch}, che vengono affrontati nei capitoli successivi.
+
+
+\section{I rendimenti finanziari}
+Nei mercati finanziari, il prezzo indica la quotazione puntuale di un asset, mentre il rendimento ne misura la variazione relativa nel tempo\cite{libro:investments}. 
+Nell'analisi delle serie storiche, l'oggetto di studio primario non è rappresentato dai prezzi degli asset, bensì dai loro rendimenti. 
+Questa scelta metodologica è motivata per due ragioni\cite{campbell:econometrics}.
+
+La prima ragione è che il rendimento fornisce un riassunto completo dell'opportunità di investimento. Essendo una misura \gls{scale-free}, 
+permette di confrontare in modo diretto strumenti finanziari differenti. 
+Inoltre, le serie storiche dei rendimenti presentano proprietà statistiche favorevoli, prima tra tutte la stazionarietà, che agevola 
+l'identificazione di modelli predittivi e lo studio della volatilità.
+
+Per misurare la variazione del prezzo nel tempo si distinguono due tipi di rendimento: il rendimento semplice uniperiodale e il 
+rendimento composto a tempo continuo (log-rendimento).
+
+
+\subsection{Rendimento semplice uniperiodale}
+Sia $P_t$ il prezzo di un asset alla data $t$ e $P_{t-1}$ il suo prezzo nel periodo precedente, e si assuma che l'asset non paghi dividendi\cite{campbell:econometrics}.
+Il rendimento netto semplice uniperiodale $R_t$, nell'intervallo di tempo $[t - 1, t]$, è definito come:
+\[
+    R_t = \frac{P_t}{P_{t-1}} - 1 = \frac{P_t - P_{t-1}}{P_{t-1}}
+\]
+e di conseguenza il rendimento lordo semplice, cioè il capitale totale dopo la detenzione dell'asset per un periodo è pari a $1 + R_t = \frac{P_t}{P_{t-1}}$.
+
+Partendo da questo è possibile estendere la misurazione su orizzonti temporali più ampi, calcolando il rendimento lordo di un asset sugli ultimi $k$ periodi.
+Denotato come $1 + R_t(k)$, equivale al prodotto dei $k$ rendimenti uniperiodali, ovvero:
+\[
+    1 + R_t(k) = (1 + R_t) \cdot (1 + R_{t-1}) \cdots (1 + R_{t-k+1}) = \frac{P_t}{P_{t-1}} \cdot \frac{P_{t-1}}{P_{t-2}} \cdots \frac{P_{t-k+1}}{P_{t-k}} = \frac{P_t}{P_{t-k}}
+\]
+Il corrispondente rendimento netto multiperiodale si ottiene sottraendo l'unità: $R_t(k) = \frac{P_t}{P_{t-k}} - 1$.
+
+Questo mostra che il rendimento semplice non gode della proprietà di additività temporale, rendendo necessaria la moltiplicazione. Per questo motivo si preferisce utilizzare i log-rendimenti.
+
+
+\subsection{Rendimento composto a tempo continuo}
+Un'alternativa al rendimento semplice uniperiodale è rappresentata dal rendimento composto a tempo continuo, noto anche come log-rendimento.
+
+Il rendimento composto a tempo continuo calcolato su un singolo periodo $r_t$ è definito come il logaritmo naturale del rendimento lordo semplice:
+\[
+    r_t = \ln(1 + R_t) = \ln\left(\frac{P_t}{P_{t-1}}\right)
+\]
+
+Definendo $p_t = \ln(P_t)$, attraverso le proprietà dei logaritmi la formula si semplifica in: 
+\[
+    r_t = p_t - p_{t-1}
+\]
+
+Il vantaggio emerge nel calcolo su orizzonti temporali ampi, in quanto il log-rendimento multiperiodale $r_t(k)$ è calcolabile come somma dei $k$ log-rendimenti:
+\begin{align*}
+    r_t(k) &= \ln(1 + R_t(k)) = \ln(1 + R_t) + \ln(1 + R_{t-1}) + \dots + \ln(1 + R_{t-k+1}) \\
+           &= r_t + r_{t-1} + \dots + r_{t-k+1}
+\end{align*}
+
+I rendimenti composti a tempo continuo multiperiodali corrispondono alla somma dei rendimenti composti a tempo continuo uniperiodali e ciò li rende preferibili per l'analisi econometrica e lo studio della volatilità.
+
+
+\section{La volatilità}
+\label{sec:volatilita}
+In ambito finanziario la volatilità non coincide con il rischio, ma se interpretata come incertezza diventa un elemento chiave per le decisioni 
+di investimento e per la creazione dei portafogli\cite{poon:forecasting}. Infatti, il punto di partenza per la valutazione del rischio 
+è una corretta previsione della futura volatilità dei prezzi degli asset.
+
+Per via del forte legame tra l'incertezza dei mercati e la fiducia pubblica, le stime della volatilità vengono usate dai responsabili di 
+politica economica come ''barometro'' per misurare la vulnerabilità dei mercati e le banche centrali la monitorano per prendere decisioni 
+di politica monetaria. Per questo motivo la volatilità dei mercati finanziari può avere ampie ripercussioni sull'intera economia.
+
+Una caratteristica problematica della volatilità azionaria è che essa, a differenza dei prezzi o dei rendimenti giornalieri, non è direttamente osservabile e rimane una variabile latente\cite{tsay:analysis}.
+Non è infatti possibile estrapolare la volatilità a partire da un singolo rendimento giornaliero.
+Per ovviare a questo problema, si ricorre spesso all'uso di misure \emph{proxy}, come il valore assoluto dei rendimenti ($|r_t|$) o i rendimenti al quadrato ($r_t^2$) per ottenere una misura della varianza.
+Tuttavia, la necessità di ricorrere a tali approssimazioni, data l'impossibilità di osservare il dato reale, rende complessa la valutazione delle performance dei modelli previsionali.
+
+Sebbene non sia direttamente osservabile, essa presenta alcune caratteristiche riscontrabili nei rendimenti degli asset, come la presenza di \emph{volatility clusters} (fasi di alta volatilità alternate a periodi di calma) e una reazione asimmetrica agli shock, nota come effetto leva.
+
+Queste caratteristiche, definibili come ''fatti stilizzati'', evidenziano le debolezze dei modelli tradizionali e rendono necessaria l'adozione di modelli avanzati per catturare la volatilità condizionata.
+
+
+\section{Fatti stilizzati delle serie storiche finanziarie}
+Le proprietà statistiche che emergono regolarmente nello studio delle serie storiche, comuni a diversi strumenti, mercati e orizzonti temporali 
+prendono il nome di fatti stilizzati\cite{cont:empirical}.
+
+Conoscere tali caratteristiche è necessario per costruire modelli econometrici adeguati. I modelli finanziari tradizionali, infatti, 
+si basano sull'assunzione di normalità dei rendimenti e varianza costante nel tempo (omoschedasticità). Tuttavia, l'osservazione dei fatti 
+stilizzati invalida queste ipotesi di base, rendendo i modelli lineari classici inadeguati a misurare correttamente il rischio.
+
+Per giustificare l'adozione di modelli avanzati in grado di catturare l'evoluzione della volatilità condizionata, nelle sezioni seguenti 
+vengono illustrate le principali proprietà statistiche osservate nelle serie finanziarie, con particolare attenzione alla stazionarietà, 
+alla leptocurtosi, al \emph{volatility clustering} e all'effetto leva.
+
+
+\subsection{Stazionarietà}
+La stazionarietà è un requisito di base per l'analisi delle serie storiche: un processo è stazionario quando media, varianza e struttura di 
+autocorrelazione restano costanti nel tempo. Quando queste proprietà cambiano nel tempo, la serie è non stazionaria, spesso a causa della 
+presenza di \emph{trend} o radici unitarie. Tale condizione si verifica empiricamente tramite appositi test, come quello di Dickey e 
+Fuller\cite{dickey:estimators} e la sua estensione, l'\emph{Augmented Dickey-Fuller} (ADF).
+
+Per i rendimenti finanziari, la stazionarietà garantisce l'esistenza di una varianza incondizionata finita, attorno alla quale si muove la 
+volatilità condizionata. A seguito di uno shock sui prezzi, l'incertezza non aumenta senza limite, ma tende a tornare progressivamente verso 
+il suo livello medio di lungo periodo.
+
+Nei modelli GARCH che verranno trattati, Bollerslev\cite{bollerslev:garch} mostra che, con coefficienti non negativi, il processo è stazionario 
+in senso lato quando la somma dei coefficienti ARCH e GARCH è minore di 1. In questo caso la varianza incondizionata è costante e finita 
+e gli shock di mercato hanno un effetto solo temporaneo sulla volatilità.
+
+
+\subsection{Leptocurtosi}
+La curtosi è un indicatore utile per descrivere la forma di una distribuzione di rendimenti: misura il peso delle code rispetto alla normale, 
+cioè la frequenza con cui si manifestano valori estremi\cite{tsay:analysis}.
+
+Mentre una distribuzione normale standard presenta una curtosi teorica pari a 3, le serie storiche finanziarie mostrano tipicamente una 
+struttura leptocurtica. Ciò si traduce in un eccesso di curtosi positivo ($K - 3 > 0$): le code risultano più pesanti e i valori estremi, 
+sia positivi che negativi, occorrono con una probabilità superiore a quella prevista dal modello gaussiano\cite{cont:empirical}.
+
+In passato si tendeva a considerare le grandi variazioni come \emph{outlier} generati da meccanismi speciali, cercando modi per escluderle 
+dal campione\cite{fama:behavior}.
+Questi movimenti, però, non possono essere scartati, perché possono pesare molto sul rendimento complessivo di un periodo e vanno 
+modellati con attenzione, ad esempio per calcolare il Value at Risk\cite{cont:empirical}.
+
+La natura non gaussiana dei dati rende insufficiente l'uso della deviazione standard per misurare la dispersione\cite{cont:empirical}. 
+Inoltre, assumere la normalità dei rendimenti porta a sottostimare la probabilità degli eventi estremi; per questo, prima di applicare 
+modelli per la volatilità come gli ARCH\cite{engle:arch}, conviene verificare la non normalità dei rendimenti.
+
+La presenza di code pesanti, suggerita da una curtosi maggiore di 3, viene poi accertata tramite test statistici, come il test di Jarque-Bera, 
+che valuta congiuntamente asimmetria e curtosi\cite{jarque:bera}, e con strumenti grafici come il QQ-plot.
+
+I modelli \gls{garch} risultano adatti all'analisi finanziaria perché, come i modelli ARCH, generano una distribuzione incondizionata 
+con code più pesanti di quelle della normale, anche quando gli errori sono gaussiani\cite{tsay:analysis}.
+
+
+\subsection{Volatility clustering}
+Il \emph{volatility clustering} (volatilità a grappoli) è un fenomeno che caratterizza le serie storiche finanziarie. 
+Come osservato da Mandelbrot\cite{mandelbrot:variation}, le grandi variazioni di prezzo tendono ad essere seguite da altre grandi variazioni 
+mentre piccole fluttuazioni da variazioni altrettanto contenute, indipendentemente dal segno, mostrando che eventi ad alta volatilità tendono 
+a raggrupparsi nel tempo.
+
+L'assenza di autocorrelazione nei rendimenti lineari non implica assoluta indipendenza, al contrario funzioni non lineari semplici, 
+come rendimenti al quadrato o in valore assoluto, mostrano un'autocorrelazione positiva. 
+Questa autocorrelazione positiva prolungata è coerente con la presenza di \emph{volatility clustering}\cite{cont:empirical}.
+
+Come già osservato nel Paragrafo \ref{sec:volatilita} (\nameref{sec:volatilita}), la volatilità giornaliera non è direttamente osservabile dai soli rendimenti di chiusura, 
+il che rende complesso lo studio di questa dinamica. 
+I modelli tradizionali risultano inadatti a questo scopo poiché assumono varianza condizionata costante nel tempo.
+
+Per superare questo limite Engle\cite{engle:arch} introdusse la classe dei processi ARCH, passando al concetto di varianza condizionata 
+($\sigma_t^2$), ovvero una varianza che varia nel tempo sulla base delle informazioni passate. 
+Come descritto in Tsay\cite{tsay:analysis}, l'estensione ai modelli GARCH permette di catturare questo fenomeno, dato che un ampio valore 
+dei rendimenti passati al quadrato genera grande varianza nel periodo successivo, replicando così la natura a grappoli della volatilità 
+osservata nei mercati.
+
+
+\subsection{Asimmetria ed effetto leva}
+Un'altra caratteristica ricorrente delle serie storiche finanziarie è l'asimmetria della volatilità in risposta agli shock. 
+Come evidenziato da Cont\cite{cont:empirical}, i rendimenti sono correlati negativamente con la variazione della volatilità futura: 
+questo fenomeno è noto come effetto leva (\emph{leverage effect}) ed è stato inizialmente documentato da Black\cite{black:studies}.
+
+Come riassunto da Nelson\cite{nelson:conditional}, la volatilità tende ad aumentare dopo cattive notizie e a diminuire dopo buone notizie. 
+Nonostante l'efficacia nel catturare il fenomeno di \emph{volatility clustering}, i modelli GARCH tradizionali risultano inadatti in quanto 
+assumono che variazioni positive e negative della stessa entità producano lo stesso impatto sulla varianza futura\cite{tsay:analysis}.
+
+Per superare questo problema di simmetria e catturare l'effetto leva sono state sviluppate estensioni asimmetriche, come il GJR-GARCH e 
+l'EGARCH, che vengono trattate nel capitolo successivo.

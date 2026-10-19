@@ -29,7 +29,7 @@ ordine $q$, denotato come ARCH($q$), si basa su due equazioni:
     \varepsilon_t &= \sigma_t \eta_t \\
     \sigma_t^2 &= \gamma + \sum_{i=1}^q \alpha_i \varepsilon_{t-i}^2
 \end{align*}
-dove $\eta_t$ è una sequenza di variabili casuali indipendenti e identicamente distribuite (i.i.d.) con media nulla e varianza unitaria.
+dove $\eta_t$ è una sequenza di variabili casuali indipendenti e identicamente distribuite (\acrshort{iid}) con media nulla e varianza unitaria.
 
 Affinché il modello sia ben definito e la varianza condizionata ($\sigma_t^2$) sempre strettamente positiva, è sufficiente che $\gamma$ 
 (la varianza di base) sia maggiore di 0 e $\alpha_i \geq 0$ per $i=1,\dots,q$. Inoltre, per garantire che il processo sia stazionario in senso 
@@ -55,7 +55,7 @@ Infine, il modello necessita spesso di un ordine $q$ molto grande, appesantendo 
 La necessità di includere informazioni molto lontane nel tempo costringe i modelli ARCH a stimare numerosi parametri per descrivere 
 adeguatamente la volatilità di un rendimento finanziario. 
 Per superare questa criticità, Bollerslev\cite{bollerslev:garch} propose un'estensione nota come modello GARCH (\emph{Generalized Autoregressive Conditional Heteroskedasticity}). 
-Questa estensione si ispira al passaggio dai processi AR ai processi ARMA, riducendo il numero di parametri necessari per la stima, 
+Questa estensione si ispira al passaggio dai processi \acrshort{ar} ai processi \acrshort{arma}, riducendo il numero di parametri necessari per la stima, 
 permettendo quindi una descrizione più parsimoniosa.
 
 Il modello GARCH, oltre che dai quadrati degli shock passati, permette alla varianza di dipendere anche dai propri valori passati, 
@@ -161,7 +161,7 @@ condizione $\theta^* < \alpha^* < -\theta^*$.
 \section{La News Impact Curve}
 \label{sec:nic}
 Per confrontare l'effetto delle notizie sulla volatilità stimata nei diversi modelli, sulla base dell'intuizione originale di Pagan e Schwert\cite{pagan:alternative}, 
-Engle e Ng\cite{engle:news} introdussero la \emph{News Impact Curve} (NIC), uno strumento grafico a forma di curva che relaziona lo shock al 
+Engle e Ng\cite{engle:news} introdussero la \acrshort{nic}, uno strumento grafico a forma di curva che relaziona lo shock al 
 tempo $t-1$ ($\varepsilon_{t-1}$) con la varianza condizionata corrente ($\sigma_t^2$), mantenendo costanti le informazioni precedenti a $t-2$. 
 L'idea alla base della NIC è quella di misurare l'impatto di uno shock isolato sulla previsione della volatilità futura, assumendo che tutte 
 le altre componenti rimangano costanti. La forma della curva dipende dalla specificazione del modello di volatilità adottato.

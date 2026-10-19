@@ -9,7 +9,7 @@ Il capitolo analizza le modalità di calcolo dei rendimenti e definisce il conce
 comportamenti tipici (i cosiddetti \emph{fatti stilizzati}) che caratterizzano i mercati finanziari.
 
 Lo studio di queste dinamiche serve a mostrare che i modelli lineari classici non sono sufficienti per descrivere la realtà dei mercati, 
-rendendo necessario l'utilizzo dei modelli econometrici della famiglia \gls{garch}, che vengono affrontati nei capitoli successivi.
+rendendo necessario l'utilizzo dei modelli econometrici della famiglia \acrshort{garch}, che vengono affrontati nei capitoli successivi.
 
 
 \section{I rendimenti finanziari}
@@ -19,7 +19,7 @@ Questa scelta metodologica è motivata per due ragioni\cite{campbell:econometric
 
 La prima ragione è che il rendimento fornisce un riassunto completo dell'opportunità di investimento. Essendo una misura \gls{scale-free}, 
 permette di confrontare in modo diretto strumenti finanziari differenti. 
-Inoltre, le serie storiche dei rendimenti presentano proprietà statistiche favorevoli, prima tra tutte la stazionarietà, che agevola 
+Inoltre, le serie storiche dei rendimenti presentano proprietà statistiche favorevoli, prima tra tutte la \gls{stazionarieta}, che agevola 
 l'identificazione di modelli predittivi e lo studio della volatilità.
 
 Per misurare la variazione del prezzo nel tempo si distinguono due tipi di rendimento: il rendimento semplice uniperiodale e il 
@@ -81,9 +81,9 @@ Per via del forte legame tra l'incertezza dei mercati e la fiducia pubblica, le 
 politica economica come ''barometro'' per misurare la vulnerabilità dei mercati e le banche centrali la monitorano per prendere decisioni 
 di politica monetaria. Per questo motivo la volatilità dei mercati finanziari può avere ampie ripercussioni sull'intera economia.
 
-Una caratteristica problematica della volatilità azionaria è che essa, a differenza dei prezzi o dei rendimenti giornalieri, non è direttamente osservabile e rimane una variabile latente\cite{tsay:analysis}.
+Una caratteristica problematica della volatilità azionaria è che essa, a differenza dei prezzi o dei rendimenti giornalieri, non è direttamente osservabile e rimane una \gls{variabile-latente}\cite{tsay:analysis}.
 Non è infatti possibile estrapolare la volatilità a partire da un singolo rendimento giornaliero.
-Per ovviare a questo problema, si ricorre spesso all'uso di misure \emph{proxy}, come il valore assoluto dei rendimenti ($|r_t|$) o i rendimenti al quadrato ($r_t^2$) per ottenere una misura della varianza.
+Per ovviare a questo problema, si ricorre spesso all'uso di misure \gls{proxy}, come il valore assoluto dei rendimenti ($|r_t|$) o i rendimenti al quadrato ($r_t^2$) per ottenere una misura della varianza.
 Tuttavia, la necessità di ricorrere a tali approssimazioni, data l'impossibilità di osservare il dato reale, rende complessa la valutazione delle performance dei modelli previsionali.
 
 Sebbene non sia direttamente osservabile, essa presenta alcune caratteristiche riscontrabili nei rendimenti degli asset, come la presenza di \emph{volatility clusters} (fasi di alta volatilità alternate a periodi di calma) e una reazione asimmetrica agli shock, nota come effetto leva.
@@ -96,7 +96,7 @@ Le proprietà statistiche che emergono regolarmente nello studio delle serie sto
 prendono il nome di fatti stilizzati\cite{cont:empirical}.
 
 Conoscere tali caratteristiche è necessario per costruire modelli econometrici adeguati. I modelli finanziari tradizionali, infatti, 
-si basano sull'assunzione di normalità dei rendimenti e varianza costante nel tempo (omoschedasticità). Tuttavia, l'osservazione dei fatti 
+si basano sull'assunzione di normalità dei rendimenti e varianza costante nel tempo (\gls{omoschedasticita}). Tuttavia, l'osservazione dei fatti 
 stilizzati invalida queste ipotesi di base, rendendo i modelli lineari classici inadeguati a misurare correttamente il rischio.
 
 Per giustificare l'adozione di modelli avanzati in grado di catturare l'evoluzione della volatilità condizionata, nelle sezioni seguenti 
@@ -108,14 +108,14 @@ alla leptocurtosi, al \emph{volatility clustering} e all'effetto leva.
 La stazionarietà è un requisito di base per l'analisi delle serie storiche: un processo è stazionario quando media, varianza e struttura di 
 autocorrelazione restano costanti nel tempo. Quando queste proprietà cambiano nel tempo, la serie è non stazionaria, spesso a causa della 
 presenza di \emph{trend} o radici unitarie. Tale condizione si verifica empiricamente tramite appositi test, come quello di Dickey e 
-Fuller\cite{dickey:estimators} e la sua estensione, l'\emph{Augmented Dickey-Fuller} (ADF).
+Fuller\cite{dickey:estimators} e la sua estensione, l'\arcshort{adf}.
 
 Per i rendimenti finanziari, la stazionarietà garantisce l'esistenza di una varianza incondizionata finita, attorno alla quale si muove la 
 volatilità condizionata. A seguito di uno shock sui prezzi, l'incertezza non aumenta senza limite, ma tende a tornare progressivamente verso 
 il suo livello medio di lungo periodo.
 
 Nei modelli GARCH che verranno trattati, Bollerslev\cite{bollerslev:garch} mostra che, con coefficienti non negativi, il processo è stazionario 
-in senso lato quando la somma dei coefficienti ARCH e GARCH è minore di 1. In questo caso la varianza incondizionata è costante e finita 
+in senso lato quando la somma dei coefficienti \acrshort{arch} e GARCH è minore di 1. In questo caso la varianza incondizionata è costante e finita 
 e gli shock di mercato hanno un effetto solo temporaneo sulla volatilità.
 
 
@@ -130,7 +130,7 @@ sia positivi che negativi, occorrono con una probabilità superiore a quella pre
 In passato si tendeva a considerare le grandi variazioni come \emph{outlier} generati da meccanismi speciali, cercando modi per escluderle 
 dal campione\cite{fama:behavior}.
 Questi movimenti, però, non possono essere scartati, perché possono pesare molto sul rendimento complessivo di un periodo e vanno 
-modellati con attenzione, ad esempio per calcolare il Value at Risk\cite{cont:empirical}.
+modellati con attenzione, ad esempio per calcolare il \arcshort{var}\cite{cont:empirical}.
 
 La natura non gaussiana dei dati rende insufficiente l'uso della deviazione standard per misurare la dispersione\cite{cont:empirical}. 
 Inoltre, assumere la normalità dei rendimenti porta a sottostimare la probabilità degli eventi estremi; per questo, prima di applicare 
@@ -173,5 +173,5 @@ Come riassunto da Nelson\cite{nelson:conditional}, la volatilità tende ad aumen
 Nonostante l'efficacia nel catturare il fenomeno di \emph{volatility clustering}, i modelli GARCH tradizionali risultano inadatti in quanto 
 assumono che variazioni positive e negative della stessa entità producano lo stesso impatto sulla varianza futura\cite{tsay:analysis}.
 
-Per superare questo problema di simmetria e catturare l'effetto leva sono state sviluppate estensioni asimmetriche, come il GJR-GARCH e 
-l'EGARCH, che vengono trattate nel capitolo successivo.
+Per superare questo problema di simmetria e catturare l'effetto leva sono state sviluppate estensioni asimmetriche, come il \arcshort{gjr-garch} e 
+l'\arcshort{egarch}, che vengono trattate nel capitolo successivo.

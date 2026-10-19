@@ -12,6 +12,26 @@
 \setlength{\headheight}{14.5pt}
 \fancyhf{} % Svuota le vecchie impostazioni
 
+% --- BLOCCO PER CONGELARE LA DIMENSIONE DEI TITOLI ---
+\titleformat{\chapter}[display]
+{\normalfont\fontsize{20}{24}\selectfont\bfseries}
+{\chaptertitlename\ \thechapter}
+{20pt}
+{\fontsize{24}{28}\selectfont\bfseries}
+
+\titleformat{\section}
+{\normalfont\fontsize{14}{17}\selectfont\bfseries}
+{\thesection}
+{1em}
+{}
+
+\titleformat{\subsection}
+{\normalfont\fontsize{12}{14.5}\selectfont\bfseries}
+{\thesubsection}
+{1em}
+{}
+% -----------------------------------------------------
+
 % Configurazione delle intestazioni: testo non tutto in maiuscolo (nouppercase)
 \fancyhead[L]{\fontsize{12}{14.5}\selectfont\nouppercase{\leftmark}}
 \fancyhead[R]{\fontsize{12}{14.5}\selectfont\nouppercase{\rightmark}}

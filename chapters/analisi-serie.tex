@@ -36,9 +36,13 @@ e di conseguenza il rendimento lordo semplice, cioè il capitale totale dopo la 
 
 Partendo da questo è possibile estendere la misurazione su orizzonti temporali più ampi, calcolando il rendimento lordo di un asset sugli ultimi $k$ periodi.
 Denotato come $1 + R_t(k)$, equivale al prodotto dei $k$ rendimenti uniperiodali, ovvero:
-\[
-    1 + R_t(k) = (1 + R_t) \cdot (1 + R_{t-1}) \cdots (1 + R_{t-k+1}) = \frac{P_t}{P_{t-1}} \cdot \frac{P_{t-1}}{P_{t-2}} \cdots \frac{P_{t-k+1}}{P_{t-k}} = \frac{P_t}{P_{t-k}}
-\]
+\begin{equation*}
+\begin{split}
+    1 + R_t(k) &= (1 + R_t) \cdot (1 + R_{t-1}) \cdots (1 + R_{t-k+1}) \\
+               &= \frac{P_t}{P_{t-1}} \cdot \frac{P_{t-1}}{P_{t-2}} \cdots \frac{P_{t-k+1}}{P_{t-k}} \\
+               &= \frac{P_t}{P_{t-k}}
+\end{split}
+\end{equation*}
 Il corrispondente rendimento netto multiperiodale si ottiene sottraendo l'unità: $R_t(k) = \frac{P_t}{P_{t-k}} - 1$.
 
 Questo mostra che il rendimento semplice non gode della proprietà di additività temporale, rendendo necessaria la moltiplicazione. Per questo motivo si preferisce utilizzare i log-rendimenti.
@@ -59,7 +63,8 @@ Definendo $p_t = \ln(P_t)$, attraverso le proprietà dei logaritmi la formula si
 
 Il vantaggio emerge nel calcolo su orizzonti temporali ampi, in quanto il log-rendimento multiperiodale $r_t(k)$ è calcolabile come somma dei $k$ log-rendimenti:
 \begin{align*}
-    r_t(k) &= \ln(1 + R_t(k)) = \ln(1 + R_t) + \ln(1 + R_{t-1}) + \dots + \ln(1 + R_{t-k+1}) \\
+    r_t(k) &= \ln(1 + R_t(k)) \\
+           &= \ln(1 + R_t) + \ln(1 + R_{t-1}) + \dots + \ln(1 + R_{t-k+1}) \\
            &= r_t + r_{t-1} + \dots + r_{t-k+1}
 \end{align*}
 
@@ -86,7 +91,7 @@ Sebbene non sia direttamente osservabile, essa presenta alcune caratteristiche r
 Queste caratteristiche, definibili come ''fatti stilizzati'', evidenziano le debolezze dei modelli tradizionali e rendono necessaria l'adozione di modelli avanzati per catturare la volatilità condizionata.
 
 
-\section{Fatti stilizzati delle serie storiche finanziarie}
+\section[Fatti stilizzati]{Fatti stilizzati delle serie storiche finanziarie}
 Le proprietà statistiche che emergono regolarmente nello studio delle serie storiche, comuni a diversi strumenti, mercati e orizzonti temporali 
 prendono il nome di fatti stilizzati\cite{cont:empirical}.
 

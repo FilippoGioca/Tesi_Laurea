@@ -76,7 +76,8 @@
 \loadglsentries{appendix/glossary-entries}
 % ESECUZIONE FORZATA NEL CASO NON ANDASSE IL GLOSSARIO: makeglossaries -d build thesis
 
-\bibliography{appendix/bibliography}
+% \bibliography{appendix/bibliography}
+\addbibresource{appendix/bibliography.bib}
 
 \defbibheading{bibliography} {
     \cleardoublepage
@@ -112,8 +113,8 @@
 % \addtocategory{web}{site:gdpr}
 % \addtocategory{web}{site:powerbi-docs}
 
-\defbibheading{opere}{\section*{Riferimenti bibliografici}} % libri
-\defbibheading{web}{\section*{Siti Web consultati}}
+\defbibheading{opere}{\section*{Libri, testi e articoli}}
+\defbibheading{web}{\section*{Sitografia}}
 
 
 \captionsetup{

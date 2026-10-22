@@ -9,7 +9,7 @@ Il capitolo analizza le modalità di calcolo dei rendimenti e definisce il conce
 comportamenti tipici (i cosiddetti \emph{fatti stilizzati}) che caratterizzano i mercati finanziari.
 
 Lo studio di queste dinamiche serve a mostrare che i modelli lineari classici non sono sufficienti per descrivere la realtà dei mercati, 
-rendendo necessario l'utilizzo dei modelli econometrici della famiglia \acrshort{garch}, che vengono affrontati nei capitoli successivi.
+rendendo necessario l'utilizzo dei modelli econometrici della famiglia \gls{garch}, che vengono affrontati nei capitoli successivi.
 
 
 \section{I rendimenti finanziari}
@@ -78,7 +78,7 @@ di investimento e per la creazione dei portafogli\cite{poon:forecasting}. Infatt
 è una corretta previsione della futura volatilità dei prezzi degli asset.
 
 Per via del forte legame tra l'incertezza dei mercati e la fiducia pubblica, le stime della volatilità vengono usate dai responsabili di 
-politica economica come ''barometro'' per misurare la vulnerabilità dei mercati e le banche centrali la monitorano per prendere decisioni 
+politica economica come «barometro» per misurare la vulnerabilità dei mercati e le banche centrali la monitorano per prendere decisioni 
 di politica monetaria. Per questo motivo la volatilità dei mercati finanziari può avere ampie ripercussioni sull'intera economia.
 
 Una caratteristica problematica della volatilità azionaria è che essa, a differenza dei prezzi o dei rendimenti giornalieri, non è direttamente osservabile e rimane una \gls{variabile-latente}\cite{tsay:analysis}.
@@ -88,7 +88,7 @@ Tuttavia, la necessità di ricorrere a tali approssimazioni, data l'impossibilit
 
 Sebbene non sia direttamente osservabile, essa presenta alcune caratteristiche riscontrabili nei rendimenti degli asset, come la presenza di \emph{volatility clusters} (fasi di alta volatilità alternate a periodi di calma) e una reazione asimmetrica agli shock, nota come effetto leva.
 
-Queste caratteristiche, definibili come ''fatti stilizzati'', evidenziano le debolezze dei modelli tradizionali e rendono necessaria l'adozione di modelli avanzati per catturare la volatilità condizionata.
+Queste caratteristiche, definibili come «fatti stilizzati», evidenziano le debolezze dei modelli tradizionali e rendono necessaria l'adozione di modelli avanzati per catturare la volatilità condizionata.
 
 
 \section[Fatti stilizzati]{Fatti stilizzati delle serie storiche finanziarie}
@@ -108,14 +108,14 @@ alla leptocurtosi, al \emph{volatility clustering} e all'effetto leva.
 La stazionarietà è un requisito di base per l'analisi delle serie storiche: un processo è stazionario quando media, varianza e struttura di 
 autocorrelazione restano costanti nel tempo. Quando queste proprietà cambiano nel tempo, la serie è non stazionaria, spesso a causa della 
 presenza di \emph{trend} o radici unitarie. Tale condizione si verifica empiricamente tramite appositi test, come quello di Dickey e 
-Fuller\cite{dickey:estimators} e la sua estensione, l'\arcshort{adf}.
+Fuller\cite{dickey:estimators} e la sua estensione, l'\gls{adf}.
 
 Per i rendimenti finanziari, la stazionarietà garantisce l'esistenza di una varianza incondizionata finita, attorno alla quale si muove la 
 volatilità condizionata. A seguito di uno shock sui prezzi, l'incertezza non aumenta senza limite, ma tende a tornare progressivamente verso 
 il suo livello medio di lungo periodo.
 
 Nei modelli GARCH che verranno trattati, Bollerslev\cite{bollerslev:garch} mostra che, con coefficienti non negativi, il processo è stazionario 
-in senso lato quando la somma dei coefficienti \acrshort{arch} e GARCH è minore di 1. In questo caso la varianza incondizionata è costante e finita 
+in senso lato quando la somma dei coefficienti \gls{arch} e \gls{garch} è minore di 1. In questo caso la varianza incondizionata è costante e finita 
 e gli shock di mercato hanno un effetto solo temporaneo sulla volatilità.
 
 
@@ -130,16 +130,16 @@ sia positivi che negativi, occorrono con una probabilità superiore a quella pre
 In passato si tendeva a considerare le grandi variazioni come \emph{outlier} generati da meccanismi speciali, cercando modi per escluderle 
 dal campione\cite{fama:behavior}.
 Questi movimenti, però, non possono essere scartati, perché possono pesare molto sul rendimento complessivo di un periodo e vanno 
-modellati con attenzione, ad esempio per calcolare il \arcshort{var}\cite{cont:empirical}.
+modellati con attenzione, ad esempio per calcolare il \gls{var}\cite{cont:empirical}.
 
 La natura non gaussiana dei dati rende insufficiente l'uso della deviazione standard per misurare la dispersione\cite{cont:empirical}. 
 Inoltre, assumere la normalità dei rendimenti porta a sottostimare la probabilità degli eventi estremi; per questo, prima di applicare 
-modelli per la volatilità come gli ARCH\cite{engle:arch}, conviene verificare la non normalità dei rendimenti.
+modelli per la volatilità come gli \gls{arch}\cite{engle:arch}, conviene verificare la non normalità dei rendimenti.
 
 La presenza di code pesanti, suggerita da una curtosi maggiore di 3, viene poi accertata tramite test statistici, come il test di Jarque-Bera, 
 che valuta congiuntamente asimmetria e curtosi\cite{jarque:bera}, e con strumenti grafici come il QQ-plot.
 
-I modelli GARCH risultano adatti all'analisi finanziaria perché, come i modelli ARCH, generano una distribuzione incondizionata 
+I modelli \gls{garch} risultano adatti all'analisi finanziaria perché, come i modelli \gls{arch}, generano una distribuzione incondizionata 
 con code più pesanti di quelle della normale, anche quando gli errori sono gaussiani\cite{tsay:analysis}.
 
 
@@ -157,9 +157,9 @@ Come già osservato nel Paragrafo \ref{sec:volatilita} (\nameref{sec:volatilita}
 il che rende complesso lo studio di questa dinamica. 
 I modelli tradizionali risultano inadatti a questo scopo poiché assumono varianza condizionata costante nel tempo.
 
-Per superare questo limite Engle\cite{engle:arch} introdusse la classe dei processi ARCH, passando al concetto di varianza condizionata 
+Per superare questo limite Engle\cite{engle:arch} introdusse la classe dei processi \gls{arch}, passando al concetto di varianza condizionata 
 ($\sigma_t^2$), ovvero una varianza che varia nel tempo sulla base delle informazioni passate. 
-Come descritto in Tsay\cite{tsay:analysis}, l'estensione ai modelli GARCH permette di catturare questo fenomeno, dato che un ampio valore 
+Come descritto in Tsay\cite{tsay:analysis}, l'estensione ai modelli \gls{garch} permette di catturare questo fenomeno, dato che un ampio valore 
 dei rendimenti passati al quadrato genera grande varianza nel periodo successivo, replicando così la natura a grappoli della volatilità 
 osservata nei mercati.
 
@@ -170,8 +170,8 @@ Come evidenziato da Cont\cite{cont:empirical}, i rendimenti sono correlati negat
 questo fenomeno è noto come effetto leva (\emph{leverage effect}) ed è stato inizialmente documentato da Black\cite{black:studies}.
 
 Come riassunto da Nelson\cite{nelson:conditional}, la volatilità tende ad aumentare dopo cattive notizie e a diminuire dopo buone notizie. 
-Nonostante l'efficacia nel catturare il fenomeno di \emph{volatility clustering}, i modelli GARCH tradizionali risultano inadatti in quanto 
+Nonostante l'efficacia nel catturare il fenomeno di \emph{volatility clustering}, i modelli \gls{garch} tradizionali risultano inadatti in quanto 
 assumono che variazioni positive e negative della stessa entità producano lo stesso impatto sulla varianza futura\cite{tsay:analysis}.
 
-Per superare questo problema di simmetria e catturare l'effetto leva sono state sviluppate estensioni asimmetriche, come il \arcshort{gjr-garch} e 
-l'\arcshort{egarch}, che vengono trattate nel capitolo successivo.
+Per superare questo problema di simmetria e catturare l'effetto leva sono state sviluppate estensioni asimmetriche, come il \gls{gjr-garch} e 
+l'\gls{egarch}, che vengono trattate nel capitolo successivo.

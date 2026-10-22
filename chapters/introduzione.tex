@@ -2,21 +2,68 @@
 \chapter{Introduzione}
 \label{cap:introduzione}
 
-Introduzione al contesto aziendale.\\
+\section{Contesto macroeconomico}
+In ambito macroeconomico, una \textbf{guerra commerciale} è una situazione di conflitto economico tra due o più Paesi, caratterizzata dall'adozione di misure protezionistiche, 
+quali l'imposizione di dazi e altre restrizioni agli scambi, in risposta alle politiche commerciali adottate dalle controparti. Tali misure possono innescare meccanismi 
+di ritorsione reciproca, alterando i flussi commerciali internazionali e alimentando l'incertezza economica. 
+L'imprevedibilità di tali misure genera shock di incertezza che si ripercuotono sui mercati finanziari, contribuendo ad accrescere la volatilità dei rendimenti azionari.
 
-% \noindent Esempio di utilizzo di un termine nel glossario \\
-% \gls{api}. \\
+In questo contesto, la guerra commerciale tra Stati Uniti e Cina nel biennio 2025-2026 ha rappresentato un caso emblematico di \emph{escalation} protezionistica, caratterizzato 
+da una rapida successione di misure tariffarie e contromisure.
 
-% \noindent Esempio di citazione in linea \\
-% \cite{site:agile-manifesto}. \\
+L'\emph{escalation} ha avuto inizio con l'avvio del secondo mandato del Presidente statunitense Donald Trump, quando l'amministrazione americana ha introdotto dazi mirati 
+nei confronti di Canada, Messico e Cina, innescando una progressiva intensificazione delle tensioni commerciali e una crescente instabilità sui mercati internazionali.
 
-% \noindent Esempio di citazione nel pie' di pagina \\
-% citazione\footcite{womak:lean-thinking} \\
+Le tensioni hanno raggiunto una prima fase di massima intensità nella primavera del 2025, quando, nel mese di aprile, l'aliquota statunitense sulle importazioni cinesi ha 
+raggiunto il 125\%. All'\emph{escalation} si sono anche alternati episodi di distensione, come gli accordi di maggio e ottobre 2025.
 
-% \section{L'azienda}
-% Descrizione dell'azienda.
+La vicenda si è successivamente estesa al piano giuridico e istituzionale, culminando nel febbraio 2026 con la pronuncia della Corte Suprema degli Stati Uniti in merito 
+all'utilizzo dell'\emph{International Emergency Economic Powers Act} (IEEPA).
+
+Un elemento caratterizzante del periodo è stata la modalità di comunicazione delle decisioni politiche: molte delle decisioni più significative non sono state annunciate 
+tramite canali diplomatici o conferenze programmate, bensì attraverso ordini esecutivi inaspettati, annunci sulle piattaforme social e dichiarazioni pubbliche estemporanee, 
+spesso rilasciate durante gli orari di chiusura delle principali borse mondiali.
+
+Quando un annuncio viene diffuso a mercati chiusi o durante il fine settimana, il suo effetto non è osservabile subito: i prezzi si aggiustano alla prima seduta utile 
+e le diverse \gls{asset-class} possono incorporare la notizia in momenti diversi, a seconda dei fusi orari e degli orari di negoziazione. La data dell'annuncio non coincide quindi 
+necessariamente con quella in cui se ne osserva l'effetto e ciò rende necessario selezionare correttamente il momento in cui l'evento entra nell'analisi.
+
+L'analisi assume che gli annunci tariffari siano eventi esogeni decisi indipendentemente dall'andamento dei prezzi, così che le variazioni di volatilità osservate possano 
+essere attribuite all'annuncio. Un modello \gls{garch} standard non distingue le variazioni di volatilità dovute a eventi esterni dalle fluttuazioni ordinarie e non permette 
+quindi di misurare l'effetto degli annunci.
+
+\section{Obiettivo e metodologie}
+Alla luce di queste considerazioni, l'elaborato si pone l'obiettivo di capire se gli annunci tariffari abbiano modificato la volatilità condizionata degli strumenti 
+considerati, con quale intensità e persistenza e con quali differenze tra asset class. 
+L'analisi considera gli eventi che riguardano i rapporti bilaterali tra Stati Uniti e Cina. A tal fine, l'analisi empirica considera sei strumenti esposti alle tensioni 
+commerciali attraverso canali di trasmissione diversi: un indice di mercato (\textbf{S\&P 500}), titoli azionari appartenenti a settori chiave (\textbf{Apple}, \textbf{Nucor} e \textbf{General Motors}), 
+l'\textbf{oro} e il mercato valutario, rappresentato dal tasso di cambio \gls{offshore} \textbf{USD/CNH}, caratterizzato da una maggiore flessibilità rispetto al tasso di cambio domestico.
+
+Dal punto di vista metodologico, l'analisi utilizza modelli della famiglia \gls{garch} con componente asimmetrica, nello specifico \gls{gjr-garch} ed \gls{egarch}, con errori distribuiti 
+secondo una t di Student. Per stimare l'effetto degli annunci politici, vengono introdotte nell'equazione della varianza le variabili \emph{dummy}, definite su una finestra 
+temporale fissa di due sedute per ciascun evento analizzato, con un criterio uniforme per tutti gli eventi.
+
 
 \section{Organizzazione del testo}
+La presente tesi è articolata nei seguenti capitoli: 
+\paragraph{Capitolo 1}
+Introduce al contesto macroeconomico e agli obiettivi dell'analisi, con una descrizione dei principali strumenti finanziari considerati e delle metodologie utilizzate.
+
+\paragraph{Capitolo 2}
+Introduce ai concetti teorici alla base dell'analisi delle serie storiche finanziarie, illustrando le principali metriche di rendimento e i cosiddetti «fatti stilizzati» della volatilità, con particolare attenzione al \emph{volatility clustering} e all'effetto asimmetrico (\emph{leverage effect}). 
+
+\paragraph{Capitolo 3}
+Presenta il quadro econometrico di riferimento: i modelli \gls{arch} e \gls{garch}, le loro estensioni asimmetriche (\gls{gjr-garch} ed \gls{egarch}) e la \emph{News Impact Curve}, utilizzata per confrontare graficamente la risposta della volatilità a shock di segno e dimensione diversi.
+
+\paragraph{Capitolo 4}
+Descrive dati e metodologia: gli strumenti finanziari selezionati, la cronologia degli annunci tariffari del biennio 2025-2026, la specificazione dei modelli con le variabili \emph{dummy}, le statistiche descrittive e l'analisi esplorativa delle serie. 
+
+\paragraph{Capitolo 5}
+Presenta e discute i risultati delle stime, valutando l'impatto degli eventi esogeni sulla volatilità condizionata e la persistenza dei loro effetti. Inoltre, attraverso un'analisi delle correlazioni \emph{rolling}, esamina i co-movimenti tra le diverse asset class nei periodi di maggiore tensione commerciale.
+
+\paragraph{Capitolo 6}
+Conclude il lavoro con una sintesi dei risultati ottenuti, con un'analisi critica dei limiti della ricerca e delle possibili estensioni future.
+
 
 Riguardo la stesura del testo, relativamente al documento sono state adottate le seguenti convenzioni tipografiche:
 \begin{itemize}

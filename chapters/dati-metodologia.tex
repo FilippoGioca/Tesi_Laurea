@@ -315,3 +315,129 @@ Tale risultato è coerente con la non stazionarietà dei prezzi.
 
 Passando invece al test sui rendimenti, la statistica del test restituisce per tutti gli asset un \emph{p-value} inferiore a 0,01. Questo porta a rifiutare l'ipotesi nulla, 
 indicando che le serie dei rendimenti risultano stazionarie, condizione necessaria per procedere con le stime dei punti successivi.
+
+
+\section{Analisi esplorativa preliminare}
+Questa sezione esamina la struttura dei log-rendimenti, per verificare se è necessario l'utilizzo di modelli a volatilità condizionata nelle serie prese in considerazione. 
+Inizialmente si osserva l'andamento di prezzi e log-rendimenti per poi proseguire con l'analisi dei correlogrammi (ACF) per i log-rendimenti e per i residui al quadrato, 
+validata tramite l'applicazione del test di Ljung-Box. Infine, il test ARCH-LM verifica la presenza di effetti ARCH, fornendo evidenza del \emph{volatility clustering}.
+
+Un primo controllo visivo delle serie storiche permette di cogliere le dinamiche strutturali del mercato. La Figura \ref{fig:prezzi-rendimenti} illustra l'andamento per 
+tre strumenti del paniere selezionato, mentre i grafici per gli asset rimanenti sono consultabili in Appendice. 
+
+\begin{figure}[htbp]
+    \centering
+    % Inserisci qui il nome del file immagine
+    \includegraphics[width=\textwidth]{NOME_FILE_IMMAGINE_PREZZI.png}
+    \caption[Prezzi di chiusura e log-rendimenti]{Prezzi di chiusura e log-rendimenti giornalieri per S\&P 500, Apple e USD/CNH.}
+    \label{fig:prezzi-rendimenti}
+\end{figure}
+
+I prezzi di chiusura di tutti gli asset evidenziano un andamento non stazionario, caratterizzato da trend variabili ed elevate oscillazioni dovute a shock esterni 
+e cicli economici. Per l'indice azionario e i titoli il trend è crescente nel lungo periodo, interrotto da cali nel 2020 a causa della pandemia, nel 2022 a 
+causa dell'inflazione e del conflitto russo-ucraino e nella primavera del 2025 a causa della guerra commerciale.
+
+Il cambio USD/CNH subisce marcate fluttuazioni legate ai rapporti commerciali e diplomatici tra i due Stati, mentre l'oro registra una forte crescita dal 2024, coerente con 
+la sua funzione di bene rifugio. Per tutti gli asset il livello della serie non è costante nel tempo, coerente con il mancato rifiuto dell'ipotesi di radice unitaria nella Tabella \ref{tab:test-adf}.
+
+I log-rendimenti oscillano invece attorno allo zero con un'ampiezza che cambia nel tempo, alternando periodi di bassa volatilità a fasi di forti oscillazioni, 
+che tendono a raggrupparsi in tutti gli asset. 
+Questo comportamento corrisponde al fenomeno del \emph{volatility clustering}, descritto nella Sezione 2.3.3, e viene verificato formalmente di seguito.
+
+\subsection{Autocorrelazione e test di Ljung-Box}
+Si procede poi con l'analisi della Funzione di Autocorrelazione (ACF). Dai correlogrammi dei log-rendimenti emerge, per tutti gli asset, una dipendenza seriale lineare di 
+ampiezza contenuta, con poche autocorrelazioni che superano le bande di confidenza, concentrate nei primi ritardi, in particolar modo nell'S\&P 500.
+
+\begin{figure}[htbp]
+    \centering
+    % Inserisci qui il nome del file immagine
+    \includegraphics[width=\textwidth]{NOME_FILE_IMMAGINE_ACF.png}
+    \caption[Funzione di Autocorrelazione (ACF)]{Funzione di Autocorrelazione (ACF) per i log-rendimenti e i residui al quadrato.}
+    \label{fig:acf-plot}
+\end{figure}
+
+Il test di Ljung-Box (Tabella \ref{tab:ljung-box}) sui log-rendimenti indica che tale dipendenza, seppur debole, è statisticamente significativa: a 5 ritardi l'ipotesi nulla 
+di assenza di autocorrelazione è rifiutata per S\&P 500 e USD/CNH (all'1\%) e per Apple (al 5\%), mentre a 10 ritardi è rifiutata per tutti e sei gli strumenti (\emph{p-value} $< 0,01$). 
+La statistica più elevata si osserva per l'S\&P 500 ($Q(10) = 210,3$), verosimilmente per l'influenza dei periodi di forte volatilità. 
+Poiché il test assume varianza costante e in presenza di effetti ARCH tende a sovrastimare la significatività, questi risultati vanno considerati come evidenza di una 
+lieve dipendenza lineare. 
+
+Al contrario, l'analisi dei residui al quadrato rivela autocorrelazioni positive, persistenti e di intensità nettamente superiore. Questa dipendenza non lineare è confermata 
+dalle statistiche $Q^2$ a 5 e 10 ritardi, le quali respingono l'ipotesi nulla per tutti e sei gli strumenti analizzati (\emph{p-value} $< 0,001$). L'insieme di queste 
+caratteristiche empiriche conferma la presenza di eteroschedasticità condizionata (effetti ARCH) in tutte le serie, giustificando il ricorso a modelli della famiglia GARCH.
+
+{
+\small
+\begin{longtable}{ p{0.14\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
+\toprule
+\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+\midrule
+\endhead
+
+\midrule
+\noalign{\vspace{10pt}}
+\caption[]{Test di Ljung-Box.} \\
+\endfoot
+
+\bottomrule
+\noalign{\vspace{10pt}}
+\caption{Test di Ljung-Box sui log-rendimenti e sui residui al quadrato.}
+\label{tab:ljung-box}
+\endlastfoot
+
+\textbf{Q(5)} & 6,2 & 8,1 & 3,5 & 11,8 & 75,0 & 18,9 \\ \midrule
+\textbf{\emph{p}(5)} & 0,2878 & 0,1507 & 0,6229 & 0,0374 & $< 0,001$ & 0,0020 \\ \midrule
+\textbf{Q(10)} & 24,2 & 38,7 & 25,6 & 64,5 & 210,3 & 28,6 \\ \midrule
+\textbf{\emph{p}(10)} & 0,0070 & $< 0,001$ & 0,0043 & $< 0,001$ & $< 0,001$ & 0,0014 \\ \midrule
+\textbf{Q²(5)} & 439,0 & 309,4 & 660,4 & 630,0 & 1928,9 & 326,2 \\ \midrule
+\textbf{\emph{p}²(5)} & $< 0,001$ & $< 0,001$ & $< 0,001$ & $< 0,001$ & $< 0,001$ & $< 0,001$ \\ \midrule
+\textbf{Q²(10)} & 553,9 & 420,1 & 1032,6 & 903,5 & 2839,4 & 539,7 \\ \midrule
+\textbf{\emph{p}²(10)} & $< 0,001$ & $< 0,001$ & $< 0,001$ & $< 0,001$ & $< 0,001$ & $< 0,001$ \\
+\end{longtable}
+}
+
+\subsection{Test ARCH-LM di Engle}
+Per confermare ulteriormente l'utilizzo di modelli GARCH per la modellazione delle serie, è stato condotto il test ARCH-LM considerando 1, 5 e 10 ritardi nella 
+regressione dei residui al quadrato, permettendo di verificare la persistenza del fenomeno su diversi orizzonti temporali. 
+
+Tutti i test mostrano statistiche elevate e \emph{p-value} molto piccoli per tutte le serie storiche in esame, indicando la presenza di eteroschedasticità condizionata 
+in tutte le serie e la dipendenza della varianza dagli shock passati. L'esito del test conferma quindi la presenza di effetti ARCH nell'intero campione, giustificando 
+il passaggio dai modelli lineari classici alle specifiche della famiglia GARCH. 
+
+{
+\small
+\begin{longtable}{ p{0.14\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
+\toprule
+\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+\midrule
+\endhead
+
+\midrule
+\noalign{\vspace{10pt}}
+\caption[]{Test ARCH-LM di Engle.} \\
+\endfoot
+
+\bottomrule
+\noalign{\vspace{10pt}}
+\caption{Test ARCH-LM di Engle a 1, 5 e 10 ritardi.}
+\label{tab:arch-lm}
+\endlastfoot
+
+\textbf{LM(1)} & 60,8 & 104,3 & 43,4 & 195,7 & 471,6 & 105,6 \\ \midrule
+\textbf{\emph{p}(1)} & $< 0,001$ & $< 0,001$ & $< 0,001$ & $< 0,001$ & $< 0,001$ & $< 0,001$ \\ \midrule
+\textbf{LM(5)} & 275,9 & 198,0 & 429,7 & 343,5 & 783,2 & 210,0 \\ \midrule
+\textbf{\emph{p}(5)} & $< 0,001$ & $< 0,001$ & $< 0,001$ & $< 0,001$ & $< 0,001$ & $< 0,001$ \\ \midrule
+\textbf{LM(10)} & 285,8 & 209,5 & 492,9 & 368,2 & 814,4 & 268,4 \\ \midrule
+\textbf{\emph{p}(10)} & $< 0,001$ & $< 0,001$ & $< 0,001$ & $< 0,001$ & $< 0,001$ & $< 0,001$ \\
+\end{longtable}
+}

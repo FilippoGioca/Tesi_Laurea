@@ -1,93 +1,84 @@
-% capitolo 2: Modelli a volatilità condizionata
+% capitolo 3: Modelli a volatilità condizionata
 \chapter{Modelli a volatilità condizionata}
 \label{cap:volatilita-condizionata}
 
-Modellare la volatilità nell'analisi delle serie storiche è fondamentale per comprendere le dinamiche di mercato e migliorare l'accuratezza 
-delle stime e delle previsioni.
+Modellare la volatilità nell'analisi delle serie storiche è fondamentale per comprendere le dinamiche di mercato e migliorare l'accuratezza delle stime e delle previsioni.
+Come emerso dall'analisi dei fatti stilizzati nel capitolo precedente, i modelli lineari classici risultano imprecisi, in quanto assumono varianza condizionata costante e non dipendente dalle informazioni passate.
 
-Come emerso dall'analisi dei fatti stilizzati nel capitolo precedente, i modelli lineari classici risultano imprecisi, in quanto assumono 
-varianza condizionata costante e non dipendente dalle informazioni passate. 
-Per superare questo limite Engle\cite{engle:arch} formulò una nuova classe di processi chiamati ARCH (\emph{Autoregressive Conditional Heteroskedasticity}). 
-Questi furono i primi modelli a riconoscere l'evoluzione della volatilità nel tempo, offrendo una rappresentazione più realistica e flessibile del suo comportamento.
+Per superare questo limite, Engle~\cite{engle:arch} formulò una nuova classe di processi chiamati ARCH. Questi furono i primi modelli a riconoscere l'evoluzione della volatilità nel tempo, offrendo una rappresentazione più realistica e flessibile del suo comportamento.
 
-Il presente capitolo ripercorre quest'evoluzione, presentando inizialmente il modello ARCH di Engle e la successiva generalizzazione GARCH di Bollerslev\cite{bollerslev:garch}. 
-Si presentano poi i modelli asimmetrici utilizzati nell'analisi, il GJR-GARCH e l'EGARCH, che consentono a shock positivi e negativi di 
-avere effetti diversi sulla volatilità, rendendoli adatti per gli shock tariffari oggetto di questo elaborato. Il capitolo si chiude con la \emph{News Impact Curve}, 
-che permette di confrontare graficamente la risposta della volatilità ai diversi modelli.
-
+Il presente capitolo ripercorre quest'evoluzione, presentando inizialmente il modello ARCH di Engle~\cite{engle:arch} e la successiva generalizzazione GARCH di Bollerslev~\cite{bollerslev:garch}. 
+Si presentano poi i modelli asimmetrici utilizzati nell'analisi, il GJR-GARCH e l'EGARCH, che consentono a shock positivi e negativi di avere effetti diversi sulla volatilità, rendendoli adatti per gli shock tariffari oggetto di questo elaborato. Il capitolo si chiude con la \emph{News Impact Curve}, che permette di confrontare graficamente la risposta della volatilità ai diversi modelli.
 
 \section{Il modello ARCH}
 \label{sec:modello-arch}
-Il modello ARCH, introdotto da Engle\cite{engle:arch}, fu il primo a considerare che lo shock di un rendimento sia incorrelato ma non 
-indipendente, e che il suo andamento possa essere descritto tramite una funzione quadratica dei suoi valori passati. 
-Si indica con $\varepsilon_t$ lo shock al tempo $t$, cioè la componente non prevista del rendimento, nonché la differenza tra il log-rendimento 
-$r_t$ e la sua media condizionata $\mu_t$, in modo che $r_t = \mu_t + \varepsilon_t$.
+Il modello ARCH, introdotto da Engle~\cite{engle:arch}, fu il primo a considerare che lo shock di un rendimento sia incorrelato ma non indipendente, e che il suo andamento possa essere descritto tramite una funzione quadratica dei suoi valori passati.
 
-Si indica con $\sigma_t^2$ la varianza di $\varepsilon_t$ condizionata all'informazione disponibile fino a $t-1$. Un modello ARCH di 
-ordine $q$, denotato come ARCH($q$), si basa su due equazioni:
+Si indica con $\varepsilon_t$ lo shock al tempo $t$, cioè la componente non prevista del rendimento, nonché la differenza tra il log-rendimento $r_t$ e la sua media condizionata $\mu_t$, in modo che $r_t = \mu_t + \varepsilon_t$. 
+Si indica con $\sigma_t^2$ la varianza di $\varepsilon_t$ condizionata all'informazione disponibile fino a $t-1$. Un modello ARCH di ordine $q$, denotato come ARCH($q$), si basa su due equazioni:
 \begin{align*}
-    \varepsilon_t &= \sigma_t \eta_t \\
-    \sigma_t^2 &= \gamma + \sum_{i=1}^q \alpha_i \varepsilon_{t-i}^2
+    \varepsilon_t &= \sigma_t z_t \\
+    \sigma_t^2 &= \omega + \sum_{i=1}^q \alpha_i \varepsilon_{t-i}^2
 \end{align*}
-dove $\eta_t$ è una sequenza di variabili casuali indipendenti e identicamente distribuite (\acrshort{iid}) con media nulla e varianza unitaria.
+dove $z_t$ è una sequenza di variabili casuali \gls{iid} con media nulla e varianza unitaria.
 
-Affinché il modello sia ben definito e la varianza condizionata ($\sigma_t^2$) sempre strettamente positiva, è sufficiente che $\gamma$ 
-(la varianza di base) sia maggiore di 0 e $\alpha_i \geq 0$ per $i=1,\dots,q$. Inoltre, per garantire che il processo sia stazionario in senso 
-lato, la somma dei coefficienti deve essere: $\sum_{i=1}^q \alpha_i < 1$.
+Affinché il modello sia ben definito e la varianza condizionata ($\sigma_t^2$) sempre strettamente positiva, è sufficiente che $\omega$ (la varianza di base) sia maggiore di $0$ e $\alpha_i \geq 0$ per $i=1,\dots,q$. Inoltre, per garantire che il processo sia stazionario in senso lato, la somma dei coefficienti deve essere:
+\[
+    \sum_{i=1}^q \alpha_i < 1
+\]
 
-Questa struttura è in grado di riprodurre il \emph{volatility clustering}, in quanto la presenza di grandi shock passati al quadrato implica 
-un'elevata varianza condizionata, portando il processo a generare nuovi shock di forte entità. 
-In aggiunta fornisce una giustificazione riguardo la leptocurtosi: assumendo una distribuzione gaussiana per l'errore $\eta_t$ e considerando 
-per semplicità un modello ARCH(1), se $\alpha_1 < 1$ la varianza incondizionata di lungo periodo è $E(\varepsilon_t^2) = \frac{\gamma}{1-\alpha_1}$.
+Questa struttura è in grado di riprodurre il \emph{volatility clustering}, in quanto la presenza di grandi shock passati al quadrato implica un'elevata varianza condizionata, portando il processo a generare nuovi shock di forte entità. 
+In aggiunta fornisce una giustificazione riguardo la leptocurtosi: assumendo una distribuzione gaussiana per l'errore $z_t$ e considerando per semplicità un modello ARCH(1), se $\alpha_1 < 1$ la varianza incondizionata di lungo periodo è:
+\[
+    E(\varepsilon_t^2) = \frac{\omega}{1-\alpha_1}
+\]
+Sotto queste ipotesi, e se $3\alpha_1^2 < 1$, la curtosi è pari a:
+\[
+    3 \frac{1-\alpha_1^2}{1-3\alpha_1^2} > 3
+\]
+ovvero superiore a quella di una distribuzione normale, in linea con il comportamento delle serie finanziarie.
 
-Sotto queste ipotesi, e se $3\alpha_1^2 < 1$, la curtosi è pari a $3 \frac{1-\alpha_1^2}{1-3\alpha_1^2} > 3$, ovvero superiore a quella di una 
-distribuzione normale, in linea con il comportamento delle serie finanziarie.
-
-Tuttavia, il modello ARCH presenta delle criticità, ad esempio tende a sovrastimare la volatilità e risponde in maniera poco flessibile a 
-shock elevati ma isolati. Inoltre, basandosi sul quadrato degli shock passati, assume che rendimenti positivi e negativi abbiano lo stesso 
-effetto sulla varianza, e quindi non riesce a catturare l'effetto leva e le asimmetrie.
+Tuttavia, il modello ARCH presenta delle criticità, ad esempio tende a sovrastimare la volatilità e risponde in maniera poco flessibile a shock elevati ma isolati. Inoltre, basandosi sul quadrato degli shock passati, assume che rendimenti positivi e negativi abbiano lo stesso effetto sulla varianza, e quindi non riesce a catturare l'effetto leva e le asimmetrie.
 
 Infine, il modello necessita spesso di un ordine $q$ molto grande, appesantendo la stima, perché i vincoli di non negatività devono valere per tutti i coefficienti.
 
 
 \section{Il modello GARCH}
 \label{sec:modello-garch}
-La necessità di includere informazioni molto lontane nel tempo costringe i modelli ARCH a stimare numerosi parametri per descrivere 
-adeguatamente la volatilità di un rendimento finanziario. 
-Per superare questa criticità, Bollerslev\cite{bollerslev:garch} propose un'estensione nota come modello GARCH (\emph{Generalized Autoregressive Conditional Heteroskedasticity}). 
-Questa estensione si ispira al passaggio dai processi \acrshort{ar} ai processi \acrshort{arma}, riducendo il numero di parametri necessari per la stima, 
-permettendo quindi una descrizione più parsimoniosa.
+La necessità di includere informazioni molto lontane nel tempo costringe i modelli ARCH a stimare numerosi parametri per descrivere adeguatamente la volatilità di un rendimento finanziario. 
+Per superare questa criticità, Bollerslev~\cite{bollerslev:garch} propose un'estensione nota come modello GARCH. 
+Questa estensione si ispira al passaggio dai processi \gls{ar} ai processi \gls{arma}, riducendo il numero di parametri necessari per la stima, permettendo quindi una descrizione più parsimoniosa.
 
-Il modello GARCH, oltre che dai quadrati degli shock passati, permette alla varianza di dipendere anche dai propri valori passati, 
-consentendo di catturare la dipendenza prolungata della volatilità utilizzando un numero inferiore di parametri.
+Il modello GARCH, oltre che dai quadrati degli shock passati, permette alla varianza di dipendere anche dai propri valori passati, consentendo di catturare la dipendenza prolungata della volatilità utilizzando un numero inferiore di parametri.
 
-Un modello GARCH di ordine $p$ e $q$, denotato come GARCH($p, q$), è descritto dalle equazioni:
+Un modello GARCH di ordine $p$ e $q$, denotato come GARCH($p,q$), è descritto dalle equazioni:
 \begin{align*}
-    \varepsilon_t &= \sigma_t \eta_t \\
-    \sigma_t^2 &= \gamma + \sum_{i=1}^q \alpha_i \varepsilon_{t-i}^2 + \sum_{i=1}^p \beta_i \sigma_{t-i}^2
+    \varepsilon_t &= \sigma_t z_t \\
+    \sigma_t^2 &= \omega + \sum_{i=1}^q \alpha_i \varepsilon_{t-i}^2 + \sum_{i=1}^p \beta_i \sigma_{t-i}^2
 \end{align*}
-dove, come nel modello ARCH, $\eta_t$ rappresenta una sequenza di variabili casuali i.i.d. con media nulla e varianza unitaria e qui $\alpha_i$ e $\beta_i$ rappresentano rispettivamente i parametri ARCH e GARCH del modello.
+dove, come nel modello ARCH, $z_t$ rappresenta una sequenza di variabili casuali i.i.d. con media nulla e varianza unitaria e qui $\alpha_i$ e $\beta_i$ rappresentano rispettivamente i parametri ARCH e GARCH del modello.
 
-Affinché la varianza condizionata sia strettamente positiva per ogni istante $t$, è sufficiente che i parametri rispettino i seguenti vincoli: 
-$\gamma > 0$, $\alpha_i \geq 0$ e $\beta_i \geq 0$. Inoltre, per fare in modo che il processo sia stazionario in senso lato, è necessario che 
-si abbia $\sum_{i=1}^{\max(p,q)} (\alpha_i + \beta_i) < 1$, con $\alpha_i = 0$ per $i > q$ e $\beta_i = 0$ per $i > p$. 
+Affinché la varianza condizionata sia strettamente positiva per ogni istante $t$, è sufficiente che i parametri rispettino i seguenti vincoli: $\omega > 0$, $\alpha_i \geq 0$ e $\beta_i \geq 0$. Inoltre, per fare in modo che il processo sia stazionario in senso lato, è necessario che si abbia:
+\[
+    \sum_{i=1}^{\max(p,q)} (\alpha_i + \beta_i) < 1
+\]
+con $\alpha_i = 0$ per $i > q$ e $\beta_i = 0$ per $i > p$. 
 Il modello più utilizzato per semplicità ed efficienza è il GARCH(1,1):
-\begin{equation*}
-    \sigma_t^2 = \gamma + \alpha_1 \varepsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2
-\end{equation*}
+\[
+    \sigma_t^2 = \omega + \alpha_1 \varepsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2
+\]
 
-Un forte shock passato ($\varepsilon_{t-1}^2$) o un'elevata varianza pregressa ($\sigma_{t-1}^2$) determinano un aumento della varianza 
-condizionata ($\sigma_t^2$). In questo modo il modello può riprodurre il fenomeno del \emph{volatility clustering} e la leptocurtosi, 
-rendendolo più adatto all'analisi delle serie finanziarie.
+Un forte shock passato ($\varepsilon_{t-1}^2$) o un'elevata varianza pregressa ($\sigma_{t-1}^2$) determinano un aumento della varianza condizionata ($\sigma_t^2$). 
+In questo modo il modello può riprodurre il fenomeno del \emph{volatility clustering} e la leptocurtosi, rendendolo più adatto all'analisi delle serie finanziarie.
 
-Sotto l'ipotesi di stazionarietà, la varianza incondizionata di lungo periodo nel modello è pari a $\frac{\gamma}{1-\alpha_1-\beta_1}$, 
-o in generale $E(\varepsilon_t^2) = \frac{\gamma}{1-\sum (\alpha_i+\beta_i)}$. 
-Inoltre, attraverso una sostituzione ricorsiva nell'equazione della varianza, rappresentando un processo GARCH(1,1) come un ARCH($\infty$), 
-si può dimostrare la parsimonia del modello, che con soli tre parametri può incorporare l'intera storia passata degli shock.
+Sotto l'ipotesi di stazionarietà, la varianza incondizionata di lungo periodo nel modello è pari a:
+\[
+    E(\varepsilon_t^2) = \frac{\omega}{1-\alpha_1-\beta_1}
+\]
+o in generale $E(\varepsilon_t^2) = \frac{\omega}{1 - \sum_{i=1}^{\max(p,q)} (\alpha_i + \beta_i)}$. 
+Inoltre, attraverso una sostituzione ricorsiva nell'equazione della varianza, rappresentando un processo GARCH(1,1) come un ARCH($\infty$), si può dimostrare la parsimonia del modello, che con soli tre parametri può incorporare l'intera storia passata degli shock.
 
-Nonostante ciò, come nel modello ARCH, gli shock passati continuano a influenzare la varianza esclusivamente attraverso i loro valori al 
-quadrato, assumendo che indipendentemente dal segno due shock di pari entità esercitino un impatto identico. 
-Questo lo rende quindi inadatto a catturare il fenomeno dell'effetto leva, rendendo necessario il ricorso a specificazioni asimmetriche.
+Nonostante ciò, come nel modello ARCH, gli shock passati continuano a influenzare la varianza esclusivamente attraverso i loro valori al quadrato, assumendo che indipendentemente dal segno due shock di pari entità esercitino un impatto identico. Questo lo rende quindi inadatto a catturare il fenomeno dell'effetto leva, rendendo necessario il ricorso a specificazioni asimmetriche.
 
 
 \section{Modelli asimmetrici}
@@ -95,111 +86,90 @@ Questo lo rende quindi inadatto a catturare il fenomeno dell'effetto leva, rende
 
 \subsection{GJR-GARCH}
 \label{subsec:gjr-garch}
-Il modello GARCH standard assume che l'effetto sulla volatilità futura degli shock di mercato dipenda solo dalla loro entità e 
-non dal segno, non riuscendo a catturare l'effetto leva. 
-Per tenerne conto, Glosten, Jagannathan e Runkle\cite{glosten:gjr} proposero una variante del modello, nota come GJR-GARCH. 
-Il nuovo modello si basa sull'inserimento di una variabile \emph{dummy} all'interno dell'equazione della varianza, 
-permettendo agli shock di segno opposto di influenzare in modo diverso la volatilità condizionata.
+Il modello GARCH standard assume che l'effetto sulla volatilità futura degli shock di mercato dipenda solo dalla loro entità e non dal segno, non riuscendo a catturare l'effetto leva. 
+Per tenerne conto, Glosten, Jagannathan e Runkle~\cite{glosten:gjr} proposero una variante del modello, nota come GJR-GARCH. 
+Il nuovo modello si basa sull'inserimento di una variabile \emph{dummy} all'interno dell'equazione della varianza, permettendo agli shock di segno opposto di influenzare in modo diverso la volatilità condizionata.
 
 L'equazione della varianza del GJR-GARCH(1,1) è:
-\begin{equation*}
-    \sigma_t^2 = \gamma + \alpha_1 \varepsilon_{t-1}^2 + \delta_1 D_{t-1}^- \varepsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2
-\end{equation*}
-
-dove $D_{t-1}^-$ è la variabile \emph{dummy} che si attiva solo in presenza di shock negativi:
-\begin{equation*}
-    D_{t-1}^- = 
+\[
+    \sigma_t^2 = \omega + \alpha_1 \varepsilon_{t-1}^2 + \delta_1 I_{t-1} \varepsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2
+\]
+dove $I_{t-1}$ è la variabile \emph{dummy} che si attiva solo in presenza di shock negativi:
+\[
+    I_{t-1} = 
     \begin{cases} 
         1, & \text{se } \varepsilon_{t-1} < 0 \\ 
         0, & \text{se } \varepsilon_{t-1} \geq 0 
     \end{cases}
-\end{equation*}
+\]
 
-In presenza di una buona notizia la variabile \emph{dummy} si annulla e l'impatto sulla volatilità condizionata è dato solamente 
-da $\alpha_1$; dopo una cattiva notizia l'indicatore assume valore 1 e l'impatto complessivo sarà dato dalla somma ($\alpha_1 + \delta_1$). 
+In presenza di una buona notizia la variabile indicatrice si annulla e l'impatto sulla volatilità condizionata è dato solamente da $\alpha_1$; dopo una cattiva notizia l'indicatore assume valore $1$ e l'impatto complessivo sarà dato dalla somma $\alpha_1 + \delta_1$. 
 L'effetto \emph{leverage} è quindi presente se $\delta_1 > 0$, perché le innovazioni negative aumentano la varianza più di quelle positive.
 
-Per garantire la positività della varianza condizionata stimata ($\sigma_t^2$) è sufficiente che i parametri dell'equazione 
-soddisfino $\gamma > 0$, $\alpha_1 \geq 0$, $\beta_1 \geq 0$ e $\alpha_1 + \delta_1 \geq 0$.
+Per garantire la positività della varianza condizionata stimata ($\sigma_t^2$) è sufficiente che i parametri dell'equazione soddisfino $\omega > 0$, $\alpha_1 \geq 0$, $\beta_1 \geq 0$ e $\alpha_1 + \delta_1 \geq 0$.
 
 
 \subsection{EGARCH}
 \label{subsec:egarch}
-Come evidenziato da Nelson\cite{nelson:conditional}, nelle stime empiriche i vincoli di positività dei modelli GARCH vengono spesso violati 
-e possono limitare la dinamica temporale della varianza condizionata. 
-Per superare questo limite, Nelson propose il modello EGARCH (\emph{Exponential Generalized Autoregressive Conditional Heteroskedasticity}), 
-che modella il logaritmo naturale della varianza condizionata, rimuovendo la necessità di vincoli di non negatività sui parametri dato che la 
-trasformazione esponenziale garantisce che la varianza sia sempre positiva.
+Come evidenziato da Nelson~\cite{nelson:conditional}, nelle stime empiriche i vincoli di positività dei modelli GARCH vengono spesso violati e possono limitare la dinamica temporale della varianza condizionata. 
+Per superare questo limite, Nelson propose il modello EGARCH, che modella il logaritmo naturale della varianza condizionata, rimuovendo la necessità di vincoli di non negatività sui parametri dato che la trasformazione esponenziale garantisce che la varianza sia sempre positiva.
 
-Per consentire al modello di rispondere in modo asimmetrico agli shock viene introdotta una funzione dell'innovazione, pesata per la sua 
-grandezza e il suo segno. 
-L'equazione di un processo EGARCH(1,1) può essere espressa come:
-\begin{equation*}
-    h_t = \gamma^* + \beta_1^* h_{t-1} + \alpha^* \frac{|\varepsilon_{t-1}|}{\sigma_{t-1}} + \theta^* \frac{\varepsilon_{t-1}}{\sigma_{t-1}}
-\end{equation*}
-dove $\varepsilon_t = \sigma_t \eta_t$ con $\eta_t \sim N(0,1)$, $\frac{\varepsilon_{t-1}}{\sigma_{t-1}} = \eta_{t-1}$ è l'innovazione standardizzata, $h_t = \ln(\sigma_t^2)$ e $\sigma_t^2 = e^{h_t}$.
+Per consentire al modello di rispondere in modo asimmetrico agli shock viene introdotta una funzione dell'innovazione, pesata per la sua grandezza e il suo segno. L'equazione di un processo EGARCH(1,1) può essere espressa come:
+\[
+    h_t = \omega^* + \beta_1^* h_{t-1} + \alpha^* \frac{|\varepsilon_{t-1}|}{\sigma_{t-1}} + \theta^* \frac{\varepsilon_{t-1}}{\sigma_{t-1}}
+\]
+dove $\varepsilon_t = \sigma_t z_t$ con $z_t \sim N(0,1)$, $\frac{\varepsilon_{t-1}}{\sigma_{t-1}} = z_{t-1}$ è l'innovazione standardizzata, $h_t = \ln(\sigma_t^2)$ e $\sigma_t^2 = e^{h_t}$.
 
-I parametri sono indicati con l'asterisco per distinguerli da quelli dei modelli precedenti e non sono soggetti a vincoli di non negatività, 
-mantenendo però la condizione di stazionarietà $|\beta_1^*| < 1$.
-
+I parametri sono indicati con l'asterisco per distinguerli da quelli dei modelli precedenti e non sono soggetti a vincoli di non negatività, mantenendo però la condizione di stazionarietà $|\beta_1^*| < 1$. 
 L'asimmetria della risposta è determinata da $\alpha^*$, che cattura l'intensità dello shock, e da $\theta^*$, che ne cattura il segno. 
-Per questo motivo una notizia positiva ($\varepsilon_{t-1} > 0$) contribuisce al logaritmo della varianza per 
-$(\alpha^* + \theta^*)\frac{\varepsilon_{t-1}}{\sigma_{t-1}}$, mentre uno shock negativo ($\varepsilon_{t-1} < 0$) contribuisce per $(\alpha^* - \theta^*)\frac{|\varepsilon_{t-1}|}{\sigma_{t-1}}$.
 
-Poiché il modello è specificato in logaritmi, l'effetto degli shock sulla varianza è moltiplicativo, e applicando la funzione esponenziale 
-per isolare la varianza condizionata ($\sigma_t^2 = e^{h_t}$) si ottiene:
-\begin{equation*}
-    \sigma_t^2 = \gamma^{**} (\sigma_{t-1}^2)^{\beta_1^*} \exp\left\{ \alpha^* \frac{|\varepsilon_{t-1}|}{\sigma_{t-1}} + \theta^* \frac{\varepsilon_{t-1}}{\sigma_{t-1}} \right\}
-\end{equation*}
-dove $\gamma^{**} = \exp(\gamma^*)$ e la costante $\gamma^*$ incorpora già il valore atteso dell'innovazione standardizzata in valore assoluto.
+Per questo motivo una notizia positiva ($\varepsilon_{t-1} > 0$) contribuisce al logaritmo della varianza per $(\alpha^* + \theta^*) \frac{\varepsilon_{t-1}}{\sigma_{t-1}}$, mentre uno shock negativo ($\varepsilon_{t-1} < 0$) contribuisce per $(\alpha^* - \theta^*) \frac{|\varepsilon_{t-1}|}{\sigma_{t-1}}$.
 
-L'effetto leva è presente se il parametro $\theta^*$ assume un valore negativo. 
-Nel caso in cui gli shock positivi riducano la varianza condizionata e quelli negativi la incrementino, deve valere la 
-condizione $\theta^* < \alpha^* < -\theta^*$.
+Poiché il modello è specificato in logaritmi, l'effetto degli shock sulla varianza è moltiplicativo, e applicando la funzione esponenziale per isolare la varianza condizionata ($\sigma_t^2 = e^{h_t}$) si ottiene:
+\[
+    \sigma_t^2 = \omega^{**} (\sigma_{t-1}^2)^{\beta_1^*} \exp\left\{ \alpha^* \frac{|\varepsilon_{t-1}|}{\sigma_{t-1}} + \theta^* \frac{\varepsilon_{t-1}}{\sigma_{t-1}} \right\}
+\]
+dove $\omega^{**} = \exp(\omega^*)$. La costante $\omega^*$ incorpora il termine di centratura: se l'equazione è scritta con l'innovazione centrata, $\alpha^* (|z_{t-1}| - E|z_{t-1}|)$, si ha $\omega^* = \omega - \alpha^* E|z_{t-1}|$. Con innovazioni normali $E|z_{t-1}| = \sqrt{2/\pi}$.
+
+Nell'analisi si abbandonerà l'ipotesi di normalità in favore di una distribuzione $t$ di Student per modellare adeguatamente lo spessore delle code. Assumendo una distribuzione di questo tipo standardizzata, $E|z_{t-1}|$ dipenderà dai gradi di libertà $\nu$ della distribuzione, con la condizione che $\nu > 2$.
+
+L'effetto leva è presente se il parametro $\theta^*$ assume un valore negativo. Nel caso in cui gli shock positivi riducano la varianza condizionata e quelli negativi la incrementino, deve valere la condizione $\theta^* < \alpha^* < -\theta^*$.
 
 
-\section{La News Impact Curve}
+\section{La News Impact Curve (NIC)}
 \label{sec:nic}
-Per confrontare l'effetto delle notizie sulla volatilità stimata nei diversi modelli, sulla base dell'intuizione originale di Pagan e Schwert\cite{pagan:alternative}, 
-Engle e Ng\cite{engle:news} introdussero la \acrshort{nic}, uno strumento grafico a forma di curva che relaziona lo shock al 
-tempo $t-1$ ($\varepsilon_{t-1}$) con la varianza condizionata corrente ($\sigma_t^2$), mantenendo costanti le informazioni precedenti a $t-2$. 
-L'idea alla base della NIC è quella di misurare l'impatto di uno shock isolato sulla previsione della volatilità futura, assumendo che tutte 
-le altre componenti rimangano costanti. La forma della curva dipende dalla specificazione del modello di volatilità adottato.
+Per confrontare l'effetto delle notizie sulla volatilità stimata nei diversi modelli, sulla base dell'intuizione originale di Pagan e Schwert~\cite{pagan:alternative}, Engle e Ng~\cite{engle:news} introdussero la \gls{nic}, uno strumento grafico a forma di curva che relaziona lo shock al tempo $t-1$ ($\varepsilon_{t-1}$) con la varianza condizionata corrente ($\sigma_t^2$), mantenendo costanti le informazioni precedenti a $t-2$. 
 
-Nel modello GARCH standard, la \emph{News Impact Curve} è una funzione quadratica perfettamente simmetrica e centrata nell'origine 
-($\varepsilon_{t-1} = 0$). L'equazione della curva per un GARCH(1,1) è:
-\begin{equation*}
+L'idea alla base della NIC è quella di misurare l'impatto di uno shock isolato sulla previsione della volatilità futura, assumendo che tutte le altre componenti rimangano costanti. La forma della curva dipende dalla specificazione del modello di volatilità adottato.
+
+Nel modello GARCH standard, la \emph{News Impact Curve} è una funzione quadratica perfettamente simmetrica e centrata nell'origine ($\varepsilon_{t-1} = 0$). L'equazione della curva per un GARCH(1,1) è:
+\[
     \sigma_t^2 = A + \alpha_1 \varepsilon_{t-1}^2
-\end{equation*}
-dove la costante $A = \gamma + \beta_1 \sigma^2$ e $\sigma^2$ è la varianza incondizionata.
+\]
+dove la costante $A = \omega + \beta_1 \sigma^2$ e $\sigma^2$ è la varianza incondizionata. La forma implica che shock di pari entità, indifferentemente dal segno, hanno lo stesso impatto sulla volatilità futura, ignorando quindi l'effetto \emph{leverage}.
 
-La forma implica che shock di pari entità, indifferentemente dal segno, hanno lo stesso impatto sulla volatilità futura, 
-ignorando quindi l'effetto \emph{leverage}.
-
-La NIC del GJR-GARCH rimane formata da due rami quadratici ma introduce una torsione nella curva, presentando pendenze diverse 
-ai due lati dell'origine:
-\begin{equation*}
+La NIC del GJR-GARCH rimane formata da due rami quadratici ma introduce una torsione nella curva, presentando pendenze diverse ai due lati dell'origine:
+\[
     \sigma_t^2 = 
     \begin{cases} 
         A + \alpha_1 \varepsilon_{t-1}^2, & \text{per } \varepsilon_{t-1} \geq 0 \\
         A + (\alpha_1 + \delta_1) \varepsilon_{t-1}^2, & \text{per } \varepsilon_{t-1} < 0
     \end{cases}
-\end{equation*}
-
-La costante $A$ mantiene la stessa forma del caso precedente, ma il suo valore differisce da quello del GARCH standard, perché la varianza 
-incondizionata $\sigma^2$ è quella specifica del modello GJR, calcolata come $\sigma^2 = \frac{\gamma}{1-\alpha_1-\beta_1-\delta_1/2}$. 
+\]
+La costante $A$ mantiene la stessa forma del caso precedente, ma il suo valore differisce da quello del GARCH standard, perché la varianza incondizionata $\sigma^2$ è quella specifica del modello GJR, calcolata come:
+\[
+    \sigma^2 = \frac{\omega}{1-\alpha_1-\beta_1-\delta_1/2}
+\]
 Se $\delta_1 > 0$, il ramo sinistro (shock negativi) risulterà più ripido rispetto al ramo destro (shock positivi), riflettendo l'effetto \emph{leverage}.
 
-Nel modello EGARCH la \emph{News Impact Curve} assume una funzione esponenziale. 
-Sostituendo la varianza incondizionata al posto di quella ritardata, la curva prende la forma:
-\begin{equation*}
+Nel modello EGARCH la \emph{News Impact Curve} assume una funzione esponenziale. Sostituendo la varianza incondizionata al posto di quella ritardata, la curva prende la forma:
+\[
     \sigma_t^2 = 
     \begin{cases} 
         A \cdot \exp\left\{ (\alpha^* + \theta^*) \frac{\varepsilon_{t-1}}{\sigma} \right\}, & \text{per } \varepsilon_{t-1} \geq 0 \\
         A \cdot \exp\left\{ (\alpha^* - \theta^*) \frac{|\varepsilon_{t-1}|}{\sigma} \right\}, & \text{per } \varepsilon_{t-1} < 0
     \end{cases}
-\end{equation*}
-dove $\sigma^2$ è la varianza incondizionata del modello, $\sigma$ la corrispondente deviazione standard e $A = \gamma^{**}(\sigma^2)^{\beta_1^*}$.
+\]
+dove $\sigma^2$ è la varianza incondizionata del modello, $\sigma$ la corrispondente deviazione standard e $A = \omega^{**}(\sigma^2)^{\beta_1^*}$.
 
-Per shock negativi molto grandi, la natura esponenziale della curva fa sì che la volatilità prevista possa superare quella degli altri modelli 
-analizzati, perché per valori elevati dello shock una funzione esponenziale cresce più di una parabola.
+Per shock negativi molto grandi, la natura esponenziale della curva fa sì che la volatilità prevista possa superare quella degli altri modelli analizzati, perché per valori elevati dello shock una funzione esponenziale cresce più di una parabola.

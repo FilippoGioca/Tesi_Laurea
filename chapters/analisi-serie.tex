@@ -1,4 +1,4 @@
-% capitolo 1 (dopo introduzione): Analisi delle serie storiche finanziarie
+% capitolo 2 (dopo introduzione): Analisi delle serie storiche finanziarie
 \chapter{Analisi delle serie storiche finanziarie}
 \label{cap:analisi-serie}
 
@@ -6,10 +6,10 @@ Per comprendere le dinamiche dei mercati è necessario condurre un'analisi delle
 prezzi in metriche misurabili di rendimento e volatilità. Questo capitolo introduce tali concetti, indispensabili per poter valutare l'impatto dei dazi.
 
 Il capitolo analizza le modalità di calcolo dei rendimenti e definisce il concetto di volatilità, per poi concentrarsi sui principali 
-comportamenti tipici (i cosiddetti \emph{fatti stilizzati}) che caratterizzano i mercati finanziari.
+comportamenti tipici (i cosiddetti «fatti stilizzati») che caratterizzano i mercati finanziari.
 
 Lo studio di queste dinamiche serve a mostrare che i modelli lineari classici non sono sufficienti per descrivere la realtà dei mercati, 
-rendendo necessario l'utilizzo dei modelli econometrici della famiglia \gls{garch}, che vengono affrontati nei capitoli successivi.
+rendendo necessario l'utilizzo dei modelli econometrici della famiglia GARCH, che vengono affrontati nei capitoli successivi.
 
 
 \section{I rendimenti finanziari}
@@ -115,7 +115,7 @@ volatilità condizionata. A seguito di uno shock sui prezzi, l'incertezza non au
 il suo livello medio di lungo periodo.
 
 Nei modelli GARCH che verranno trattati, Bollerslev\cite{bollerslev:garch} mostra che, con coefficienti non negativi, il processo è stazionario 
-in senso lato quando la somma dei coefficienti \gls{arch} e \gls{garch} è minore di 1. In questo caso la varianza incondizionata è costante e finita 
+in senso lato quando la somma dei coefficienti ARCH e GARCH è minore di 1. In questo caso la varianza incondizionata è costante e finita 
 e gli shock di mercato hanno un effetto solo temporaneo sulla volatilità.
 
 
@@ -134,12 +134,12 @@ modellati con attenzione, ad esempio per calcolare il \gls{var}\cite{cont:empiri
 
 La natura non gaussiana dei dati rende insufficiente l'uso della deviazione standard per misurare la dispersione\cite{cont:empirical}. 
 Inoltre, assumere la normalità dei rendimenti porta a sottostimare la probabilità degli eventi estremi; per questo, prima di applicare 
-modelli per la volatilità come gli \gls{arch}\cite{engle:arch}, conviene verificare la non normalità dei rendimenti.
+modelli per la volatilità come gli ARCH\cite{engle:arch}, conviene verificare la non normalità dei rendimenti.
 
 La presenza di code pesanti, suggerita da una curtosi maggiore di 3, viene poi accertata tramite test statistici, come il test di Jarque-Bera, 
 che valuta congiuntamente asimmetria e curtosi\cite{jarque:bera}, e con strumenti grafici come il QQ-plot.
 
-I modelli \gls{garch} risultano adatti all'analisi finanziaria perché, come i modelli \gls{arch}, generano una distribuzione incondizionata 
+I modelli GARCH risultano adatti all'analisi finanziaria perché, come i modelli ARCH, generano una distribuzione incondizionata 
 con code più pesanti di quelle della normale, anche quando gli errori sono gaussiani\cite{tsay:analysis}.
 
 
@@ -157,9 +157,9 @@ Come già osservato nel Paragrafo \ref{sec:volatilita} (\nameref{sec:volatilita}
 il che rende complesso lo studio di questa dinamica. 
 I modelli tradizionali risultano inadatti a questo scopo poiché assumono varianza condizionata costante nel tempo.
 
-Per superare questo limite Engle\cite{engle:arch} introdusse la classe dei processi \gls{arch}, passando al concetto di varianza condizionata 
+Per superare questo limite Engle\cite{engle:arch} introdusse la classe dei processi ARCH, passando al concetto di varianza condizionata 
 ($\sigma_t^2$), ovvero una varianza che varia nel tempo sulla base delle informazioni passate. 
-Come descritto in Tsay\cite{tsay:analysis}, l'estensione ai modelli \gls{garch} permette di catturare questo fenomeno, dato che un ampio valore 
+Come descritto in Tsay\cite{tsay:analysis}, l'estensione ai modelli GARCH permette di catturare questo fenomeno, dato che un ampio valore 
 dei rendimenti passati al quadrato genera grande varianza nel periodo successivo, replicando così la natura a grappoli della volatilità 
 osservata nei mercati.
 
@@ -170,8 +170,8 @@ Come evidenziato da Cont\cite{cont:empirical}, i rendimenti sono correlati negat
 questo fenomeno è noto come effetto leva (\emph{leverage effect}) ed è stato inizialmente documentato da Black\cite{black:studies}.
 
 Come riassunto da Nelson\cite{nelson:conditional}, la volatilità tende ad aumentare dopo cattive notizie e a diminuire dopo buone notizie. 
-Nonostante l'efficacia nel catturare il fenomeno di \emph{volatility clustering}, i modelli \gls{garch} tradizionali risultano inadatti in quanto 
+Nonostante l'efficacia nel catturare il fenomeno di \emph{volatility clustering}, i modelli GARCH tradizionali risultano inadatti in quanto 
 assumono che variazioni positive e negative della stessa entità producano lo stesso impatto sulla varianza futura\cite{tsay:analysis}.
 
-Per superare questo problema di simmetria e catturare l'effetto leva sono state sviluppate estensioni asimmetriche, come il \gls{gjr-garch} e 
-l'\gls{egarch}, che vengono trattate nel capitolo successivo.
+Per superare questo problema di simmetria e catturare l'effetto leva sono state sviluppate estensioni asimmetriche, come il GJR-GARCH e 
+l'EGARCH, che vengono trattate nel capitolo successivo.

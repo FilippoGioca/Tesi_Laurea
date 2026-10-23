@@ -1,7 +1,175 @@
-% capitolo 3: Dati e metodologia
+% capitolo 4: Dati e metodologia
 \chapter{Dati e metodologia}
 \label{cap:dati-metodologia}
 
+Questo capitolo illustra la metodologia di analisi scelta per stimare l'impatto dei dazi tra USA e Cina nel 2025-2026 sulle dinamiche dei mercati, definendo i modelli 
+utilizzati per misurare i picchi di volatilità. Le serie storiche sono state estratte dalla piattaforma \textbf{Refinitiv Eikon}, esportate in formato tabellare su Excel 
+e successivamente importate in RStudio.
 
-% \section{Prerequisiti}
+L'analisi si basa sulle serie storiche giornaliere dei prezzi di chiusura di ciascuno strumento; per i titoli azionari i prezzi risultano aggiustati per le operazioni 
+sul capitale e per la distribuzione dei dividendi. Dalle serie dei prezzi sono stati calcolati i log-rendimenti giornalieri, che per semplicità espositiva verranno indicati 
+semplicemente come «rendimenti». Il campione copre il periodo dal primo giorno di contrattazione di gennaio 2016 al 31 agosto 2026, includendo un'ampia finestra 
+temporale precedente all'\emph{escalation} tariffaria per stimare in modo più robusto i parametri dei modelli.
 
+Il capitolo illustra la selezione degli asset e l'identificazione degli eventi esogeni, per poi formalizzare la specificazione dei modelli e concludersi con le 
+statistiche descrittive e l'analisi esplorativa preliminare.
+
+
+\section{Definizione degli asset}
+Per cogliere le diverse dinamiche innescate dai dazi, il campione comprende sei strumenti finanziari appartenenti a categorie di mercato distinte 
+(una materia prima, un indice azionario, una valuta e tre titoli azionari), scelti per verificare se le reazioni sono eterogenee rispetto allo stesso shock tariffario.
+
+\paragraph{Oro}
+Metallo prezioso classificato come materia prima (\emph{commodity}) e inserito nel campione in quanto tradizionalmente considerato un bene rifugio. Si utilizza la 
+quotazione \emph{spot} in dollari per oncia troy. 
+Come definito da Baur e McDermott\cite{baur:gold}, un bene rifugio è un asset non correlato o negativamente correlato con un altro strumento o portafoglio in determinati 
+periodi di stress, ad esempio nei periodi di calo dei mercati azionari. Nel presente contesto la sua inclusione permette di valutare se, e in che misura, la volatilità 
+dell'oro risponde agli shock tariffari, e di confrontarne il comportamento con quello degli altri asset.
+
+\paragraph{S\&P 500}
+Indice che misura la performance di 500 grandi società statunitensi selezionate in base a criteri di dimensione, liquidità e altri requisiti. Il peso di ciascuna azienda 
+all'interno dell'indice è proporzionale al valore totale delle sue azioni liberamente scambiabili sul mercato (\emph{\gls{free-float}}). Rappresenta un 
+riferimento consolidato per l'andamento complessivo del mercato azionario statunitense.
+
+Nell'analisi l'indice è rappresentato dall'ETF SPDR S\&P 500 (SPY), che ne replica la performance, poiché i dati dell'indice non erano disponibili nella piattaforma 
+utilizzata. La sua inclusione permette di distinguere la reazione complessiva del mercato azionario ai dazi rispetto alle dinamiche delle singole azioni. I tre titoli 
+azionari considerati fanno parte dell'indice, per cui i loro rendimenti non sono indipendenti da quelli dello SPY.
+
+\paragraph{USD/CNH}
+Tasso di cambio tra il dollaro statunitense e il renminbi quotato sul mercato \emph{offshore}. Il prezzo del CNH si forma sul mercato \emph{offshore} in base alle forze di 
+mercato, mentre il CNY \emph{onshore} è gestito dalla \emph{People's Bank of China} (PBOC) attraverso un tasso centrale di riferimento e una banda di oscillazione giornaliera.
+
+L'inclusione del tasso di cambio permette di misurare la reazione del mercato valutario agli shock tariffari. Si è scelto il CNH perché i suoi prezzi riflettono più 
+direttamente la reazione del mercato a questi shock. Inoltre, la serie \emph{offshore} viene quotata anche durante alcune delle festività nazionali cinesi e ciò riduce il 
+rischio di trattare giornate mancanti o rendimenti artificialmente nulli, seguiti da picchi di volatilità alla riapertura del mercato.
+
+\paragraph{Nucor}
+Uno dei maggiori produttori di acciaio e prodotti siderurgici, che utilizza rottami ferrosi come materia prima e opera prevalentemente sul mercato interno nordamericano. 
+I suoi margini di profitto sono sensibili alle decisioni di politica commerciale; il ripristino e l'ampliamento dei dazi sull'acciaio nel 2025 hanno verosimilmente favorito 
+l'azienda limitando l'ingresso nel mercato interno di acciaio estero a basso costo. Una potenziale rimozione di tali dazi potrebbe esporre l'azienda a un forte aumento delle 
+importazioni di materiale straniero, generando una pressione al ribasso sui prezzi dell'acciaio statunitense.
+
+\paragraph{General Motors (GM)}
+Società attiva nella progettazione, produzione e vendita di veicoli, oltre che nella fornitura di servizi basati su software e abbonamenti a livello globale. Molte operazioni 
+fondamentali (specialmente in Cina e, per la produzione di batterie, in Nord America) sono gestite tramite \emph{joint venture} e la espongono al rischio politico e 
+commerciale legato alla Cina.
+
+Nel mercato cinese, l'azienda affronta una concorrenza aggressiva da parte di produttori nazionali in forte crescita e vede la propria operatività condizionata dalle 
+continue tensioni commerciali tra USA e Cina. Parallelamente, sul fronte interno, GM subisce l'aumento dei costi di produzione a causa dei dazi americani su acciaio e 
+alluminio, oltre a quelli sulle importazioni di veicoli e componenti.
+
+\paragraph{Apple Inc.}
+Una delle società a maggiore capitalizzazione al mondo, operante nel settore tecnologico. Progetta e commercializza elettronica di consumo, ma la quasi totalità della 
+produzione è affidata a partner esterni situati principalmente in Cina continentale, India, Giappone, Corea del Sud, Taiwan e Vietnam. Le restrizioni al commercio 
+internazionale, come i dazi, possono aumentare i costi o limitare la disponibilità dei componenti, delle terre rare e delle altre materie prime necessarie alla produzione. 
+Tale struttura la rende vulnerabile a rincari o a interruzioni della \emph{supply chain} in caso di tensioni commerciali.
+
+
+\section{Identificazione degli eventi esogeni}
+Il periodo di osservazione (2025-2026) è stato caratterizzato da una fitta sequenza di shock esogeni su scala globale. Ai fini della presente analisi è stata selezionata 
+una cronologia mirata di eventi, filtrando gli annunci di maggiore impatto sistemico e restringendo l'indagine ai rapporti bilaterali tra Stati Uniti e Cina. Di conseguenza, 
+le misure tariffarie rivolte a Paesi terzi sono state tralasciate, a meno che non risultassero associate agli eventi considerati.
+
+Per garantire la coerenza dell'analisi empirica, gli annunci avvenuti a mercati chiusi, durante i fine settimana o nei giorni festivi, sono stati associati alla data della 
+prima sessione di negoziazione utile. Di seguito si riportano gli eventi selezionati.
+
+\paragraph{1° febbraio 2025: Provvedimento anti-Fentanyl}
+L'amministrazione statunitense ha annunciato l'imposizione di nuovi dazi per motivi di sicurezza nazionale e salute pubblica, per contrastare il traffico illegale di 
+Fentanyl. Nello specifico, il provvedimento prevedeva tariffe del 25\% sulle importazioni da Canada e Messico (identificati come principali corridoi di transito) e 
+del 10\% verso la Cina, accusata di non aver bloccato l'esportazione di composti chimici primari. L'entrata in vigore era fissata per martedì 4 febbraio, ma grazie al 
+raggiungimento di un accordo i dazi verso i partner nordamericani sono stati sospesi, a differenza di quelli verso Pechino. Poiché l'annuncio è avvenuto di sabato, 
+lo shock è stato prezzato a partire da lunedì 3 febbraio, data in cui è stata posizionata la variabile indicatrice.
+
+\paragraph{2 aprile 2025: Liberation Day}
+Durante l'evento pubblico \emph{Liberation Day}, il Presidente statunitense ha presentato un importante piano tariffario, articolato in dazi di base e tariffe reciproche, 
+con entrata in vigore il 5 e il 9 aprile. Era prevista una tariffa minima del 10\% su tutte le importazioni globali (al netto di specifiche categorie), con un inasprimento 
+verso alcune nazioni, prima fra tutte la Cina, soggetta ad un'aliquota del 34\%. È stato inoltre annunciato un dazio globale del 25\% destinato alle importazioni del 
+settore automobilistico. Poiché il discorso è avvenuto alle 16:00 EST in coincidenza con la chiusura di Wall Street, lo shock si è scaricato interamente alla riapertura 
+dei mercati il giorno successivo, giovedì 3 aprile.
+
+\paragraph{9 aprile 2025: Escalation bilaterale}
+Nella serata dell'8 aprile 2025, a mercati finanziari chiusi, l'amministrazione statunitense ha emanato un ordine esecutivo volto a innalzare l'aliquota sulle importazioni 
+dalla Cina all'84\%. Il giorno successivo, in risposta al provvedimento precedente, Pechino ha annunciato l'imposizione di una tariffa ritorsiva dell'84\% sulle merci 
+statunitensi, con decorrenza dal giorno seguente. Come controrisposta gli Stati Uniti hanno sospeso per 90 giorni le tariffe del \emph{Liberation Day} verso la maggior 
+parte dei partner commerciali (mantenendo l'aliquota base del 10\%), innalzando però al 125\% il prelievo verso la Cina. 
+Poiché il provvedimento iniziale è avvenuto a contrattazioni concluse, l'intero shock è stato prezzato il 9 aprile, giornata in cui è stata posizionata la variabile indicatrice.
+
+\paragraph{12 maggio 2025: Vertice di Ginevra}
+A seguito di un incontro diplomatico tenutosi a Ginevra, i funzionari di Stati Uniti e Cina hanno siglato un primo accordo per allentare le tensioni commerciali. Le due 
+potenze hanno revocato le misure adottate nel mese di aprile, portando l'aliquota al 10\% sulle importazioni statunitensi e al 30\% su quelle cinesi a partire da mercoledì 
+14 maggio, innescando una reazione positiva sui mercati azionari. Poiché la notizia è stata diffusa nella giornata di lunedì 12 maggio, lo shock è stato prezzato in tale 
+seduta, data in cui è stata posizionata la variabile indicatrice.
+
+\paragraph{9-10 ottobre 2025: Crisi delle terre rare}
+Il 9 ottobre il Ministero del Commercio cinese ha annunciato nuove misure sui controlli extraterritoriali per alcuni articoli di fabbricazione estera contenenti terre 
+rare di origine cinese. Il giorno successivo, in risposta alla mossa precedente, il Presidente statunitense ha annunciato un'\emph{escalation} commerciale, minacciando un 
+dazio aggiuntivo del 100\% sulle importazioni cinesi con decorrenza dal 1° novembre 2025, accompagnato da restrizioni più severe sull'export di tecnologie avanzate e 
+software verso Pechino. Poiché gli eventi si sono concentrati in due giornate consecutive a mercati aperti, l'intero periodo costituisce la finestra temporale esatta in 
+cui è stata posizionata la variabile indicatrice.
+
+\paragraph{30 ottobre 2025: Accordo di Busan}
+A seguito di un incontro tenutosi a Busan (Corea del Sud) tra il Presidente Donald Trump e il Presidente Xi Jinping, Stati Uniti e Cina hanno annunciato un accordo volto 
+a sospendere le misure adottate nel mese di ottobre (la minaccia del dazio al 100\% e i controlli sulle terre rare). L'intesa, inoltre, ha riportato il dazio legato al 
+Fentanyl dal 20\% (provvedimento di marzo) al 10\% e ha impegnato la Cina a sospendere tutti i dazi di ritorsione imposti agli Stati Uniti a partire da marzo 2025. 
+Lo shock è stato prezzato nella medesima seduta del 30 ottobre, data in cui è stata posizionata la variabile indicatrice.
+
+\paragraph{20 febbraio 2026: Sentenza della Corte Suprema}
+La Corte Suprema degli Stati Uniti ha annullato i dazi imposti nel corso del 2025 alla Cina e ad altri partner commerciali, dichiarando illegittimo l'utilizzo 
+dell'IEEPA (\emph{International Emergency Economic Powers Act}) e aprendo alla possibilità, per le imprese importatrici, di richiedere rimborsi tariffari. In risposta 
+alla sentenza, l'amministrazione statunitense ha invocato la \emph{Section 122} del \emph{Trade Act} del 1974 (una norma emergenziale per far fronte a gravi deficit della 
+bilancia dei pagamenti), annunciando l'imposizione di un dazio globale del 10\% sulla maggior parte delle importazioni mondiali, con entrata in vigore fissata per martedì 
+24 febbraio 2026. Poiché il 20 febbraio era un venerdì, la finestra di evento, costituita da due sedute, ingloba il fine settimana, permettendo di catturare una reazione 
+di mercato più completa in vista dell'entrata in vigore dei dazi fissata per il martedì successivo.
+
+
+\section{Specificazione del modello}
+Per valutare empiricamente l'impatto dei dazi statunitensi del 2025-2026 sulla volatilità degli asset selezionati, oltre a stimare i modelli standard è necessario estendere 
+le equazioni della varianza condizionata includendo l'informazione relativa agli eventi esogeni, sotto forma di variabili \emph{dummy}.
+
+La specificazione del modello richiede di definire le equazioni della media e della varianza. L'equazione della media dei rendimenti viene specificata imponendo una media 
+condizionata costante. Pur riconoscendo che gli eventi tariffari potrebbero influenzare anche il livello dei rendimenti, questa assunzione vincola il modello ad assegnare 
+l'impatto degli shock esclusivamente alla varianza. La specificazione risulta empiricamente giustificata dall'assenza di una struttura autoregressiva significativa nei 
+log-rendimenti, come confermato dai test di Ljung-Box e dall'analisi della funzione di autocorrelazione (ACF). Pertanto, l'equazione della media assume la forma:
+\[
+    r_t = \mu + \varepsilon_t
+\]
+dove $r_t$ è il log-rendimento dell'asset al tempo $t$ e $\varepsilon_t$ lo shock. Per tenere conto delle code pesanti evidenziate nei fatti stilizzati, lo shock è 
+modellato come $\varepsilon_t = \sigma_t z_t$, dove $z_t$ segue una distribuzione $t$ di Student standardizzata con $\nu$ gradi di libertà. La scelta della $t$ di Student 
+è motivata empiricamente dalla leptocurtosi dei rendimenti e dal confronto dei criteri di informazione.
+
+Sulla base delle date di effettivo impatto identificate, vengono costruite delle variabili indicatrici $D_{k,t}$, dove l'indice $k$ rappresenta il $k$-esimo evento 
+considerato. Ciascuna variabile vale 1 nelle prime due sedute di contrattazione dell'asset a partire dalla data dell'evento e 0 altrimenti. 
+La scelta di una finestra di due sedute è mantenuta per tutti gli eventi e gli asset per tenere conto dei diversi fusi orari e poter cogliere in modo più completo la reazione allo shock.
+
+Nell'equazione della varianza condizionata, le variabili \emph{dummy} vengono inserite come regressori esterni. Il modello principale dell'analisi è l'EGARCH(1,1), la cui equazione è:
+\[
+    \ln(\sigma_t^2) = \omega + \beta_1^* \ln(\sigma_{t-1}^2) + \alpha^* (|z_{t-1}| - E|z_{t-1}|) + \theta^* z_{t-1} + \sum_{k=1}^K \lambda_k D_{k,t}
+\]
+dove $\theta^*$ rappresenta il termine di segno (che cattura l'effetto leva) e $\alpha^*$ il termine di ampiezza dello shock. Poiché si assume una distribuzione $t$ di 
+Student standardizzata, il valore atteso $E|z_{t-1}|$ dipende dai gradi di libertà $\nu$ (con $\nu > 2$).
+
+Come verifica di robustezza, vengono stimati anche il GJR-GARCH(1,1):
+\[
+    \sigma_t^2 = \omega + (\alpha_1 + \delta_1 I_{t-1}) \varepsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2 + \sum_{k=1}^K \lambda_k D_{k,t}
+\]
+(con $I_{t-1} = 1$ se $\varepsilon_{t-1} < 0$) e il modello simmetrico GARCH(1,1), in cui l'effetto asimmetrico viene posto pari a zero.
+
+Tuttavia, da un punto di vista strettamente teorico, l'inserimento di regressori esterni in forma additiva nei modelli GARCH e GJR-GARCH espone al rischio di violare 
+il vincolo di positività della varianza condizionata qualora gli shock esogeni abbiano un impatto negativo. Questo costituisce la motivazione analitica per l'adozione 
+dell'EGARCH come modello principale della presente analisi: grazie alla sua specificazione logaritmica, esso garantisce per costruzione matematica 
+la positività della varianza, indipendentemente dal segno e dal valore assunto dai parametri $\lambda_k$.
+
+L'interpretazione del coefficiente $\lambda_k$, che misura l'impatto diretto dell'evento tariffario $k$, varia a seconda del modello. Nei modelli GARCH e GJR-GARCH, 
+$\lambda_k$ rappresenta un incremento additivo della varianza, espresso in rendimenti percentuali al quadrato, non direttamente confrontabile tra asset diversi. 
+Nel modello EGARCH, l'effetto diretto di un annuncio si traduce in un moltiplicatore $e^{\lambda_k}$ sulla varianza (pari a $e^{\lambda_k/2}$ sulla volatilità).
+
+Poiché il parametro di persistenza $\beta_1^*$ è generalmente prossimo a 1, l'effetto si trasmette anche alle sedute successive. Inoltre, il parametro 
+stimato $\lambda_k$ mantiene lo stesso valore in entrambe le sedute borsistiche che compongono la finestra temporale dell'evento.
+
+I parametri sono stimati per massima verosimiglianza con errori standard robusti, avvalendosi del pacchetto \texttt{rugarch} tramite il software R. La bontà di adattamento 
+delle diverse specificazioni è valutata tramite i criteri di informazione AIC e BIC.
+
+Poiché i modelli sono stimati tramite QML, il test del rapporto di verosimiglianza (LR) perde la sua validità asintotica standard. Per questo motivo, l'effetto complessivo 
+di tutti gli eventi tariffari viene valutato tramite un test di Wald congiunto basato su errori standard robusti, verificando se gli effetti degli annunci sono 
+congiuntamente diversi da zero, ponendo come ipotesi nulla $H_0: \lambda_1 = \dots = \lambda_K = 0$, mentre l'impatto di ogni singolo evento è verificato individualmente 
+tramite le classiche statistiche $t$.

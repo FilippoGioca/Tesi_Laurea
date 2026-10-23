@@ -173,3 +173,145 @@ Poiché i modelli sono stimati tramite QML, il test del rapporto di verosimiglia
 di tutti gli eventi tariffari viene valutato tramite un test di Wald congiunto basato su errori standard robusti, verificando se gli effetti degli annunci sono 
 congiuntamente diversi da zero, ponendo come ipotesi nulla $H_0: \lambda_1 = \dots = \lambda_K = 0$, mentre l'impatto di ogni singolo evento è verificato individualmente 
 tramite le classiche statistiche $t$.
+
+
+\section{Analisi preliminare dei dati}
+Prima di procedere con la stima dei modelli della classe GARCH, è necessario analizzare le proprietà statistiche delle serie storiche prese in considerazione. Viene 
+esaminato il comportamento dei log-prezzi e rendimenti giornalieri per verificare la presenza dei fatti stilizzati delle serie finanziarie, oltre a testare le ipotesi 
+di stazionarietà e normalità.
+
+{
+\small % Riduce leggermente il font per un'impaginazione più pulita
+\begin{longtable}{ p{0.18\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
+\toprule
+\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+\midrule
+\endhead
+
+\midrule
+\noalign{\vspace{10pt}}
+\caption[]{Statistiche descrittive dei rendimenti giornalieri.} \\
+\endfoot
+
+\bottomrule
+\noalign{\vspace{10pt}}
+\caption{Statistiche descrittive dei rendimenti giornalieri (valori percentuali).}
+\label{tab:stat-descrittive}
+\endlastfoot
+
+\textbf{N} & 2766 & 2679 & 2679 & 2679 & 2679 & 2782 \\ \midrule
+\textbf{Minimo} & -10,3517 & -15,6758 & -19,0227 & -13,7708 & -11,5887 & -2,1249 \\ \midrule
+\textbf{Massimo} & 5,6918 & 14,8375 & 18,1848 & 14,2617 & 9,9863 & 1,7523 \\ \midrule
+\textbf{Media} & 0,0518 & 0,0774 & 0,0438 & 0,0968 & 0,0500 & 0,0008 \\ \midrule
+\textbf{Mediana} & 0,0666 & 0,0991 & 0,0825 & 0,1123 & 0,0693 & 0,0057 \\ \midrule
+\textbf{Dev. Std.} & 1,0057 & 2,2530 & 2,2901 & 1,8211 & 1,1248 & 0,2947 \\ \midrule
+\textbf{Asimmetria} & -0,6106 & -0,1682 & -0,0524 & -0,1238 & -0,5923 & -0,4154 \\ \midrule
+\textbf{Curtosi (ecc.)} & 7,1491 & 4,7620 & 7,1275 & 6,5258 & 14,8702 & 4,8879 \\
+\end{longtable}
+}
+{\footnotesize \noindent \emph{Note:} N è il numero di log-rendimenti giornalieri, che varia tra le serie per i diversi calendari di contrattazione. I valori sono espressi in punti percentuali; curtosi in eccesso (K - 3).\par}
+\vspace{1em}
+
+La Tabella \ref{tab:stat-descrittive} riporta le statistiche descrittive dei log-rendimenti giornalieri da gennaio 2016 al 31 agosto 2026 e mostra tre regolarità: 
+rendimenti medi prossimi a zero, una volatilità incondizionata molto diversa tra gli asset e distribuzioni con code pesanti, con asimmetria negativa per alcune serie.
+
+In primo luogo, per tutti gli asset la media e la mediana sono molto piccole rispetto alla deviazione standard (la media è sempre inferiore a 0,10 punti percentuali al 
+giorno, la mediana a 0,12), un comportamento tipico dei dati finanziari a frequenza giornaliera e coerente con la precedente ipotesi di media costante.
+
+La deviazione standard, utilizzata come indicatore principale della volatilità incondizionata, mostra una notevole eterogeneità tra i diversi asset. Si osserva un valore 
+minimo di \textbf{0,2947} per il tasso di cambio USD/CNH, che rappresenta il mercato più stabile del campione, in contrasto con la marcata instabilità registrata 
+dai titoli azionari del settore siderurgico e automobilistico, con General Motors (2,2901) e Nucor (2,2530) che presentano i livelli di variabilità più elevati.
+
+Questa elevata volatilità si riflette anche nei valori estremi: General Motors registra il log-rendimento minimo più basso (-19,02\%), seguita da Nucor (-15,68\%) e 
+Apple (-13,77\%). Questi minimi si concentrano nella fase più acuta della pandemia (16-18 marzo 2020) e sono quindi estranei all'\emph{escalation} tariffaria del 2025-2026, 
+mentre i massimi di Apple e dell'S\&P 500 coincidono con l'annuncio del 9 aprile 2025. Le statistiche della Tabella \ref{tab:stat-descrittive} sono calcolate sull'intero 
+campione e incorporano tutti gli episodi di stress che lo attraversano, non solo quelli tariffari: la deviazione standard e la curtosi non possono quindi essere attribuite 
+solamente agli eventi oggetto di studio, e per isolarne l'effetto serve un modello che distingua gli annunci dalle fluttuazioni ordinarie.
+
+L'asimmetria è negativa per tutte le serie ed è particolarmente marcata per l'oro (-0,61), l'S\&P 500 (-0,59) e l'USD/CNH (-0,42): la coda sinistra della distribuzione 
+incondizionata è più estesa di quella destra. Per i titoli azionari è invece modesta (da -0,05 per General Motors a -0,17 per Nucor). Questa caratteristica non va confusa 
+con l'effetto leva, che riguarda la risposta della volatilità condizionata agli shock e verrà analizzato con le stime dei modelli.
+
+Infine, per tutti gli asset la curtosi in eccesso è positiva (nulla per la distribuzione normale) e compresa tra 4,76 e 14,87, con il valore più alto per l'S\&P 500: 
+le distribuzioni sono quindi leptocurtiche.
+
+\begin{longtable}{ p{0.30\textwidth} p{0.30\textwidth} p{0.30\textwidth} }
+\toprule
+\textbf{Asset} & \textbf{Statistica JB} & \textbf{\emph{p-value}} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Asset} & \textbf{Statistica JB} & \textbf{\emph{p-value}} \\
+\midrule
+\endhead
+
+\midrule
+\noalign{\vspace{10pt}}
+\caption[]{Test di Jarque-Bera.} \\
+\endfoot
+
+\bottomrule
+\noalign{\vspace{10pt}}
+\caption{Test di Jarque-Bera.}
+\label{tab:jarque-bera}
+\endlastfoot
+
+Oro & 6074,61 & $< 0,001$ \\ \midrule
+Nucor & 2550,07 & $< 0,001$ \\ \midrule
+GM & 5683,93 & $< 0,001$ \\ \midrule
+Apple & 4770,88 & $< 0,001$ \\ \midrule
+S\&P 500 & 24884,11 & $< 0,001$ \\ \midrule
+USD/CNH & 2855,94 & $< 0,001$ \\
+\end{longtable}
+
+\begin{longtable}{ p{0.20\textwidth} p{0.16\textwidth} p{0.16\textwidth} p{0.16\textwidth} p{0.16\textwidth} }
+\toprule
+\textbf{Asset} & \textbf{Stat. (prezzi)} & \textbf{\emph{p-value} (prezzi)} & \textbf{Stat. (rend.)} & \textbf{\emph{p-value} (rend.)} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Asset} & \textbf{Stat. (prezzi)} & \textbf{\emph{p-value} (prezzi)} & \textbf{Stat. (rend.)} & \textbf{\emph{p-value} (rend.)} \\
+\midrule
+\endhead
+
+\midrule
+\noalign{\vspace{10pt}}
+\caption[]{Test ADF su log-prezzi e rendimenti.} \\
+\endfoot
+
+\bottomrule
+\noalign{\vspace{10pt}}
+\caption{Test ADF su log-prezzi e rendimenti.}
+\label{tab:test-adf}
+\endlastfoot
+
+Oro & -1,19 & 0,906 & -13,60 & $< 0,01$ \\ \midrule
+Nucor & -2,27 & 0,461 & -13,66 & $< 0,01$ \\ \midrule
+GM & -2,35 & 0,428 & -13,55 & $< 0,01$ \\ \midrule
+Apple & -2,34 & 0,434 & -13,59 & $< 0,01$ \\ \midrule
+S\&P 500 & -3,27 & 0,075 & -14,04 & $< 0,01$ \\ \midrule
+USD/CNH & -1,95 & 0,597 & -12,58 & $< 0,01$ \\
+\end{longtable}
+
+Per verificare quanto emerso dalle statistiche descrittive, nelle Tabelle \ref{tab:jarque-bera} e \ref{tab:test-adf} sono riportati i risultati dei test statistici 
+effettuati sulle serie.
+
+Il test di Jarque-Bera (JB) rifiuta a tutti i livelli di significatività usuali l'ipotesi nulla di normalità per tutti gli asset esaminati, con \emph{p-value} inferiori 
+a 0,001 e valori della statistica test estremamente elevati. Questo risultato indica che i rendimenti non seguono una distribuzione normale, motivando l'adozione di una 
+distribuzione degli errori a code pesanti come la $t$ di Student. Il test, valutando congiuntamente asimmetria e curtosi, conferma le caratteristiche della distribuzione 
+già evidenziate nell'analisi descrittiva.
+
+Per verificare la condizione di stazionarietà richiesta dai modelli GARCH, è stato applicato il test Augmented Dickey-Fuller (ADF). Come evidenziato nella 
+Tabella \ref{tab:test-adf}, il test condotto sui log-prezzi non permette di rifiutare l'ipotesi nulla di radice unitaria al livello di significatività del 5\% per nessuna 
+delle serie analizzate; nel caso dell'S\&P 500, il \emph{p-value} (0,075) rifiuterebbe a un livello di significatività del 10\%, ma non a quello considerato. 
+Tale risultato è coerente con la non stazionarietà dei prezzi. 
+
+Passando invece al test sui rendimenti, la statistica del test restituisce per tutti gli asset un \emph{p-value} inferiore a 0,01. Questo porta a rifiutare l'ipotesi nulla, 
+indicando che le serie dei rendimenti risultano stazionarie, condizione necessaria per procedere con le stime dei punti successivi.

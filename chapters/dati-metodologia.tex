@@ -83,8 +83,7 @@ lo shock è stato prezzato a partire da lunedì 3 febbraio, data in cui è stata
 \paragraph{2 aprile 2025: Liberation Day}
 Durante l'evento pubblico \emph{Liberation Day}, il Presidente statunitense ha presentato un importante piano tariffario, articolato in dazi di base e tariffe reciproche, 
 con entrata in vigore il 5 e il 9 aprile. Era prevista una tariffa minima del 10\% su tutte le importazioni globali (al netto di specifiche categorie), con un inasprimento 
-verso alcune nazioni, prima fra tutte la Cina, soggetta ad un'aliquota del 34\%. È stato inoltre annunciato un dazio globale del 25\% destinato alle importazioni del 
-settore automobilistico. Poiché il discorso è avvenuto alle 16:00 EST in coincidenza con la chiusura di Wall Street, lo shock si è scaricato interamente alla riapertura 
+verso alcune nazioni, prima fra tutte la Cina, soggetta ad un'aliquota del 34\%. Poiché il discorso è avvenuto alle 16:00 EST in coincidenza con la chiusura di Wall Street, lo shock si è scaricato interamente alla riapertura 
 dei mercati il giorno successivo, giovedì 3 aprile.
 
 \paragraph{9 aprile 2025: Escalation bilaterale}
@@ -128,8 +127,9 @@ le equazioni della varianza condizionata includendo l'informazione relativa agli
 
 La specificazione del modello richiede di definire le equazioni della media e della varianza. L'equazione della media dei rendimenti viene specificata imponendo una media 
 condizionata costante. Pur riconoscendo che gli eventi tariffari potrebbero influenzare anche il livello dei rendimenti, questa assunzione vincola il modello ad assegnare 
-l'impatto degli shock esclusivamente alla varianza. La specificazione risulta empiricamente giustificata dall'assenza di una struttura autoregressiva significativa nei 
-log-rendimenti, come confermato dai test di Ljung-Box e dall'analisi della funzione di autocorrelazione (ACF). Pertanto, l'equazione della media assume la forma:
+l'impatto degli shock esclusivamente alla varianza. La specificazione è giustificata dalla debolezza della dipendenza lineare nei log-rendimenti: pur risultando statisticamente 
+significativa a 10 ritardi, essa è di ampiezza contenuta e il test tende a sovrastimarla in presenza di effetti ARCH. L'adeguatezza dell'equazione della media sarà verificata sui residui standardizzati dei modelli stimati.
+ Pertanto, l'equazione della media assume la forma:
 \[
     r_t = \mu + \varepsilon_t
 \]
@@ -218,7 +218,7 @@ di stazionarietà e normalità.
 \vspace{1em}
 
 La Tabella \ref{tab:stat-descrittive} riporta le statistiche descrittive dei log-rendimenti giornalieri da gennaio 2016 al 31 agosto 2026 e mostra tre regolarità: 
-rendimenti medi prossimi a zero, una volatilità incondizionata molto diversa tra gli asset e distribuzioni con code pesanti, con asimmetria negativa per alcune serie.
+rendimenti medi prossimi a zero, una volatilità incondizionata molto diversa tra gli asset e distribuzioni con code pesanti, con asimmetria negativa per tutte le serie.
 
 In primo luogo, per tutti gli asset la media e la mediana sono molto piccole rispetto alla deviazione standard (la media è sempre inferiore a 0,10 punti percentuali al 
 giorno, la mediana a 0,12), un comportamento tipico dei dati finanziari a frequenza giornaliera e coerente con la precedente ipotesi di media costante.
@@ -325,7 +325,7 @@ validata tramite l'applicazione del test di Ljung-Box. Infine, il test ARCH-LM v
 Un primo controllo visivo delle serie storiche permette di cogliere le dinamiche strutturali del mercato. La Figura \ref{fig:prezzi-rendimenti} illustra l'andamento per 
 tre strumenti del paniere selezionato, mentre i grafici per gli asset rimanenti sono consultabili in Appendice. 
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     % Inserisci qui il nome del file immagine
     \includegraphics[width=\textwidth]{Finalbord3x2.png}

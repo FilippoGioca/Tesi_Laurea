@@ -1,71 +1,55 @@
+% ============================================================================
+% FRONTESPIZIO - formato richiesto (Dipartimento di Scienze Statistiche)
+% Posizioni, corpi e testi fissi sono quelli del modello ufficiale.
+% I dati vengono presi dalle variabili già presenti in config/variables.tex:
+%   \myDepartment, \myDegree, \myTitle, \profTitle, \myProf, \myName, \myID, \myAA
+% Variabili NUOVE (facoltative: se non le definisci, la riga non compare):
+%   \mySecondDepartment  secondo Dipartimento (solo se il relatore non afferisce a Scienze Statistiche)
+%   \myCoProf            nome e cognome del correlatore
+%   \myCoProfTitle       titolo del correlatore (se omesso usa \profTitle)
+% ============================================================================
+
+\providecommand{\mySecondDepartment}{}
+\providecommand{\myCoProf}{}
+\providecommand{\myCoProfTitle}{\profTitle}
+
+% Carattere Times SOLO per il frontespizio (non tocca il resto della tesi)
+\providecommand{\tpfont}[2]{\fontfamily{ptm}\fontsize{#1}{#2}\selectfont}
+
+% File del sigillo (cartella images). Il modello ufficiale usa "sigillo_unipd":
+% se hai il file sigillo_unipd.png in images, sostituisci unipd-logo con sigillo_unipd.
+\providecommand{\tplogo}{unipd-logo}
+
 \begin{titlepage}
-    \begin{center}
-        \begin{large}
-            \textbf{\myUni}\\
-        \end{large}
+\begin{tikzpicture}[remember picture,overlay]
+  \coordinate (NW) at (current page.north west);
 
-        \vspace{10pt}
+  \node[anchor=north] at ([yshift=-14mm]current page.north) {\includegraphics[width=39mm]{\tplogo}};
 
-        \begin{large}
-            \textsc{\myDepartment}\\
-        \end{large}
+  \node[anchor=center,text width=185mm,align=center,font=\tpfont{18}{20}]
+    at ([yshift=-66mm]current page.north) {UNIVERSIT\`A DEGLI STUDI DI PADOVA};
+  \node[anchor=center,text width=185mm,align=center,font=\tpfont{16}{18}]
+    at ([yshift=-76mm]current page.north) {\myDepartment};
+  \ifx\mySecondDepartment\empty\else
+  \node[anchor=center,text width=195mm,align=center,font=\tpfont{14.5}{17}]
+    at ([yshift=-86mm]current page.north) {\mySecondDepartment};
+  \fi
 
-        \vspace{10pt}
+  \node[anchor=center,text width=185mm,align=center,font=\tpfont{19}{22}]
+    at ([yshift=-119mm]current page.north) {\myFaculty};  
+  \node[anchor=center,text width=170mm,align=center,font=\tpfont{18}{22}]
+    at ([yshift=-149mm]current page.north) {\myTitle};
 
-        \begin{small}
-            \textsc{\myFaculty}\\
-        \end{small}
+  \node[anchor=north west,text width=82mm,align=left,font=\tpfont{13}{16}]
+    at ([xshift=17mm,yshift=-190mm]NW) {Relatore:\\[3mm]\profTitle\\\myProf%
+      \ifx\myCoProf\empty\else\\[7mm]Correlatore:\\[3mm]\myCoProfTitle\\\myCoProf\fi};
+  \node[anchor=north west,text width=82mm,align=left,font=\tpfont{13}{16}]
+    at ([xshift=112mm,yshift=-190mm]NW) {Laureando:\\[3mm]\myName\\Matricola: \myID};
 
-        \vspace{40pt}
-        \vfill
-
-        \begin{figure}[htbp]
-            \centering
-            \includegraphics[width=0.5\textwidth]{unipd-logo} %va bene così perchè le impostazioni di compilazione prevedono che le immagini siano nella cartella "images"
-        \end{figure}
-        
-        \vspace{25pt}
-        \vfill
-
-        \begin{large}
-            \textbf{\myTitle}\\
-        \end{large}
-
-        \vspace{10pt}
-
-        \begin{normalsize}
-            \textsl{\myDegree}\\
-        \end{normalsize}
-
-        %\vspace{30pt}
-        \vfill
-
-        \begin{normalsize}
-            \begin{flushleft}
-                \textit{Relatore}\\
-                \vspace{5pt}
-                \profTitle\ \myProf
-            \end{flushleft}
-
-            % You can tweak the spacing to have professor and student names on the same line
-            % useful if the page is broken by a long thesis title and you need more space
-            % \vspace{-52pt}
-
-            \begin{flushright}
-                \textit{Laureando}\\
-                \vspace{5pt}
-                \myName \\
-                \vspace{5pt}
-                \textit{Matricola} \myID
-            \end{flushright}
-        \end{normalsize}
-
-        %\vspace{40pt}
-        \vfill
-
-        \line(1, 0){338} \\
-        \begin{small}
-            \textsc{Anno Accademico \myAA}
-        \end{small}
-    \end{center}
+  \node[anchor=center,text width=185mm,align=center,font=\tpfont{13}{16}]
+    at ([yshift=17mm]current page.south) {Anno Accademico \myAA};
+\end{tikzpicture}
+\null
 \end{titlepage}
+
+

@@ -4,4 +4,171 @@
 \chapter*{Appendice}
 \markboth{Appendice}{}
 \setcounter{chapter}{1} % le eventuali sezioni si chiameranno A.1, A.2, ...
+\setcounter{figure}{0} % le figure si chiamano A.1, A.2, ...
 
+% QQ Plot in riferimento al capitolo 2 (Analisi delle serie storiche finanziarie)
+\section{QQ plot dei rendimenti}
+\label{app:qqplot}
+Di seguito sono riportati i QQ plot dei rendimenti degli strumenti analizzati che non sono stati inseriti nel Capitolo~\ref{cap:analisi-serie}, 
+dove è presentato quello dell'indice S\&P 500 (Figura~\ref{fig:qqplot-sp500}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{QQ_Plot_Oro.png}
+    \caption[QQ Plot dei rendimenti dell'oro]{QQ Plot dei rendimenti dell'oro rispetto alla distribuzione normale.}
+    \label{fig:qqplot-oro}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{QQ_Plot_USD_CNH.png}
+    \caption[QQ Plot dei rendimenti del tasso di cambio USD/CNH]{QQ Plot dei rendimenti del tasso di cambio USD/CNH rispetto alla distribuzione normale.}
+    \label{fig:qqplot-usdcnh}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{QQ_Plot_Nucor.png}
+    \caption[QQ Plot dei rendimenti di Nucor]{QQ Plot dei rendimenti di Nucor rispetto alla distribuzione normale.}
+    \label{fig:qqplot-nucor}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{QQ_Plot_GM.png}
+    \caption[QQ Plot dei rendimenti di General Motors]{QQ Plot dei rendimenti di General Motors rispetto alla distribuzione normale.}
+    \label{fig:qqplot-gm}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{QQ_Plot_Apple.png}
+    \caption[QQ Plot dei rendimenti di Apple]{QQ Plot dei rendimenti di Apple rispetto alla distribuzione normale.}
+    \label{fig:qqplot-apple}
+\end{figure}
+
+\newpage
+% immagini in riferimento al capitolo 4 (Dati e metodologia)
+\section{Prezzi di chiusura e log-rendimenti}
+\label{app:prezzi}
+Di seguito sono riportati i prezzi di chiusura giornalieri e i log-rendimenti che non sono stati inseriti nel capitolo~\ref{cap:dati-metodologia}, 
+dove sono stati mostrati solo S\&P 500, Apple e USD/CNH.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Prezzo_Oro.png}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Rendimenti_Oro.png}
+    \end{subfigure}
+
+    \medskip
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Prezzo_Nucor.png}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Rendimenti_Nucor.png}
+    \end{subfigure}
+
+    \medskip
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Prezzo_GM.png}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Rendimenti_GM.png}
+    \end{subfigure}
+    \caption[Prezzi di chiusura e log-rendimenti]{Prezzi di chiusura giornalieri (a sinistra) e log-rendimenti giornalieri (a destra) per oro, Nucor e General Motors.}
+    \label{fig:app-prezzi-rendimenti}
+\end{figure}
+ 
+
+\newpage
+\section{Funzione di autocorrelazione (ACF) e ACF dei residui al quadrato}
+\label{app:acf}
+Di seguito sono riportate le ACF dei log-rendimenti e le ACF dei residui al quadrato ($r_t^2$) degli asset analizzati, a integrazione della Figura~\ref{fig:acf-plot}.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{ACF_Oro.png}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{ACF_Sq_Oro.png}
+    \end{subfigure}
+
+    \medskip
+
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{ACF_Nucor.png}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{ACF_Sq_Nucor.png}
+    \end{subfigure}
+
+    \caption[ACF dei log-rendimenti e ACF dei residui al quadrato (Oro e Nucor)]{Funzione di Autocorrelazione (ACF) dei log-rendimenti e dei residui al quadrato ($r_t^2$) per Oro e Nucor. Le linee tratteggiate indicano le bande di confidenza al 95\%.}
+    \label{fig:app-acf-1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{ACF_GM.png}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{ACF_Sq_GM.png}
+    \end{subfigure}
+
+    \medskip
+
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{ACF_Apple.png}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{ACF_Sq_Apple.png}
+    \end{subfigure}
+
+    \caption[ACF dei log-rendimenti e ACF dei residui al quadrato (GM e Apple)]{Funzione di Autocorrelazione (ACF) dei log-rendimenti e dei residui al quadrato ($r_t^2$) per GM e Apple. Le linee tratteggiate indicano le bande di confidenza al 95\%.}
+    \label{fig:app-acf-2}
+\end{figure}
+
+\newpage
+% altre immagini non direttamente presenti nel capitolo 4, in cui vengono mostrati tutti gli asset analizzati
+\section{Funzione di autocorrelazione parziale (PACF)}
+\label{app:pacf}
+Di seguito sono riportate le funzioni di autocorrelazione parziale (PACF) dei log-rendimenti di tutti gli asset analizzati.
+ 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{PACF_Tutti_Appendice.png}
+    \caption[PACF dei log-rendimenti]{Funzione di Autocorrelazione Parziale (PACF) dei log-rendimenti. Le linee tratteggiate indicano le bande di confidenza al 95\%.}
+    \label{fig:app-pacf}
+\end{figure}
+
+
+\newpage
+\section{Proxy della varianza}
+\label{app:proxy}
+Di seguito è riportato l'andamento dei quadrati dei log-rendimenti ($r_t^2$), utilizzati come proxy della varianza, per tutti gli asset analizzati.
+ 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Proxy_Varianza_Tutti_Appendice.png}
+    \caption[Proxy della varianza]{Quadrati dei log-rendimenti ($r_t^2$) come proxy della varianza.}
+    \label{fig:app-proxy}
+\end{figure}
+
+
+\newpage
+% immagini in riferimento al capitolo 5
+\section{Volatilità condizionata con e senza \emph{dummy}}
+\label{app:sigma}
+Di seguito è riportata la volatilità condizionata stimata con e senza le variabili \emph{dummy} per tutti gli asset analizzati.
+ 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{fig_sigmaApp.png}
+    \caption[Volatilità condizionata con e senza dummy]{Volatilità condizionata ($\sigma_t$, in percentuale e scala logaritmica) di Nucor, GM e USD/CNH, 
+    stimata con e senza le variabili \emph{dummy}. Le linee verticali numerate indicano gli eventi tariffari, nello stesso ordine della Sezione~\ref{sec:eventi}.}
+    \label{fig:app-sigma}
+\end{figure}

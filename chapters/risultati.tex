@@ -1,0 +1,67 @@
+% capitolo 5: Risultati dei modelli GARCH e delle correlazioni
+\chapter{Risultati dei modelli GARCH e delle correlazioni}
+\label{cap:risultati}
+
+\section{Selezione del modello e stima dei parametri}
+L'analisi empirica ha inizio con la selezione del modello ottimale per analizzare le dinamiche della varianza condizionata, per poi passare alla stima e interpretazione 
+dei parametri nel modello selezionato. La valutazione si basa sulla minimizzazione del Criterio di Informazione Bayesiano (BIC), confrontando le strutture sGARCH, 
+GJR-GARCH ed EGARCH, stimate con distribuzione Gaussiana e Student-t. Come mostrato nella tabella \ref{tab:bic_valori}, il modello asimmetrico EGARCH-t minimizza il valore 
+per tutti e 6 gli asset in esame.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Valori del BIC}
+    \label{tab:bic_valori}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lcccccc}
+        \toprule
+        \textbf{Asset} & \textbf{sGARCH\_norm} & \textbf{GJR-GARCH\_norm} & \textbf{EGARCH\_norm} & \textbf{sGARCH\_std} & \textbf{GJR-GARCH\_std} & \textbf{EGARCH\_std} \\
+        \midrule
+        Oro & 2.6817 & 2.6722 & 2.6677 & 2.6190 & 2.6152 & 2.6086 \\
+        Nucor & 4.3930 & 4.3903 & 4.3759 & 4.3039 & 4.3041 & 4.2960 \\
+        GM & 4.3607 & 4.3561 & 4.3307 & 4.2492 & 4.2453 & 4.2368 \\
+        Apple & 3.8663 & 3.8441 & 3.8228 & 3.7610 & 3.7500 & 3.7397 \\
+        S\&P 500 (SPY) & 2.6115 & 2.5867 & 2.5623 & 2.5374 & 2.5121 & 2.5007 \\
+        USD/CNH & 0.2254 & 0.2214 & 0.2113 & 0.1146 & 0.1157 & 0.1091 \\
+        \bottomrule
+    \end{tabular}%
+    }
+\end{table}
+
+Questa superiorità viene confermata anche dal Criterio di Informazione di Akaike (AIC) e dalle tabelle delta (dBIC e dAIC), i cui risultati completi sono riportati in 
+Appendice. Impostando l'EGARCH-t come benchmark ($\Delta=0$), tutti gli altri modelli restituiscono delta ampiamente positivi e mostrano come la Student-t migliori 
+l'adeguatezza in tutti i modelli. Definita la specifica ottimale, la Tabella \ref{tab:parametri_egarch} riporta le stime dei parametri del modello EGARCH-t.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Stima dei parametri del modello EGARCH-t}
+    \label{tab:parametri_egarch}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lcccccc}
+    \toprule
+    \textbf{Parametro} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/CNH} \\
+    \midrule
+    $\mu$ & 0.059*** & 0.068* & 0.058** & 0.112*** & 0.070*** & -0.001 \\
+    $\omega$ & -0.002 & 0.014*** & 0.013*** & 0.031*** & -0.018*** & -0.057*** \\
+    $\theta^*$ (segno) & 0.036*** & -0.023** & -0.043*** & -0.092*** & -0.165*** & 0.019 \\
+    $\alpha^*$ (ampiezza) & 0.102*** & 0.088*** & 0.101*** & 0.175*** & 0.191*** & 0.200*** \\
+    $\beta^*$ & 0.988*** & 0.990*** & 0.992*** & 0.968*** & 0.970*** & 0.979*** \\
+    $\nu$ & 5.353*** & 5.261*** & 4.157*** & 4.622*** & 6.099*** & 4.445*** \\
+    \bottomrule
+    \end{tabular}%
+    }
+    \vspace{0.15cm}
+    \footnotesize{\textit{Nota:} *, **, *** indicano significatività al 10\%, 5\% e 1\% (basata su errori standard classici). Le stime si riferiscono al modello includente le variabili dummy, i cui coefficienti sono omessi per brevità; il $\beta^*$ riportato è quello impiegato per i calcoli nella Sezione 5.2. Rispetto a \textit{rugarch}: $\theta^*$ = alpha1, $\alpha^*$ = gamma1, $\omega$ = costante.}
+\end{table}
+
+Il parametro di asimmetria ($\theta^*$) evidenzia il classico effetto leva per i titoli azionari (GM e Apple) e per l'indice di mercato S&P 500, mentre per Nucor risulta 
+significativo solo al 10\%. I valori inferiori a 0 indicano che gli shock negativi incrementano la volatilità in misura maggiore rispetto a shock positivi di pari entità. 
+Per quantificare la dimensione di questa asimmetria, si osservi l'indice S&P 500: l'impatto dei rialzi pesa solamente 0,026 ($\alpha^* + \theta^*$), mentre quello dei ribassi 
+pesa ben 0,356 ($\alpha^* - \theta^*$). Al contrario, l'Oro presenta un coefficiente positivo (0,036), evidenziando un'asimmetria inversa, diversa da quella azionaria. 
+La valutazione della sua effettiva natura di bene rifugio viene pertanto demandata all'analisi delle correlazioni nei periodi di stress, mentre per il tasso di cambio USD/CNH 
+non si rifiuta la simmetria. 
+
+I gradi di libertà della distribuzione ($\nu$) si attestano tra 4 e 6, confermando la presenza di code grasse (\emph{fat tails}) e l'inadeguatezza di una distribuzione 
+normale. Infine, il coefficiente di persistenza ($\beta^*$) risulta prossimo a 1 per tutti gli asset (superiore a 0.96). Calcolando l'\gls{emivita} (\emph{half-life}) degli 
+shock tramite la formula $\log(0.5)/\log(\beta^*)$, emerge che i movimenti si dimezzano in tempi variabili: da un assorbimento più rapido di circa 21 giorni per Apple, 
+a un rientro lento di quasi 86 giorni per General Motors, evidenziando un'elevata persistenza della volatilità.

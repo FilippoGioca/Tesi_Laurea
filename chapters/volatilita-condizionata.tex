@@ -138,15 +138,20 @@ L'effetto leva è presente se il parametro $\theta^*$ assume un valore negativo.
 
 \section{La News Impact Curve (NIC)}
 \label{sec:nic}
-Per confrontare l'effetto delle notizie sulla volatilità stimata nei diversi modelli, sulla base dell'intuizione originale di Pagan e Schwert~\cite{pagan:alternative}, Engle e Ng~\cite{engle:news} introdussero la \gls{nic}, uno strumento grafico a forma di curva che relaziona lo shock al tempo $t-1$ ($\varepsilon_{t-1}$) con la varianza condizionata corrente ($\sigma_t^2$), mantenendo costanti le informazioni precedenti a $t-2$. 
+Per confrontare l'effetto delle notizie sulla volatilità stimata nei diversi modelli, sulla base dell'intuizione originale di Pagan e Schwert\cite{pagan:alternative}, 
+Engle e Ng~\cite{engle:news} introdussero la \gls{nic}, uno strumento grafico a forma di curva che relaziona lo shock al tempo $t-1$ ($\varepsilon_{t-1}$) con la varianza 
+condizionata corrente ($\sigma_t^2$), mantenendo costanti le informazioni precedenti a $t-2$. 
 
-L'idea alla base della NIC è quella di misurare l'impatto di uno shock isolato sulla previsione della volatilità futura, assumendo che tutte le altre componenti rimangano costanti. La forma della curva dipende dalla specificazione del modello di volatilità adottato.
+L'idea alla base della NIC è quella di misurare l'impatto di uno shock isolato sulla previsione della volatilità futura, assumendo che tutte le altre componenti 
+rimangano costanti. La forma della curva dipende dalla specificazione del modello di volatilità adottato.
 
-Nel modello GARCH standard, la \emph{News Impact Curve} è una funzione quadratica perfettamente simmetrica e centrata nell'origine ($\varepsilon_{t-1} = 0$). L'equazione della curva per un GARCH(1,1) è:
+Nel modello GARCH standard, la \emph{News Impact Curve} è una funzione quadratica perfettamente simmetrica e centrata nell'origine ($\varepsilon_{t-1} = 0$). 
+L'equazione della curva per un GARCH(1,1) è:
 \[
     \sigma_t^2 = A + \alpha_1 \varepsilon_{t-1}^2
 \]
-dove la costante $A = \omega + \beta_1 \sigma^2$ e $\sigma^2$ è la varianza incondizionata. La forma implica che shock di pari entità, indifferentemente dal segno, hanno lo stesso impatto sulla volatilità futura, ignorando quindi l'effetto \emph{leverage}.
+dove la costante $A = \omega + \beta_1 \sigma^2$ e $\sigma^2$ è la varianza incondizionata. La forma implica che shock di pari entità, indifferentemente dal segno, 
+hanno lo stesso impatto sulla volatilità futura, ignorando quindi l'effetto \emph{leverage}.
 
 La NIC del GJR-GARCH rimane formata da due rami quadratici ma introduce una torsione nella curva, presentando pendenze diverse ai due lati dell'origine:
 \[
@@ -156,7 +161,8 @@ La NIC del GJR-GARCH rimane formata da due rami quadratici ma introduce una tors
         A + (\alpha_1 + \delta_1) \varepsilon_{t-1}^2, & \text{per } \varepsilon_{t-1} < 0
     \end{cases}
 \]
-La costante $A$ mantiene la stessa forma del caso precedente, ma il suo valore differisce da quello del GARCH standard, perché la varianza incondizionata $\sigma^2$ è quella specifica del modello GJR, calcolata come:
+La costante $A$ mantiene la stessa forma del caso precedente, ma il suo valore differisce da quello del GARCH standard, perché la varianza incondizionata $\sigma^2$ è 
+quella specifica del modello GJR, calcolata come:
 \[
     \sigma^2 = \frac{\omega}{1-\alpha_1-\beta_1-\delta_1/2}
 \]
@@ -172,4 +178,15 @@ Nel modello EGARCH la \emph{News Impact Curve} assume una funzione esponenziale.
 \]
 dove $\sigma^2$ è la varianza incondizionata del modello, $\sigma$ la corrispondente deviazione standard e $A = \omega^{**}(\sigma^2)^{\beta_1^*}$.
 
-Per shock negativi molto grandi, la natura esponenziale della curva fa sì che la volatilità prevista possa superare quella degli altri modelli analizzati, perché per valori elevati dello shock una funzione esponenziale cresce più di una parabola.
+Per shock negativi molto grandi, la natura esponenziale della curva fa sì che la volatilità prevista possa superare quella degli altri modelli analizzati, perché per 
+valori elevati dello shock una funzione esponenziale cresce più di una parabola.
+
+Poiché l'esponente è lineare nello shock, per valori sufficientemente grandi di la curva dell'EGARCH cresce più di una parabola e supera quella degli altri modelli, 
+anche se con i parametri stimati ciò avviene oltre l'intervallo di shock osservato (Figura \ref{fig:app-nic-sp500}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{NIC_teoria.png}
+    \caption[News Impact Curve per S\&P 500]{News Impact Curve per S\&P 500 (SPY).}
+    \label{fig:app-nic-sp500}
+\end{figure}

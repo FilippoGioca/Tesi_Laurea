@@ -90,7 +90,23 @@ compresi tra 4,2 e 6,1, indicando code pesanti, in linea con la scelta della $t$
 Il coefficiente di persistenza $\beta^*$ è prossimo a 1 per tutti gli asset (superiore a 0,96): l'\gls{emivita} degli shock va da circa 21 sedute per Apple a circa 86 
 per General Motors, a indicare un'elevata persistenza della volatilità.
 
-% INSERIRE NIC
+La Figura \ref{fig:nic-egarch} illustra l'asimmetria attraverso le \emph{News Impact Curve}. Per Apple e S\&P 500 (Sezione \ref{sec:nic}) il ramo sinistro è molto più 
+ripido del destro, come per GM e Nucor (in Appendice) ma con effetto più moderato, coerentemente con $\theta^* < 0$: le cattive notizie aumentano la volatilità più 
+delle buone. Per l'oro avviene il contrario, con il ramo destro più alto, mentre per USD/CNH l'asimmetria è lieve.
+
+Il confronto con il GARCH mostra che la parabola simmetrica sovrastima l'effetto degli shock positivi sulle azioni e quello degli shock negativi sull'oro. GJR-GARCH ed EGARCH 
+producono curve simili, con il GJR generalmente più ripido nel ramo sinistro.
+
+Per shock negativi molto grandi, la natura esponenziale della curva fa sì che la volatilità prevista possa superare quella degli altri modelli analizzati, perché per 
+valori elevati dello shock una funzione esponenziale cresce più di una parabola. Poiché l'esponente è lineare nello shock, per valori sufficientemente grandi la curva 
+dell'EGARCH cresce più di una parabola e supera quella degli altri modelli, anche se con i parametri stimati ciò avviene oltre l'intervallo di shock osservato.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{NIC_51.png}
+    \caption[News Impact Curve per Apple, oro e USD/CNH]{News Impact Curve per Apple, oro e USD/CNH (modelli senza \emph{dummy}; curve allo stesso livello in $\varepsilon_{t-1} = 0$).}
+    \label{fig:nic-egarch}
+\end{figure}
 
 
 \section{Impatto degli eventi sulla volatilità condizionata}
@@ -271,16 +287,14 @@ Prima della stima, tutti i test sui quadrati dei log-rendimenti e l'ARCH-LM rifi
 gli asset ($p < 0,01$). Sui residui standardizzati non restano evidenze rilevanti di eteroschedasticità o di dipendenza lineare; pertanto, l'EGARCH(1,1) con equazione 
 della media costante risulta adeguato, in linea con la scelta discussa nella Sezione \ref{sec:specificazione-modello}.
 
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=\textwidth]{fig_qqplot_residui.png}
-%    \caption[QQ-plot dei residui standardizzati]{QQ-plot dei residui standardizzati rispetto alla distribuzione $t$ di Student.}
-%    \label{fig:qqplot-residui}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{QQ_plot_residui.png}
+    \caption[QQ-plot dei residui standardizzati]{QQ-plot dei residui standardizzati rispetto alla distribuzione $t$ di Student.}
+    \label{fig:qqplot-residui}
+\end{figure}
 
-La Figura 
-%\ref{fig:qqplot-residui}
-confronta i quantili dei residui standardizzati con quelli della $t$ di Student standardizzata con $\nu$ stimato. 
+La Figura \ref{fig:qqplot-residui} confronta i quantili dei residui standardizzati con quelli della $t$ di Student standardizzata con $\nu$ stimato. 
 Per oro, Nucor, GM, Apple e USD/CNH i punti si dispongono lungo la retta, con scostamenti limitati a pochi valori estremi, confermando che la distribuzione $t$ di 
 Student descrive adeguatamente lo spessore delle code. Il caso meno soddisfacente riguarda l'S\&P 500, in cui la coda sinistra risulta più pesante e la 
 destra più leggera rispetto alla distribuzione teorica di riferimento, segno di un'asimmetria residua che una distribuzione simmetrica non può catturare.

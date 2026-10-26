@@ -121,6 +121,44 @@ bilancia dei pagamenti), annunciando l'imposizione di un dazio globale del 10\% 
 di mercato più completa in vista dell'entrata in vigore dei dazi fissata per il martedì successivo.
 
 
+Per quantificare l'impatto immediato di questi eventi viene osservata la reazione di mercato a ridosso degli annunci. La Tabella \ref{tab:rendimenti-cumulati} riporta 
+il log-rendimento cumulato (\%) nelle due sedute della finestra di ciascun evento. Il \emph{Liberation Day} (2 aprile) causa i ribassi maggiori 
+(Nucor $-17,6\%$, Apple $-17,3\%$, S\&P 500 $-11,1\%$), mentre l'\emph{escalation} del 9 aprile coincide con forti rialzi per tutti gli strumenti tranne USD/CNH, 
+dovuti alla sospensione dei dazi reciproci e alla nuova tariffa verso la Cina.
+
+Le reazioni sono eterogenee per segno e dimensione, infatti lo stesso evento provoca reazioni diverse a seconda dello strumento finanziario.
+
+{
+\footnotesize
+\begin{longtable}{ p{0.18\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
+    \toprule
+    \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \begin{tabular}{@{}c@{}}\textbf{S\&P 500}\\\textbf{(SPY)}\end{tabular} & \textbf{USD/\newline CNH} \\
+    \midrule
+    \endfirsthead
+    \toprule
+    \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \begin{tabular}{@{}c@{}}\textbf{S\&P 500}\\\textbf{(SPY)}\end{tabular} & \textbf{USD/\newline CNH} \\
+    \midrule
+    \endhead
+    \midrule
+    \noalign{\vspace{10pt}}
+    \caption[]{Log-rendimenti cumulati degli asset nelle finestre degli eventi tariffari.} \\
+    \endfoot
+    \bottomrule
+    \noalign{\vspace{10pt}}
+    \caption{Log-rendimenti cumulati (\%) degli asset nelle finestre temporali degli eventi tariffari.}
+    \label{tab:rendimenti-cumulati}
+    \endlastfoot
+    1° febbraio & 1,45 & 1,84 & -1,82 & -1,37 & -0,01 & -0,46 \\ \midrule
+    2 aprile & -3,12 & -17,56 & -8,25 & -17,27 & -11,09 & 0,00 \\ \midrule
+    9 aprile & 6,18 & 5,41 & 2,90 & 9,93 & 5,51 & -1,54 \\ \midrule
+    12 maggio & -2,34 & 3,19 & 6,05 & 7,13 & 3,91 & -0,60 \\ \midrule
+    9-10 ottobre & -0,51 & -3,09 & -1,88 & -5,08 & -3,03 & -0,04 \\ \midrule
+    30 ottobre & 1,83 & -2,88 & -0,06 & 0,25 & -0,78 & 0,35 \\ \midrule
+    20 febbraio & 4,54 & -0,66 & -2,25 & 2,13 & -0,31 & -0,15 \\
+\end{longtable}
+}
+
+
 \section{Specificazione del modello}
 \label{sec:specificazione-modello}
 Per valutare empiricamente l'impatto dei dazi statunitensi del 2025-2026 sulla volatilità degli asset selezionati, oltre a stimare i modelli standard è necessario estendere 
@@ -187,29 +225,25 @@ esaminato il comportamento dei log-prezzi e rendimenti giornalieri per verificar
 di stazionarietà e normalità.
 
 {
-\small % Riduce leggermente il font per un'impaginazione più pulita
-\begin{longtable}{ p{0.18\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
+\footnotesize
+\begin{longtable}{ p{0.15\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
 \toprule
 \textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
 \midrule
 \endfirsthead
-
 \toprule
 \textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
 \midrule
 \endhead
-
 \midrule
 \noalign{\vspace{10pt}}
 \caption[]{Statistiche descrittive dei rendimenti giornalieri.} \\
 \endfoot
-
 \bottomrule
 \noalign{\vspace{10pt}}
 \caption{Statistiche descrittive dei rendimenti giornalieri (valori percentuali).}
 \label{tab:stat-descrittive}
 \endlastfoot
-
 \textbf{N} & 2766 & 2679 & 2679 & 2679 & 2679 & 2782 \\ \midrule
 \textbf{Minimo} & -10,3517 & -15,6758 & -19,0227 & -13,7708 & -11,5887 & -2,1249 \\ \midrule
 \textbf{Massimo} & 5,6918 & 14,8375 & 18,1848 & 14,2617 & 9,9863 & 1,7523 \\ \midrule

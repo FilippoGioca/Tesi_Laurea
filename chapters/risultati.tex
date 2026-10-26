@@ -300,5 +300,87 @@ Student descrive adeguatamente lo spessore delle code. Il caso meno soddisfacent
 destra più leggera rispetto alla distribuzione teorica di riferimento, segno di un'asimmetria residua che una distribuzione simmetrica non può catturare.
 
 
-\section{Analisi delle correlazioni rolling} %(Assumendo questo come titolo della 5.4)
+\section{Analisi delle correlazioni rolling}
 \label{sec:correlazioni-rolling}
+Infine, si analizza la correlazione tra gli asset selezionati, limitandosi alle tre coppie la cui analisi potrebbe essere più interessante. L'analisi procede in due 
+passaggi: il primo è una tabella che confronta la correlazione nella fase pre-dazi (2016--2024) con quella del periodo dei dazi (2025--2026), riportando la differenza 
+netta tra le due e un test di Fisher per la sua significatività. 
+Il secondo è costituito da grafici della correlazione \emph{rolling} a 62 sedute (circa tre mesi di borsa), calcolata sui residui standardizzati del modello EGARCH(1,1) 
+con distribuzione $t$ di Student e \emph{dummy}, in modo da misurare i co-movimenti al netto della volatilità di ciascun asset.
+
+Le linee rosse verticali corrispondono alle date degli shock tariffari, mentre le linee orizzontali tratteggiate corrispondono al 5° e al 95° percentile della correlazione 
+nel periodo pre-dazi, delimitando l'intervallo contenente i movimenti della correlazione nel 90\% dei casi prima dei dazi. L'uscita da tale intervallo indica una relazione 
+insolita rispetto alla fase pre-dazi, ma non corrisponde a un test in quanto le finestre sovrapposte sono fortemente autocorrelate. Inoltre il periodo pre-dazi comprende 
+la guerra commerciale del 2018--19 e la fase COVID e altri momenti rilevanti, costituendo solo un riferimento e non un periodo privo di tensioni.
+
+{
+\footnotesize
+\begin{longtable}{ p{0.22\textwidth} p{0.14\textwidth} p{0.14\textwidth} p{0.14\textwidth} p{0.10\textwidth} p{0.14\textwidth} }
+    \toprule
+    \textbf{Coppie} & \textbf{Corr.}\newline \textbf{pre-dazi} & \textbf{Corr. periodo}\newline \textbf{dazi} & \textbf{Differenza} & \textbf{z} & \textbf{\emph{p-value}} \\
+    \midrule
+    \endfirsthead
+    \toprule
+    \textbf{Coppie} & \textbf{Corr.}\newline \textbf{pre-dazi} & \textbf{Corr. periodo}\newline \textbf{dazi} & \textbf{Differenza} & \textbf{z} & \textbf{\emph{p-value}} \\
+    \midrule
+    \endhead
+    \midrule
+    \noalign{\vspace{10pt}}
+    \caption[]{Confronto delle correlazioni statiche.} \\
+    \endfoot
+    \bottomrule
+    \noalign{\vspace{10pt}}
+    \caption{Confronto delle correlazioni. \newline Note: correlazioni statiche calcolate sui residui standardizzati dell'EGARCH(1,1)-t. Fase pre-dazi: dal 1° gennaio 2016 al 31 dicembre 2024; periodo dei dazi: dal 1° gennaio 2025 al 31 agosto 2026. Il test è la differenza di Fisher tra due correlazioni indipendenti ed è approssimato, perché assume osservazioni indipendenti.}
+    \label{tab:confronto-correlazioni}
+    \endlastfoot
+    S\&P 500 - Oro & 0,028 & 0,166 & 0,138 & 2,60 & 0,009 \\ \midrule
+    S\&P 500 - USD/CNH & -0,238 & -0,278 & -0,040 & -0,79 & 0,427 \\ \midrule
+    Nucor - GM & 0,396 & 0,220 & -0,176 & -3,65 & $<0,001$ \\
+\end{longtable}
+}
+
+La Tabella \ref{tab:confronto-correlazioni} mostra risposte eterogenee nel passaggio dalla fase pre-dazi (2016--2024) a quella dei dazi (2025--2026). La correlazione 
+tra S\&P 500 e oro aumenta da 0,028 a 0,166 e la differenza è statisticamente significativa ($p = 0,009$).
+
+Per Nucor e GM la correlazione si riduce da 0,396 a 0,220 e la riduzione è altamente significativa ($p < 0,001$). La coppia S\&P 500-USD/CNH resta invece moderatamente 
+negativa e la variazione non è statisticamente distinguibile da zero ($p = 0,427$): in media, il legame tra il cambio e l'azionario statunitense non cambia. 
+Questi valori rappresentano le medie dell'intero periodo e non mostrano come la correlazione cambi nel tempo; per questo si passa ai grafici \emph{rolling}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{grafico_sp500_oro.png}
+    \caption[Correlazione rolling S\&P 500-Oro]{Correlazione \emph{rolling} a 62 sedute tra S\&P 500 e Oro.}
+    \label{fig:corr-sp500-oro}
+\end{figure}
+
+Il grafico in Figura \ref{fig:corr-sp500-oro} mostra la correlazione \emph{rolling} a 62 sedute tra S\&P 500 e oro. Nel periodo pre-dazi la relazione alterna fasi di 
+correlazione prossima a zero o negativa, coerenti con il ruolo di bene rifugio, a fasi di crescita moderata, con occasionali uscite dalle bande. All'inizio del 2025 
+la correlazione presenta una forte discesa, per poi risalire rapidamente fino al massimo dell'intero campione nel 2026. Il rialzo suggerisce che, in una fase degli shock, 
+oro e azionario abbiano risposto a fattori comuni, con una possibile riduzione del beneficio di diversificazione dell'oro nei momenti di stress.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{grafico_sp500_cnh.png}
+    \caption[Correlazione rolling S\&P 500-USD/CNH]{Correlazione \emph{rolling} a 62 sedute tra S\&P 500 e USD/CNH.}
+    \label{fig:corr-sp500-usdcnh}
+\end{figure}
+
+Il grafico in Figura \ref{fig:corr-sp500-usdcnh} verifica se il cambio USD/CNH segue l'andamento del mercato azionario statunitense. Poiché un aumento di USD/CNH indica 
+un indebolimento della moneta cinese, una correlazione negativa significa che a ribassi dell'S\&P 500 si accompagna un deprezzamento della valuta cinese.
+
+Fino alla fine del 2024 la correlazione resta prevalentemente negativa; poco prima del periodo dei dazi torna positiva, superando la banda superiore, ma con i primi annunci 
+del 2025 inizia a scendere fino a un minimo di circa $-0,7$ nel 2026. Ciò non è in contrasto con la stabilità della media riportata in tabella, che nasconde una forte 
+variazione intra-periodo. Durante gli shock il legame tra yuan e azionario statunitense si è quindi rafforzato.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{grafico_nucor_gm.png}
+    \caption[Correlazione rolling Nucor-GM]{Correlazione \emph{rolling} a 62 sedute tra Nucor e GM.}
+    \label{fig:corr-nucor-gm}
+\end{figure}
+
+Prima dei dazi la correlazione tra Nucor e GM (Figura \ref{fig:corr-nucor-gm}) è prevalentemente positiva, con media attorno a $0,40$, in linea con l'esposizione 
+comune al ciclo industriale e al mercato. Con i dazi la curva si contrae in modo prolungato, scende sotto la banda inferiore e raggiunge valori prossimi a zero.
+
+Il risultato è coerente con un impatto differenziato delle tariffe sui due settori: i produttori siderurgici statunitensi beneficiano della protezione, mentre GM subisce 
+un aumento dei costi di approvvigionamento e un calo nelle vendite internazionali.

@@ -166,13 +166,18 @@ Nel modello EGARCH, l'effetto diretto di un annuncio si traduce in un moltiplica
 Poiché il parametro di persistenza $\beta_1^*$ è generalmente prossimo a 1, l'effetto si trasmette anche alle sedute successive. Inoltre, il parametro 
 stimato $\lambda_k$ mantiene lo stesso valore in entrambe le sedute borsistiche che compongono la finestra temporale dell'evento.
 
-I parametri sono stimati per massima verosimiglianza con errori standard robusti, avvalendosi del pacchetto \texttt{rugarch} tramite il software R. La bontà di adattamento 
-delle diverse specificazioni è valutata tramite i criteri di informazione AIC e BIC.
+I parametri sono stimati per Massima Verosimiglianza (ML), avvalendosi del pacchetto \texttt{rugarch} tramite il software R. La bontà di adattamento 
+delle diverse specificazioni è valutata tramite i criteri di informazione AIC e BIC. 
 
-Poiché i modelli sono stimati tramite QML, il test del rapporto di verosimiglianza (LR) perde la sua validità asintotica standard. Per questo motivo, l'effetto complessivo 
-di tutti gli eventi tariffari viene valutato tramite un test di Wald congiunto basato su errori standard robusti, verificando se gli effetti degli annunci sono 
-congiuntamente diversi da zero, ponendo come ipotesi nulla $H_0: \lambda_1 = \dots = \lambda_K = 0$, mentre l'impatto di ogni singolo evento è verificato individualmente 
-tramite le classiche statistiche $t$.
+
+L'effetto complessivo degli eventi tariffari viene valutato affiancando il test del Rapporto di Verosimiglianza (LR) a
+un test di Wald congiunto, ponendo come ipotesi nulla $H_0: \lambda_1 = \dots = \lambda_K = 0$, mentre l'impatto di ogni  
+singolo evento è verificato individualmente tramite le classiche statistiche $t$.
+
+Poiché le variabili dummy si attivano in corrispondenza di sole due osservazioni, lo stimatore robusto della matrice di covarianza
+perde le sue proprietà asintotiche, rischiando di generare statistiche di test instabili e sovradimensionate. Per avere una maggiore 
+affidabilità dei risultati ed evitare il rischio di falsi positivi, i livelli di significatività e i test d'ipotesi si basano solamente 
+sugli errori standard classici.
 
 
 \section{Analisi preliminare dei dati}

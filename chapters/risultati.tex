@@ -1,67 +1,290 @@
-% capitolo 5: Risultati dei modelli GARCH e delle correlazioni
-\chapter{Risultati dei modelli GARCH e delle correlazioni}
+% capitolo 5: Risultati empirici dei modelli GARCH e delle correlazioni
+\chapter{Risultati empirici}
 \label{cap:risultati}
 
-\section{Selezione del modello e stima dei parametri}
-L'analisi empirica ha inizio con la selezione del modello ottimale per analizzare le dinamiche della varianza condizionata, per poi passare alla stima e interpretazione 
-dei parametri nel modello selezionato. La valutazione si basa sulla minimizzazione del Criterio di Informazione Bayesiano (BIC), confrontando le strutture sGARCH, 
-GJR-GARCH ed EGARCH, stimate con distribuzione Gaussiana e Student-t. Come mostrato nella tabella \ref{tab:bic_valori}, il modello asimmetrico EGARCH-t minimizza il valore 
-per tutti e 6 gli asset in esame.
+Il capitolo presenta le stime del modello EGARCH e utilizza i risultati per valutare l'effetto degli annunci tariffari sulla volatilità condizionata degli asset.
 
-\begin{table}[htbp]
-    \centering
-    \caption{Valori del BIC}
-    \label{tab:bic_valori}
-    \resizebox{\textwidth}{!}{%
-    \begin{tabular}{lcccccc}
-        \toprule
-        \textbf{Asset} & \textbf{sGARCH\_norm} & \textbf{GJR-GARCH\_norm} & \textbf{EGARCH\_norm} & \textbf{sGARCH\_std} & \textbf{GJR-GARCH\_std} & \textbf{EGARCH\_std} \\
-        \midrule
-        Oro & 2.6817 & 2.6722 & 2.6677 & 2.6190 & 2.6152 & 2.6086 \\
-        Nucor & 4.3930 & 4.3903 & 4.3759 & 4.3039 & 4.3041 & 4.2960 \\
-        GM & 4.3607 & 4.3561 & 4.3307 & 4.2492 & 4.2453 & 4.2368 \\
-        Apple & 3.8663 & 3.8441 & 3.8228 & 3.7610 & 3.7500 & 3.7397 \\
-        S\&P 500 (SPY) & 2.6115 & 2.5867 & 2.5623 & 2.5374 & 2.5121 & 2.5007 \\
-        USD/CNH & 0.2254 & 0.2214 & 0.2113 & 0.1146 & 0.1157 & 0.1091 \\
-        \bottomrule
-    \end{tabular}%
-    }
-\end{table}
+La Sezione \ref{sec:selezione-modello} giustifica l'utilizzo del modello EGARCH(1,1) con errori $t$ di Student, confrontandolo con le alternative tramite i criteri di 
+informazione AIC e BIC, e ne commenta i parametri stimati. La Sezione \ref{sec:impatto-eventi} costituisce il punto centrale dell'analisi: valuta in che misura gli annunci 
+hanno modificato la volatilità condizionata, prima in termini congiunti e poi evento per evento, e ne illustra la traiettoria nel tempo. La Sezione \ref{sec:diagnostica-residui} 
+verifica l'adeguatezza del modello sui residui standardizzati. La Sezione \ref{sec:correlazioni-rolling} si concentra sui co-movimenti tra gli asset, analizzando 
+tramite correlazioni \emph{rolling} tra i residui standardizzati di alcune coppie se i legami tra diversi asset cambiano nei periodi di maggiore tensione commerciale.
+
+\section{Selezione del modello e stima dei parametri}
+\label{sec:selezione-modello}
+L'analisi empirica ha inizio con la selezione del modello ottimale per analizzare le dinamiche della varianza condizionata, per poi passare alla stima e interpretazione 
+dei parametri nel modello selezionato. La valutazione si basa sulla minimizzazione del Criterio di Informazione Bayesiano (BIC), confrontando le strutture sGARCH, GJR-GARCH 
+ed EGARCH, stimate con distribuzione Gaussiana e $t$ di Student. Come mostrato nella Tabella \ref{tab:bic-completa}, il modello asimmetrico EGARCH-t 
+minimizza il valore per tutti e sei gli asset in esame.
+
+{
+\footnotesize
+\begin{longtable}{ p{0.13\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
+\toprule
+\textbf{Asset} & \textbf{sGARCH\newline norm} & \textbf{GJR\newline norm} & \textbf{EGARCH\newline norm} & \textbf{sGARCH\newline std} & \textbf{GJR\newline std} & \textbf{EGARCH\newline std} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Asset} & \textbf{sGARCH\newline norm} & \textbf{GJR\newline norm} & \textbf{EGARCH\newline norm} & \textbf{sGARCH\newline std} & \textbf{GJR\newline std} & \textbf{EGARCH\newline std} \\
+\midrule
+\endhead
+\midrule
+\noalign{\vspace{10pt}}
+\caption[]{Valori del BIC.} \\
+\endfoot
+\bottomrule
+\noalign{\vspace{10pt}}
+\caption{Valori del Criterio di Informazione Bayesiano (BIC).}
+\label{tab:bic-completa}
+\endlastfoot
+Oro & 2,6817 & 2,6722 & 2,6677 & 2,6190 & 2,6152 & \textbf{2,6086} \\ \midrule
+Nucor & 4,3930 & 4,3903 & 4,3759 & 4,3039 & 4,3041 & \textbf{4,2960} \\ \midrule
+GM & 4,3607 & 4,3561 & 4,3307 & 4,2492 & 4,2453 & \textbf{4,2368} \\ \midrule
+Apple & 3,8663 & 3,8441 & 3,8228 & 3,7610 & 3,7500 & \textbf{3,7397} \\ \midrule
+S\&P 500 & 2,6115 & 2,5867 & 2,5623 & 2,5374 & 2,5121 & \textbf{2,5007} \\ \midrule
+USD/\newline CNH & 0,2254 & 0,2214 & 0,2113 & 0,1146 & 0,1157 & \textbf{0,1091} \\
+\end{longtable}
+}
 
 Questa superiorità viene confermata anche dal Criterio di Informazione di Akaike (AIC) e dalle tabelle delta (dBIC e dAIC), i cui risultati completi sono riportati in 
-Appendice. Impostando l'EGARCH-t come benchmark ($\Delta=0$), tutti gli altri modelli restituiscono delta ampiamente positivi e mostrano come la Student-t migliori 
-l'adeguatezza in tutti i modelli. Definita la specifica ottimale, la Tabella \ref{tab:parametri_egarch} riporta le stime dei parametri del modello EGARCH-t.
+Appendice. Impostando l'EGARCH-t come \emph{benchmark} ($\Delta=0$), tutti gli altri modelli restituiscono delta ampiamente positivi e mostrano come la $t$ di Student 
+migliori l'adeguatezza in tutti i modelli. Definita la specifica ottimale, la Tabella \ref{tab:parametri-egarch-completa} riporta le stime 
+dei parametri del modello EGARCH-t.
 
-\begin{table}[htbp]
-    \centering
-    \caption{Stima dei parametri del modello EGARCH-t}
-    \label{tab:parametri_egarch}
-    \resizebox{\textwidth}{!}{%
-    \begin{tabular}{lcccccc}
+{
+\footnotesize
+\begin{longtable}{ p{0.15\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
+\toprule
+\textbf{Parametro} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Parametro} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+\midrule
+\endhead
+\midrule
+\noalign{\vspace{10pt}}
+\caption[]{Stima dei parametri del modello EGARCH-t.} \\
+\endfoot
+\bottomrule
+\noalign{\vspace{10pt}}
+\caption{Stima dei parametri del modello EGARCH-t. \newline Note: *, **, *** indicano significatività al 10\%, 5\% e 1\% (basata su errori standard classici).}
+\label{tab:parametri-egarch-completa}
+\endlastfoot
+$\mu$ & 0,059*** & 0,068* & 0,058** & 0,112*** & 0,070*** & -0,001 \\ \midrule
+$\omega$ & -0,002 & 0,014*** & 0,013*** & 0,031*** & -0,018*** & -0,057*** \\ \midrule
+$\theta^*$ (segno) & 0,036*** & -0,023** & -0,043*** & -0,092*** & -0,165*** & 0,019 \\ \midrule
+$\alpha^*$ (ampiezza) & 0,102*** & 0,088*** & 0,101*** & 0,175*** & 0,191*** & 0,200*** \\ \midrule
+$\beta^*$ & 0,988*** & 0,990*** & 0,992*** & 0,968*** & 0,970*** & 0,979*** \\ \midrule
+$\nu$ & 5,353*** & 5,261*** & 4,157*** & 4,622*** & 6,099*** & 4,445*** \\
+\end{longtable}
+}
+
+Il parametro di asimmetria $\theta^*$ evidenzia l'effetto leva per GM, Apple, Nucor e S\&P 500, con valori negativi e significativi: gli shock negativi aumentano la 
+volatilità più di quelli positivi di pari entità. Per l'oro $\theta^*$ è invece positivo (0,036), segno di un'asimmetria inversa rispetto a quella azionaria, mentre per 
+USD/CNH non è significativo.
+
+Il parametro di ampiezza $\alpha^*$ è positivo e significativo per tutti gli asset, mentre i gradi di libertà della distribuzione ($\nu$) sono 
+compresi tra 4,2 e 6,1, indicando code pesanti, in linea con la scelta della $t$ di Student.
+
+Il coefficiente di persistenza $\beta^*$ è prossimo a 1 per tutti gli asset (superiore a 0,96): l'\gls{emivita} degli shock va da circa 21 sedute per Apple a circa 86 
+per General Motors, a indicare un'elevata persistenza della volatilità.
+
+% INSERIRE NIC
+
+
+\section{Impatto degli eventi sulla volatilità condizionata}
+\label{sec:impatto-eventi}
+Questa sezione valuta se gli annunci tariffari hanno modificato la volatilità condizionata degli asset, con quale intensità e in quali strumenti. L'analisi si basa 
+sull'EGARCH(1,1) con errori $t$ di Student e sulle variabili \emph{dummy} descritte nella Sezione \ref{sec:specificazione-modello}.
+
+Il moltiplicatore della varianza condizionata è $e^{\lambda_k}$, mentre $e^{\lambda_k/2}$ quello della volatilità. L'effetto di ciascun evento è espresso come variazione 
+percentuale della volatilità nella prima seduta della finestra, $(e^{\lambda_k/2} - 1) \times 100$, rispetto a quella prevista dal modello in assenza dell'annuncio. 
+Il coefficiente cattura la variazione della varianza e non il segno del rendimento, quindi due shock della stessa entità producono lo stesso effetto, indipendentemente dal segno.
+
+Poiché la \emph{dummy} è attiva su due sedute consecutive, nella seconda seduta all'effetto diretto si somma quello trasmesso dalla persistenza: alla fine della finestra 
+il moltiplicatore della volatilità è circa $e^{\lambda_k(1+\beta^*)/2}$, risultando più ampio di quello riportato in tabella, e l'effetto prosegue nelle sedute successive 
+(Figura \ref{fig:sigma-main}).
+
+Inizialmente si verifica se gli eventi presi assieme modificano la volatilità, ponendo come ipotesi nulla $H_0: \lambda_1 = \dots = \lambda_7 = 0$. Il confronto tra il 
+modello con le variabili \emph{dummy} e quello base si fonda sul test del Rapporto di Verosimiglianza (LR) e sul test di Wald, con covarianza classica e robusta, 
+entrambi con distribuzione $\chi^2$ a sette gradi di libertà. Poiché il test è eseguito su sei asset, ai \emph{p-value} del test LR si applica la correzione di Holm per 
+contenere il rischio di falsi positivi. Si riportano anche $\Delta$AIC e $\Delta$BIC, calcolati come differenza tra il criterio del modello con \emph{dummy} e quello senza, 
+moltiplicata per il numero di osservazioni: valori negativi indicano che il modello con \emph{dummy} è preferibile (Tabella \ref{tab:test-congiunti}).
+
+{
+\footnotesize
+\begin{longtable}{ p{0.14\textwidth} p{0.09\textwidth} p{0.09\textwidth} p{0.09\textwidth} p{0.09\textwidth} p{0.12\textwidth} p{0.09\textwidth} p{0.09\textwidth} }
     \toprule
-    \textbf{Parametro} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/CNH} \\
+    \textbf{Asset} & \textbf{Wald\newline cl.} & \textbf{\emph{p}\newline Wald} & \textbf{LR} & \textbf{\emph{p}\newline LR} & \textbf{\emph{p} LR\newline Holm} & \textbf{$\Delta$AIC} & \textbf{$\Delta$BIC} \\
     \midrule
-    $\mu$ & 0.059*** & 0.068* & 0.058** & 0.112*** & 0.070*** & -0.001 \\
-    $\omega$ & -0.002 & 0.014*** & 0.013*** & 0.031*** & -0.018*** & -0.057*** \\
-    $\theta^*$ (segno) & 0.036*** & -0.023** & -0.043*** & -0.092*** & -0.165*** & 0.019 \\
-    $\alpha^*$ (ampiezza) & 0.102*** & 0.088*** & 0.101*** & 0.175*** & 0.191*** & 0.200*** \\
-    $\beta^*$ & 0.988*** & 0.990*** & 0.992*** & 0.968*** & 0.970*** & 0.979*** \\
-    $\nu$ & 5.353*** & 5.261*** & 4.157*** & 4.622*** & 6.099*** & 4.445*** \\
+    \endfirsthead
+    \toprule
+    \textbf{Asset} & \textbf{Wald\newline cl.} & \textbf{\emph{p}\newline Wald} & \textbf{LR} & \textbf{\emph{p}\newline LR} & \textbf{\emph{p} LR\newline Holm} & \textbf{$\Delta$AIC} & \textbf{$\Delta$BIC} \\
+    \midrule
+    \endhead
+    \midrule
+    \noalign{\vspace{10pt}}
+    \caption[]{Test di significatività congiunta.} \\
+    \endfoot
     \bottomrule
-    \end{tabular}%
-    }
-    \vspace{0.15cm}
-    \footnotesize{\textit{Nota:} *, **, *** indicano significatività al 10\%, 5\% e 1\% (basata su errori standard classici). Le stime si riferiscono al modello includente le variabili dummy, i cui coefficienti sono omessi per brevità; il $\beta^*$ riportato è quello impiegato per i calcoli nella Sezione 5.2. Rispetto a \textit{rugarch}: $\theta^*$ = alpha1, $\alpha^*$ = gamma1, $\omega$ = costante.}
-\end{table}
+    \noalign{\vspace{10pt}}
+    \caption{Test di significatività congiunta (Wald Classico, LR Test e Criteri Informativi).}
+    \label{tab:test-congiunti}
+    \endlastfoot
+    Oro & 21,4 & 0,003 & 20,1 & 0,005 & 0,032 & -6,1 & 35,4 \\ \midrule
+    Nucor & 13,3 & 0,066 & 15,6 & 0,029 & 0,109 & -1,6 & 39,6 \\ \midrule
+    GM & 3,6 & 0,823 & 4,3 & 0,746 & 0,746 & 9,7 & 51,0 \\ \midrule
+    Apple & 17,0 & 0,018 & 17,4 & 0,015 & 0,075 & -3,4 & 37,9 \\ \midrule
+    S\&P 500 & 17,3 & 0,016 & 15,4 & 0,031 & 0,109 & -1,4 & 39,8 \\ \midrule
+    USD/\newline CNH & 16,0 & 0,026 & 15,8 & 0,027 & 0,109 & -1,8 & 39,7 \\
+\end{longtable}
+}
 
-Il parametro di asimmetria ($\theta^*$) evidenzia il classico effetto leva per i titoli azionari (GM e Apple) e per l'indice di mercato S&P 500, mentre per Nucor risulta 
-significativo solo al 10\%. I valori inferiori a 0 indicano che gli shock negativi incrementano la volatilità in misura maggiore rispetto a shock positivi di pari entità. 
-Per quantificare la dimensione di questa asimmetria, si osservi l'indice S&P 500: l'impatto dei rialzi pesa solamente 0,026 ($\alpha^* + \theta^*$), mentre quello dei ribassi 
-pesa ben 0,356 ($\alpha^* - \theta^*$). Al contrario, l'Oro presenta un coefficiente positivo (0,036), evidenziando un'asimmetria inversa, diversa da quella azionaria. 
-La valutazione della sua effettiva natura di bene rifugio viene pertanto demandata all'analisi delle correlazioni nei periodi di stress, mentre per il tasso di cambio USD/CNH 
-non si rifiuta la simmetria. 
+Per l'oro entrambi i test LR e Wald classico rifiutano l'ipotesi nulla, il risultato resta significativo al 5\% dopo la correzione di Holm e l'AIC preferisce il modello 
+con \emph{dummy}. Per Apple l'evidenza è intermedia: il \emph{p-value} dell'LR di 0,015 diventa 0,075 dopo Holm (restando significativo al 10\%) e la riduzione dell'AIC (-3,4) 
+segnala una preferenza più netta per il modello con \emph{dummy}. Per S\&P 500 e USD/CNH i test rifiutano $H_0$ al 5\% senza correzione, mentre per Nucor il rifiuto si 
+osserva solo con l'LR. La correzione rende i \emph{p-value} di questi tre asset non significativi al 5\% e l'AIC considera i due modelli quasi equivalenti. 
 
-I gradi di libertà della distribuzione ($\nu$) si attestano tra 4 e 6, confermando la presenza di code grasse (\emph{fat tails}) e l'inadeguatezza di una distribuzione 
-normale. Infine, il coefficiente di persistenza ($\beta^*$) risulta prossimo a 1 per tutti gli asset (superiore a 0.96). Calcolando l'\gls{emivita} (\emph{half-life}) degli 
-shock tramite la formula $\log(0.5)/\log(\beta^*)$, emerge che i movimenti si dimezzano in tempi variabili: da un assorbimento più rapido di circa 21 giorni per Apple, 
-a un rientro lento di quasi 86 giorni per General Motors, evidenziando un'elevata persistenza della volatilità.
+Per General Motors gli eventi non mostrano alcuna significatività congiunta e la loro inclusione peggiora il modello. Il BIC preferisce sempre il modello senza \emph{dummy} 
+perché penalizza l'aggiunta dei parametri di circa $7 \ln(n)$; poiché le \emph{dummy} sono l'oggetto dello studio, il criterio non viene usato per escluderle.
+
+LR e Wald classico risultano molto vicini, mentre il Wald robusto restituisce valori nettamente superiori, probabilmente dovuti all'instabilità dello stimatore quando 
+si utilizzano variabili \emph{dummy} identificate da due sole osservazioni.
+
+L'affidabilità dei test LR e Wald classico dipende dalla corretta specificazione della densità $t$ di Student. Come verificato dalla diagnostica sui residui standardizzati 
+e dai relativi QQ-plot presentati successivamente, tale assunzione distributiva risulta ben specificata, supportando l'impiego degli errori standard classici. Il Wald 
+robusto è riportato in Appendice.
+
+{
+\footnotesize
+\begin{longtable}{ p{0.16\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
+    \toprule
+    \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+    \midrule
+    \endfirsthead
+    \toprule
+    \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+    \midrule
+    \endhead
+    \midrule
+    \noalign{\vspace{10pt}}
+    \caption[]{Variazione percentuale della volatilità condizionata.} \\
+    \endfoot
+    \bottomrule
+    \noalign{\vspace{10pt}}
+    \caption{Variazione percentuale della volatilità condizionata nella prima seduta della finestra annuncio. \newline Note: *, **, *** indicano significatività al 10\%, 5\% e 1\% (errori standard classici).}
+    \label{tab:var-volatilita}
+    \endlastfoot
+    Anti Fentanyl & -2\% & +19\% & -6\% & -1\% & -11\% & -12\% \\ \midrule
+    \emph{Liberation Day} & +59\%** & +118\%** & +47\% & +201\%*** & +171\%*** & +129\%*** \\ \midrule
+    \emph{Escalation} & +7\% & -51\%** & -36\% & -45\%* & -35\% & -35\% \\ \midrule
+    Vertice Ginevra & -14\% & -7\% & -4\% & -19\% & +5\% & -24\% \\ \midrule
+    Terre Rare & +51\%** & +34\%** & +11\% & +32\% & +62\%** & -9\% \\ \midrule
+    Accordo Busan & -22\% & -24\%* & -6\% & -35\%** & +6\% & -2\% \\ \midrule
+    Sentenza CS & +10\% & -5\% & -1\% & -14\% & +5\% & +42\%* \\
+\end{longtable}
+}
+
+L'effetto maggiore si verifica nel \emph{Liberation Day}, con un aumento significativo ed elevato della volatilità per cinque asset, mentre per General Motors il segno è positivo 
+ma non significativo. Un aumento significativo si osserva anche in corrispondenza della crisi delle terre rare per oro, Nucor e S\&P 500.
+
+Gli eventi di distensione hanno per lo più segno negativo, l'accordo di Busan è associato a una diminuzione della volatilità prevista per Apple e, al 10\%, per Nucor, 
+mentre per il vertice di Ginevra nessun coefficiente è significativo. Per l'anti Fentanyl e la sentenza della Corte Suprema non emerge evidenza di un effetto stabile, 
+a parte un aumento dell'USD/CNH in occasione della sentenza (+42\%), significativo solo al 10\%.
+
+L'\emph{escalation} del 9 aprile presenta coefficienti negativi per cinque asset su sei, significativi per Nucor e, al 10\%, per Apple. Poiché l'evento si verifica a 
+pochi giorni dal \emph{Liberation Day} e la persistenza è prossima a 1, il modello prevede già una volatilità molto elevata, e il coefficiente corregge l'effetto del primo evento.
+
+
+\subsection{Traiettoria della volatilità}
+La Figura \ref{fig:sigma-main} confronta la volatilità condizionata stimata con (linea continua) e senza \emph{dummy} (linea tratteggiata) per S\&P 500, Oro e Apple, 
+rappresentata su scala logaritmica. Con le \emph{dummy} $\sigma_t$ reagisce in corrispondenza dell'annuncio, mentre senza \emph{dummy} il modello risponde con un giorno 
+di ritardo e in proporzione al rendimento realizzato. L'evento del \emph{Liberation Day} è il più evidente, dove la volatilità dell'S\&P 500 passa da circa 1,3 a 10 punti 
+percentuali, per poi ridursi con l'\emph{escalation} del 9 aprile, in cui il coefficiente negativo corregge l'effetto del primo shock. 
+Per l'oro un movimento simile si verifica anche per la crisi delle terre rare e l'accordo di Busan.
+
+I livelli di volatilità raggiunti in queste finestre risultano superiori a quelli effettivamente realizzati, in quanto, assorbendo l'intero shock 
+all'interno di una finestra di sole due sedute, la struttura EGARCH tende a sovrastimare i picchi estremi. 
+L'analisi grafica per i restanti asset (Nucor, GM e USD/CNH) è riportata in Appendice alla Sezione \ref{app:sigma}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{fig_sigma.png}
+    \caption[Confronto modelli EGARCH con e senza dummy (S\&P 500, Oro, Apple)]{Confronto dei modelli EGARCH con e senza dummy (S\&P 500, Oro, Apple).}
+    \label{fig:sigma-main}
+\end{figure}
+
+I risultati ottenuti vanno letti con prudenza, in quanto l'esecuzione di 42 test individuali espone al rischio di falsi positivi. Poiché le variabili \emph{dummy} sono 
+identificate da sole due osservazioni e stimate per massima verosimiglianza ipotizzando code pesanti, i \emph{p-value} possono risultare instabili. Per tale motivo, 
+i livelli di significatività riportati nella Tabella \ref{tab:var-volatilita} si basano sugli errori standard classici. L'impatto stimato fornisce quindi evidenza 
+indicativa di associazione tra eventi e volatilità, ma non costituisce una prova definitiva. Le statistiche del test di Wald robusto e i coefficienti $\lambda_k$ con errori 
+standard robusti sono riportati in Appendice.
+
+
+\section{Diagnostica dei residui}
+\label{sec:diagnostica-residui}
+Per valutare l'affidabilità dei risultati precedenti si verifica se il modello descrive adeguatamente i dati, analizzando i residui standardizzati $z_t = \varepsilon_t / \sigma_t$ ottenuti 
+dividendo la stima dello shock per la volatilità condizionata. Se l'equazione della media e quella della varianza sono ben specificate, $z_t$ si comporta come una sequenza 
+di variabili indipendenti e identicamente distribuite, con distribuzione $t$ di Student standardizzata con $\nu$ gradi di libertà: deve esserci assenza di autocorrelazione 
+nei residui e di dipendenza nei loro quadrati. 
+
+Si applicano i test della Sezione \ref{sec:analisi-esplorativa} (Ljung-Box su $z_t$ e su $z_t^2$ e ARCH-LM) mantenendo gli stessi ritardi, in modo da confrontare la 
+situazione prima e dopo la stima, mentre la distribuzione è verificata con i QQ-plot. A differenza della Sezione \ref{sec:analisi-esplorativa}, dove il rifiuto dell'ipotesi 
+nulla giustificava il ricorso ai modelli GARCH, qui l'ipotesi nulla è che il modello sia adeguato e i \emph{p-value} elevati sono quindi un esito favorevole.
+
+{
+\footnotesize
+\begin{longtable}{ p{0.12\textwidth} p{0.09\textwidth} p{0.09\textwidth} p{0.10\textwidth} p{0.10\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
+    \toprule
+    \textbf{Asset} & \textbf{LB $\mathbf{z_t}$ \newline (5)} & \textbf{LB $\mathbf{z_t}$ \newline (10)} & \textbf{LB $\mathbf{z_t^2}$ \newline (5)} & \textbf{LB $\mathbf{z_t^2}$ \newline (10)} & \textbf{ARCH-LM \newline (1)} & \textbf{ARCH-LM \newline (5)} & \textbf{ARCH-LM \newline (10)} \\
+    \midrule
+    \endfirsthead
+    \toprule
+    \textbf{Asset} & \textbf{LB $\mathbf{z_t}$ \newline (5)} & \textbf{LB $\mathbf{z_t}$ \newline (10)} & \textbf{LB $\mathbf{z_t^2}$ \newline (5)} & \textbf{LB $\mathbf{z_t^2}$ \newline (10)} & \textbf{ARCH-LM \newline (1)} & \textbf{ARCH-LM \newline (5)} & \textbf{ARCH-LM \newline (10)} \\
+    \midrule
+    \endhead
+    \midrule
+    \noalign{\vspace{10pt}}
+    \caption[]{\emph{p-value} dei test sui residui standardizzati.} \\
+    \endfoot
+    \bottomrule
+    \noalign{\vspace{10pt}}
+    \caption{\emph{p-value} dei test diagnostici applicati ai residui standardizzati del modello EGARCH-t.}
+    \label{tab:diagnostica-residui}
+    \endlastfoot
+    Oro & 0,3473 & 0,3434 & 0,0099 & 0,0880 & 0,9819 & 0,0136 & 0,1054 \\ \midrule
+    Nucor & 0,7167 & 0,2173 & 0,8679 & 0,8958 & 0,3618 & 0,8714 & 0,8752 \\ \midrule
+    GM & 0,9419 & 0,5786 & 0,4471 & 0,6686 & 0,0709 & 0,4635 & 0,6858 \\ \midrule
+    Apple & 0,6186 & 0,3163 & 0,8943 & 0,9303 & 0,7294 & 0,8980 & 0,9301 \\ \midrule
+    S\&P 500 & 0,4585 & 0,4008 & 0,3276 & 0,5879 & 0,1965 & 0,3266 & 0,6042 \\ \midrule
+    USD/\newline CNH & 0,0551 & 0,1080 & 0,6584 & 0,6469 & 0,1041 & 0,6680 & 0,6188 \\
+\end{longtable}
+}
+
+La Tabella \ref{tab:diagnostica-residui} riporta i \emph{p-value} dei test sui residui standardizzati, che non evidenziano problemi sul modello EGARCH-t. Solamente due 
+rifiutano l'ipotesi nulla al 5\% e riguardano l'oro al ritardo 5 (Ljung-Box su $z_t^2$, $p = 0,010$, e ARCH-LM, $p = 0,014$), mentre l'ARCH-LM a 1 e a 10 ritardi non 
+rifiuta: per l'oro resta quindi un lieve residuo di eteroschedasticità, limitato a un ritardo specifico. Per gli altri asset i \emph{p-value} sono superiori alla soglia 
+di significatività del 5\%; al limite della soglia, ma senza rifiuto, il Ljung-Box su $z_t$ a 5 ritardi per USD/CNH ($p = 0,055$) e l'ARCH-LM a 1 ritardo per GM ($p = 0,071$).
+
+Prima della stima, tutti i test sui quadrati dei log-rendimenti e l'ARCH-LM rifiutavano con $p < 0,001$ e il Ljung-Box sui log-rendimenti a 10 ritardi rifiutava per tutti 
+gli asset ($p < 0,01$). Sui residui standardizzati non restano evidenze rilevanti di eteroschedasticità o di dipendenza lineare; pertanto, l'EGARCH(1,1) con equazione 
+della media costante risulta adeguato, in linea con la scelta discussa nella Sezione \ref{sec:specificazione-modello}.
+
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=\textwidth]{fig_qqplot_residui.png}
+%    \caption[QQ-plot dei residui standardizzati]{QQ-plot dei residui standardizzati rispetto alla distribuzione $t$ di Student.}
+%    \label{fig:qqplot-residui}
+%\end{figure}
+
+La Figura 
+%\ref{fig:qqplot-residui}
+confronta i quantili dei residui standardizzati con quelli della $t$ di Student standardizzata con $\nu$ stimato. 
+Per oro, Nucor, GM, Apple e USD/CNH i punti si dispongono lungo la retta, con scostamenti limitati a pochi valori estremi, confermando che la distribuzione $t$ di 
+Student descrive adeguatamente lo spessore delle code. Il caso meno soddisfacente riguarda l'S\&P 500, in cui la coda sinistra risulta più pesante e la 
+destra più leggera rispetto alla distribuzione teorica di riferimento, segno di un'asimmetria residua che una distribuzione simmetrica non può catturare.
+
+
+\section{Analisi delle correlazioni rolling} %(Assumendo questo come titolo della 5.4)
+\label{sec:correlazioni-rolling}

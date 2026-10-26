@@ -187,12 +187,6 @@ Nell'equazione della varianza condizionata, le variabili \emph{dummy} vengono in
 dove $\theta^*$ rappresenta il termine di segno (che cattura l'effetto leva) e $\alpha^*$ il termine di ampiezza dello shock. Poiché si assume una distribuzione $t$ di 
 Student standardizzata, il valore atteso $E|z_{t-1}|$ dipende dai gradi di libertà $\nu$ (con $\nu > 2$).
 
-Come verifica di robustezza, vengono stimati anche il GJR-GARCH(1,1):
-\[
-    \sigma_t^2 = \omega + (\alpha_1 + \delta_1 I_{t-1}) \varepsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2 + \sum_{k=1}^K \lambda_k D_{k,t}
-\]
-(con $I_{t-1} = 1$ se $\varepsilon_{t-1} < 0$) e il modello simmetrico GARCH(1,1), in cui l'effetto asimmetrico viene posto pari a zero.
-
 Tuttavia, da un punto di vista strettamente teorico, l'inserimento di regressori esterni in forma additiva nei modelli GARCH e GJR-GARCH espone al rischio di violare 
 il vincolo di positività della varianza condizionata qualora gli shock esogeni abbiano un impatto negativo. Questo costituisce la motivazione analitica per l'adozione 
 dell'EGARCH come modello principale della presente analisi: grazie alla sua specificazione logaritmica, esso garantisce per costruzione matematica 

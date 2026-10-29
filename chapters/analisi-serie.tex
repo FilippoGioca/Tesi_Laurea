@@ -15,7 +15,7 @@ rendendo necessario l'utilizzo dei modelli econometrici della famiglia GARCH, ch
 \section{I rendimenti finanziari}
 Nei mercati finanziari, il prezzo indica la quotazione puntuale di un asset, mentre il rendimento ne misura la variazione relativa nel tempo\cite{libro:investments}. 
 Nell'analisi delle serie storiche, l'oggetto di studio primario non è rappresentato dai prezzi degli asset, bensì dai loro rendimenti. 
-Questa scelta metodologica è motivata per due ragioni\cite{campbell:econometrics}.
+Questa scelta metodologica è motivata da due ragioni\cite{campbell:econometrics}.
 
 La prima ragione è che il rendimento fornisce un riassunto completo dell'opportunità di investimento. Essendo una misura \gls{scale-free}, 
 permette di confrontare in modo diretto strumenti finanziari differenti. 
@@ -146,7 +146,7 @@ con code più pesanti di quelle della normale, anche quando gli errori sono gaus
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{QQ_Plot_S_P_500_SPY_.png}
-    \caption[QQ Plot dei rendimenti dell'indice S\&P 500]{QQ Plot dei rendimenti dell'indice S\&P 500 (rispetto alla distribuzione normale).}
+    \caption[QQ Plot dei rendimenti dell'indice S\&P 500]{QQ Plot dei rendimenti dell'indice S\&P 500 (SPY) rispetto alla distribuzione normale.}
     \label{fig:qqplot-sp500}
 \end{figure}
 
@@ -161,7 +161,7 @@ L'assenza di autocorrelazione nei rendimenti lineari non implica assoluta indipe
 come rendimenti al quadrato o in valore assoluto, mostrano un'autocorrelazione positiva. 
 Questa autocorrelazione positiva prolungata è coerente con la presenza di \emph{volatility clustering}\cite{cont:empirical}.
 
-Come già osservato nel Paragrafo \ref{sec:volatilita} (\nameref{sec:volatilita}), la volatilità giornaliera non è direttamente osservabile dai soli rendimenti di chiusura, 
+Come già osservato nel Paragrafo \ref{sec:volatilita}, la volatilità giornaliera non è direttamente osservabile dai soli rendimenti di chiusura, 
 il che rende complesso lo studio di questa dinamica. 
 I modelli tradizionali risultano inadatti a questo scopo poiché assumono varianza condizionata costante nel tempo.
 

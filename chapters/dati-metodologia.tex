@@ -84,7 +84,7 @@ lo shock è stato prezzato a partire da lunedì 3 febbraio, data in cui è stata
 \paragraph{2 aprile 2025: Liberation Day}
 Durante l'evento pubblico \emph{Liberation Day}, il Presidente statunitense ha presentato un importante piano tariffario, articolato in dazi di base e tariffe reciproche, 
 con entrata in vigore il 5 e il 9 aprile. Era prevista una tariffa minima del 10\% su tutte le importazioni globali (al netto di specifiche categorie), con un inasprimento 
-verso alcune nazioni, prima fra tutte la Cina, soggetta ad un'aliquota del 34\%. Poiché il discorso è avvenuto alle 16:00 EST in coincidenza con la chiusura di Wall Street, lo shock si è scaricato interamente alla riapertura 
+verso alcune nazioni, prima fra tutte la Cina, soggetta ad un'aliquota del 34\%. Poiché il discorso è avvenuto alle 16:00 EDT in coincidenza con la chiusura di Wall Street, lo shock si è scaricato interamente alla riapertura 
 dei mercati il giorno successivo, giovedì 3 aprile.
 
 \paragraph{9 aprile 2025: Escalation bilaterale}
@@ -129,36 +129,26 @@ dovuti alla sospensione dei dazi reciproci e alla nuova tariffa verso la Cina.
 
 Le reazioni sono eterogenee per segno e dimensione, infatti lo stesso evento provoca reazioni diverse a seconda dello strumento finanziario.
 
-{
-\footnotesize
-\begin{longtable}{ p{0.18\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
-    \toprule
-    \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \begin{tabular}{@{}c@{}}\textbf{S\&P 500}\\\textbf{(SPY)}\end{tabular} & \textbf{USD/\newline CNH} \\
-    \midrule
-    \endfirsthead
-    \toprule
-    \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \begin{tabular}{@{}c@{}}\textbf{S\&P 500}\\\textbf{(SPY)}\end{tabular} & \textbf{USD/\newline CNH} \\
-    \midrule
-    \endhead
-    \midrule
-    \noalign{\vspace{10pt}}
-    \caption[]{Log-rendimenti cumulati degli asset nelle finestre degli eventi tariffari.} \\
-    \endfoot
-    \bottomrule
-    \noalign{\vspace{10pt}}
-    \caption{Log-rendimenti cumulati (\%) degli asset nelle finestre temporali degli eventi tariffari.}
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \begin{tabular}{ p{0.16\textwidth} p{0.10\textwidth} p{0.10\textwidth} p{0.10\textwidth} p{0.10\textwidth} p{0.10\textwidth} p{0.10\textwidth} }
+        \toprule
+        \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \begin{tabular}{@{}c@{}}\textbf{S\&P 500}\\\textbf{(SPY)}\end{tabular} & \textbf{USD/\newline CNH} \\
+        \midrule
+        1° febbraio & 1,45 & 1,84 & -1,82 & -1,37 & -0,01 & -0,46 \\ \midrule
+        2 aprile & -3,12 & -17,56 & -8,25 & -17,27 & -11,09 & 0,00 \\ \midrule
+        9 aprile & 6,18 & 5,41 & 2,90 & 9,93 & 5,51 & -1,54 \\ \midrule
+        12 maggio & -2,34 & 3,19 & 6,05 & 7,13 & 3,91 & -0,60 \\ \midrule
+        9-10 ottobre & -0,51 & -3,09 & -1,88 & -5,08 & -3,03 & -0,04 \\ \midrule
+        30 ottobre & 1,83 & -2,88 & -0,06 & 0,25 & -0,78 & 0,35 \\ \midrule
+        20 febbraio & 4,54 & -0,66 & -2,25 & 2,13 & -0,31 & -0,15 \\
+        \bottomrule
+    \end{tabular}
+    \vspace{5pt}
+    \caption[Log-rendimenti cumulati degli asset nelle finestre degli eventi tariffari.]{Log-rendimenti cumulati (\%) degli asset nelle finestre temporali degli eventi tariffari.}
     \label{tab:rendimenti-cumulati}
-    \endlastfoot
-    1° febbraio & 1,45 & 1,84 & -1,82 & -1,37 & -0,01 & -0,46 \\ \midrule
-    2 aprile & -3,12 & -17,56 & -8,25 & -17,27 & -11,09 & 0,00 \\ \midrule
-    9 aprile & 6,18 & 5,41 & 2,90 & 9,93 & 5,51 & -1,54 \\ \midrule
-    12 maggio & -2,34 & 3,19 & 6,05 & 7,13 & 3,91 & -0,60 \\ \midrule
-    9-10 ottobre & -0,51 & -3,09 & -1,88 & -5,08 & -3,03 & -0,04 \\ \midrule
-    30 ottobre & 1,83 & -2,88 & -0,06 & 0,25 & -0,78 & 0,35 \\ \midrule
-    20 febbraio & 4,54 & -0,66 & -2,25 & 2,13 & -0,31 & -0,15 \\
-\end{longtable}
-}
-
+\end{table}
 
 \section{Specificazione del modello}
 \label{sec:specificazione-modello}
@@ -221,7 +211,7 @@ di stazionarietà e normalità.
 
 {
 \footnotesize
-\begin{longtable}{ p{0.15\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
+\begin{longtable}{ p{0.15\textwidth} p{0.10\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.10\textwidth} }
 \toprule
 \textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
 \midrule
@@ -305,35 +295,24 @@ S\&P 500 & 24884,11 & $< 0,001$ \\ \midrule
 USD/CNH & 2855,94 & $< 0,001$ \\
 \end{longtable}
 
-\begin{longtable}{ p{0.20\textwidth} p{0.16\textwidth} p{0.16\textwidth} p{0.16\textwidth} p{0.16\textwidth} }
-\toprule
-\textbf{Asset} & \textbf{Stat. (prezzi)} & \textbf{\emph{p-value} (prezzi)} & \textbf{Stat. (rend.)} & \textbf{\emph{p-value} (rend.)} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Asset} & \textbf{Stat. (prezzi)} & \textbf{\emph{p-value} (prezzi)} & \textbf{Stat. (rend.)} & \textbf{\emph{p-value} (rend.)} \\
-\midrule
-\endhead
-
-\midrule
-\noalign{\vspace{10pt}}
-\caption[]{Test ADF su log-prezzi e rendimenti.} \\
-\endfoot
-
-\bottomrule
-\noalign{\vspace{10pt}}
-\caption{Test ADF su log-prezzi e rendimenti.}
-\label{tab:test-adf}
-\endlastfoot
-
-Oro & -1,19 & 0,906 & -13,60 & $< 0,01$ \\ \midrule
-Nucor & -2,27 & 0,461 & -13,66 & $< 0,01$ \\ \midrule
-GM & -2,35 & 0,428 & -13,55 & $< 0,01$ \\ \midrule
-Apple & -2,34 & 0,434 & -13,59 & $< 0,01$ \\ \midrule
-S\&P 500 & -3,27 & 0,075 & -14,04 & $< 0,01$ \\ \midrule
-USD/CNH & -1,95 & 0,597 & -12,58 & $< 0,01$ \\
-\end{longtable}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ p{0.20\textwidth} p{0.16\textwidth} p{0.16\textwidth} p{0.16\textwidth} p{0.16\textwidth} }
+        \toprule
+        \textbf{Asset} & \textbf{Stat. (prezzi)} & \textbf{\emph{p-value} (prezzi)} & \textbf{Stat. (rend.)} & \textbf{\emph{p-value} (rend.)} \\
+        \midrule
+        Oro & -1,19 & 0,906 & -13,60 & $< 0,01$ \\ \midrule
+        Nucor & -2,27 & 0,461 & -13,66 & $< 0,01$ \\ \midrule
+        GM & -2,35 & 0,428 & -13,55 & $< 0,01$ \\ \midrule
+        Apple & -2,34 & 0,434 & -13,59 & $< 0,01$ \\ \midrule
+        S\&P 500 & -3,27 & 0,075 & -14,04 & $< 0,01$ \\ \midrule
+        USD/CNH & -1,95 & 0,597 & -12,58 & $< 0,01$ \\
+        \bottomrule
+    \end{tabular}
+    \vspace{5pt}
+    \caption[Test ADF su log-prezzi e rendimenti]{Test ADF su log-prezzi e rendimenti.}
+    \label{tab:test-adf}
+\end{table}
 
 Per verificare quanto emerso dalle statistiche descrittive, nelle Tabelle \ref{tab:jarque-bera} e \ref{tab:test-adf} sono riportati i risultati dei test statistici 
 effettuati sulle serie.

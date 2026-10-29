@@ -53,7 +53,7 @@ dei parametri del modello EGARCH-t.
 
 {
 \footnotesize
-\begin{longtable}{ p{0.15\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
+\begin{longtable}{ p{0.13\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
 \toprule
 \textbf{Parametro} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
 \midrule
@@ -68,7 +68,7 @@ dei parametri del modello EGARCH-t.
 \endfoot
 \bottomrule
 \noalign{\vspace{10pt}}
-\caption{Stima dei parametri del modello EGARCH-t. \newline Note: *, **, *** indicano significatività al 10\%, 5\% e 1\% (basata su errori standard classici).}
+\caption[Stima dei parametri del modello EGARCH-t.]{Stima dei parametri del modello EGARCH-t. \newline Note: *, **, *** indicano significatività al 10\%, 5\% e 1\% (basata su errori standard classici).}
 \label{tab:parametri-egarch-completa}
 \endlastfoot
 $\mu$ & 0,059*** & 0,068* & 0,058** & 0,112*** & 0,070*** & -0,001 \\ \midrule
@@ -130,7 +130,7 @@ moltiplicata per il numero di osservazioni: valori negativi indicano che il mode
 
 {
 \footnotesize
-\begin{longtable}{ p{0.14\textwidth} p{0.09\textwidth} p{0.09\textwidth} p{0.09\textwidth} p{0.09\textwidth} p{0.12\textwidth} p{0.09\textwidth} p{0.09\textwidth} }
+\begin{longtable}{ p{0.12\textwidth} p{0.09\textwidth} p{0.09\textwidth} p{0.08\textwidth} p{0.09\textwidth} p{0.09\textwidth} p{0.08\textwidth} p{0.08\textwidth} }
     \toprule
     \textbf{Asset} & \textbf{Wald\newline cl.} & \textbf{\emph{p}\newline Wald} & \textbf{LR} & \textbf{\emph{p}\newline LR} & \textbf{\emph{p} LR\newline Holm} & \textbf{$\Delta$AIC} & \textbf{$\Delta$BIC} \\
     \midrule
@@ -174,7 +174,7 @@ robusto è riportato in Appendice.
 
 {
 \footnotesize
-\begin{longtable}{ p{0.16\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
+\begin{longtable}{ p{0.14\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.09\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
     \toprule
     \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
     \midrule
@@ -189,7 +189,7 @@ robusto è riportato in Appendice.
     \endfoot
     \bottomrule
     \noalign{\vspace{10pt}}
-    \caption{Variazione percentuale della volatilità condizionata nella prima seduta della finestra annuncio. \newline Note: *, **, *** indicano significatività al 10\%, 5\% e 1\% (errori standard classici).}
+    \caption[Variazione percentuale della volatilità condizionata nella prima seduta della finestra annuncio.]{Variazione percentuale della volatilità condizionata nella prima seduta della finestra annuncio. \newline Note: *, **, *** indicano significatività al 10\%, 5\% e 1\% (errori standard classici).}
     \label{tab:var-volatilita}
     \endlastfoot
     Anti Fentanyl & -2\% & +19\% & -6\% & -1\% & -11\% & -12\% \\ \midrule
@@ -251,7 +251,7 @@ nulla giustificava il ricorso ai modelli GARCH, qui l'ipotesi nulla è che il mo
 
 {
 \footnotesize
-\begin{longtable}{ p{0.12\textwidth} p{0.09\textwidth} p{0.09\textwidth} p{0.10\textwidth} p{0.10\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
+\begin{longtable}{ p{0.10\textwidth} p{0.08\textwidth} p{0.08\textwidth} p{0.08\textwidth} p{0.08\textwidth} p{0.08\textwidth} p{0.08\textwidth} p{0.08\textwidth} }
     \toprule
     \textbf{Asset} & \textbf{LB $\mathbf{z_t}$ \newline (5)} & \textbf{LB $\mathbf{z_t}$ \newline (10)} & \textbf{LB $\mathbf{z_t^2}$ \newline (5)} & \textbf{LB $\mathbf{z_t^2}$ \newline (10)} & \textbf{ARCH-LM \newline (1)} & \textbf{ARCH-LM \newline (5)} & \textbf{ARCH-LM \newline (10)} \\
     \midrule
@@ -315,24 +315,28 @@ la guerra commerciale del 2018--19 e la fase COVID e altri momenti rilevanti, co
 
 {
 \footnotesize
-\begin{longtable}{ p{0.22\textwidth} p{0.14\textwidth} p{0.14\textwidth} p{0.14\textwidth} p{0.10\textwidth} p{0.14\textwidth} }
+\begin{longtable}{ l p{0.13\textwidth} p{0.12\textwidth} p{0.13\textwidth} p{0.09\textwidth} p{0.10\textwidth} }
     \toprule
-    \textbf{Coppie} & \textbf{Corr.}\newline \textbf{pre-dazi} & \textbf{Corr. periodo}\newline \textbf{dazi} & \textbf{Differenza} & \textbf{z} & \textbf{\emph{p-value}} \\
+    \textbf{Coppie} & \textbf{Corr.}\newline \textbf{pre-dazi} & \textbf{Corr.}\newline \textbf{periodo}\newline \textbf{dazi} & \textbf{Differenza} & \textbf{z} & \textbf{\emph{p-value}} \\
     \midrule
     \endfirsthead
+
     \toprule
-    \textbf{Coppie} & \textbf{Corr.}\newline \textbf{pre-dazi} & \textbf{Corr. periodo}\newline \textbf{dazi} & \textbf{Differenza} & \textbf{z} & \textbf{\emph{p-value}} \\
+    \textbf{Coppie} & \textbf{Corr.}\newline \textbf{pre-dazi} & \textbf{Corr.}\newline \textbf{periodo}\newline \textbf{dazi} & \textbf{Differenza} & \textbf{z} & \textbf{\emph{p-value}} \\
     \midrule
     \endhead
+
     \midrule
     \noalign{\vspace{10pt}}
     \caption[]{Confronto delle correlazioni statiche.} \\
     \endfoot
+
     \bottomrule
     \noalign{\vspace{10pt}}
-    \caption{Confronto delle correlazioni. \newline Note: correlazioni statiche calcolate sui residui standardizzati dell'EGARCH(1,1)-t. Fase pre-dazi: dal 1° gennaio 2016 al 31 dicembre 2024; periodo dei dazi: dal 1° gennaio 2025 al 31 agosto 2026. Il test è la differenza di Fisher tra due correlazioni indipendenti ed è approssimato, perché assume osservazioni indipendenti.}
+    \caption[Confronto delle correlazioni.]{Confronto delle correlazioni. \newline Note: correlazioni statiche calcolate sui residui standardizzati dell'EGARCH(1,1)-t. Fase pre-dazi: dal 1° gennaio 2016 al 31 dicembre 2024; periodo dei dazi: dal 1° gennaio 2025 al 31 agosto 2026. Il test è la differenza di Fisher tra due correlazioni indipendenti ed è approssimato, perché assume osservazioni indipendenti.}
     \label{tab:confronto-correlazioni}
     \endlastfoot
+
     S\&P 500 - Oro & 0,028 & 0,166 & 0,138 & 2,60 & 0,009 \\ \midrule
     S\&P 500 - USD/CNH & -0,238 & -0,278 & -0,040 & -0,79 & 0,427 \\ \midrule
     Nucor - GM & 0,396 & 0,220 & -0,176 & -3,65 & $<0,001$ \\

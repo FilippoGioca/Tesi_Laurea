@@ -41,7 +41,7 @@ Oro & 2,6817 & 2,6722 & 2,6677 & 2,6190 & 2,6152 & \textbf{2,6086} \\ \midrule
 Nucor & 4,3930 & 4,3903 & 4,3759 & 4,3039 & 4,3041 & \textbf{4,2960} \\ \midrule
 GM & 4,3607 & 4,3561 & 4,3307 & 4,2492 & 4,2453 & \textbf{4,2368} \\ \midrule
 Apple & 3,8663 & 3,8441 & 3,8228 & 3,7610 & 3,7500 & \textbf{3,7397} \\ \midrule
-S\&P 500 & 2,6115 & 2,5867 & 2,5623 & 2,5374 & 2,5121 & \textbf{2,5007} \\ \midrule
+S\&P 500 (SPY) & 2,6115 & 2,5867 & 2,5623 & 2,5374 & 2,5121 & \textbf{2,5007} \\ \midrule
 USD/\newline CNH & 0,2254 & 0,2214 & 0,2113 & 0,1146 & 0,1157 & \textbf{0,1091} \\
 \end{longtable}
 }
@@ -55,11 +55,11 @@ dei parametri del modello EGARCH-t.
 \footnotesize
 \begin{longtable}{ p{0.13\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
 \toprule
-\textbf{Parametro} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+\textbf{Parametro} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/\newline CNH} \\
 \midrule
 \endfirsthead
 \toprule
-\textbf{Parametro} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+\textbf{Parametro} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/\newline CNH} \\
 \midrule
 \endhead
 \midrule
@@ -80,7 +80,7 @@ $\nu$ & 5,353*** & 5,261*** & 4,157*** & 4,622*** & 6,099*** & 4,445*** \\
 \end{longtable}
 }
 
-Il parametro di asimmetria $\theta^*$ evidenzia l'effetto leva per GM, Apple, Nucor e S\&P 500, con valori negativi e significativi: gli shock negativi aumentano la 
+Il parametro di asimmetria $\theta^*$ evidenzia l'effetto leva per GM, Apple, Nucor e SPY, con valori negativi e significativi: gli shock negativi aumentano la 
 volatilità più di quelli positivi di pari entità. Per l'oro $\theta^*$ è invece positivo (0,036), segno di un'asimmetria inversa rispetto a quella azionaria, mentre per 
 USD/CNH non è significativo.
 
@@ -90,7 +90,7 @@ compresi tra 4,2 e 6,1, indicando code pesanti, in linea con la scelta della $t$
 Il coefficiente di persistenza $\beta^*$ è prossimo a 1 per tutti gli asset (superiore a 0,96): l'\gls{emivita} degli shock va da circa 21 sedute per Apple a circa 86 
 per General Motors, a indicare un'elevata persistenza della volatilità.
 
-La Figura \ref{fig:nic-egarch} illustra l'asimmetria attraverso le \emph{News Impact Curve}. Per Apple e S\&P 500 (Sezione \ref{sec:nic}) il ramo sinistro è molto più 
+La Figura \ref{fig:nic-egarch} illustra l'asimmetria attraverso le \emph{News Impact Curve}. Per Apple e SPY (Sezione \ref{sec:nic}) il ramo sinistro è molto più 
 ripido del destro, come per GM e Nucor (in Appendice) ma con effetto più moderato, coerentemente con $\theta^* < 0$: le cattive notizie aumentano la volatilità più 
 delle buone. Per l'oro avviene il contrario, con il ramo destro più alto, mentre per USD/CNH l'asimmetria è lieve.
 
@@ -152,14 +152,14 @@ moltiplicata per il numero di osservazioni: valori negativi indicano che il mode
     Nucor & 13,3 & 0,066 & 15,6 & 0,029 & 0,109 & -1,6 & 39,6 \\ \midrule
     GM & 3,6 & 0,823 & 4,3 & 0,746 & 0,746 & 9,7 & 51,0 \\ \midrule
     Apple & 17,0 & 0,018 & 17,4 & 0,015 & 0,075 & -3,4 & 37,9 \\ \midrule
-    S\&P 500 & 17,3 & 0,016 & 15,4 & 0,031 & 0,109 & -1,4 & 39,8 \\ \midrule
+    S\&P 500 (SPY) & 17,3 & 0,016 & 15,4 & 0,031 & 0,109 & -1,4 & 39,8 \\ \midrule
     USD/\newline CNH & 16,0 & 0,026 & 15,8 & 0,027 & 0,109 & -1,8 & 39,7 \\
 \end{longtable}
 }
 
 Per l'oro entrambi i test LR e Wald classico rifiutano l'ipotesi nulla, il risultato resta significativo al 5\% dopo la correzione di Holm e l'AIC preferisce il modello 
 con \emph{dummy}. Per Apple l'evidenza è intermedia: il \emph{p-value} dell'LR di 0,015 diventa 0,075 dopo Holm (restando significativo al 10\%) e la riduzione dell'AIC (-3,4) 
-segnala una preferenza più netta per il modello con \emph{dummy}. Per S\&P 500 e USD/CNH i test rifiutano $H_0$ al 5\% senza correzione, mentre per Nucor il rifiuto si 
+segnala una preferenza più netta per il modello con \emph{dummy}. Per SPY e USD/CNH i test rifiutano $H_0$ al 5\% senza correzione, mentre per Nucor il rifiuto si 
 osserva solo con l'LR. La correzione rende i \emph{p-value} di questi tre asset non significativi al 5\% e l'AIC considera i due modelli quasi equivalenti. 
 
 Per General Motors gli eventi non mostrano alcuna significatività congiunta e la loro inclusione peggiora il modello. Il BIC preferisce sempre il modello senza \emph{dummy} 
@@ -176,11 +176,11 @@ robusto è riportato in Appendice.
 \footnotesize
 \begin{longtable}{ p{0.14\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.09\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
     \toprule
-    \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+    \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/\newline CNH} \\
     \midrule
     \endfirsthead
     \toprule
-    \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+    \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/\newline CNH} \\
     \midrule
     \endhead
     \midrule
@@ -203,7 +203,7 @@ robusto è riportato in Appendice.
 }
 
 L'effetto maggiore si verifica nel \emph{Liberation Day}, con un aumento significativo ed elevato della volatilità per cinque asset, mentre per General Motors il segno è positivo 
-ma non significativo. Un aumento significativo si osserva anche in corrispondenza della crisi delle terre rare per oro, Nucor e S\&P 500.
+ma non significativo. Un aumento significativo si osserva anche in corrispondenza della crisi delle terre rare per oro, Nucor e SPY.
 
 Gli eventi di distensione hanno per lo più segno negativo, l'accordo di Busan è associato a una diminuzione della volatilità prevista per Apple e, al 10\%, per Nucor, 
 mentre per il vertice di Ginevra nessun coefficiente è significativo. Per l'anti Fentanyl e la sentenza della Corte Suprema non emerge evidenza di un effetto stabile, 
@@ -214,9 +214,9 @@ pochi giorni dal \emph{Liberation Day} e la persistenza è prossima a 1, il mode
 
 
 \subsection{Traiettoria della volatilità}
-La Figura \ref{fig:sigma-main} confronta la volatilità condizionata stimata con (linea continua) e senza \emph{dummy} (linea tratteggiata) per S\&P 500, Oro e Apple, 
+La Figura \ref{fig:sigma-main} confronta la volatilità condizionata stimata con (linea continua) e senza \emph{dummy} (linea tratteggiata) per SPY, Oro e Apple, 
 rappresentata su scala logaritmica. Con le \emph{dummy} $\sigma_t$ reagisce in corrispondenza dell'annuncio, mentre senza \emph{dummy} il modello risponde con un giorno 
-di ritardo e in proporzione al rendimento realizzato. L'evento del \emph{Liberation Day} è il più evidente, dove la volatilità dell'S\&P 500 passa da circa 1,3 a 10 punti 
+di ritardo e in proporzione al rendimento realizzato. L'evento del \emph{Liberation Day} è il più evidente, dove la volatilità dell'SPY passa da circa 1,3 a 10 punti 
 percentuali, per poi ridursi con l'\emph{escalation} del 9 aprile, in cui il coefficiente negativo corregge l'effetto del primo shock. 
 Per l'oro un movimento simile si verifica anche per la crisi delle terre rare e l'accordo di Busan.
 
@@ -227,7 +227,7 @@ L'analisi grafica per i restanti asset (Nucor, GM e USD/CNH) è riportata in App
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{fig_sigma.png}
-    \caption[Confronto modelli EGARCH con e senza dummy (S\&P 500, Oro, Apple)]{Confronto dei modelli EGARCH con e senza dummy (S\&P 500, Oro, Apple).}
+    \caption[Confronto modelli EGARCH con e senza dummy (S\&P 500 (SPY), Oro, Apple)]{Confronto dei modelli EGARCH con e senza dummy (S\&P 500 (SPY), Oro, Apple).}
     \label{fig:sigma-main}
 \end{figure}
 
@@ -273,7 +273,7 @@ nulla giustificava il ricorso ai modelli GARCH, qui l'ipotesi nulla è che il mo
     Nucor & 0,7167 & 0,2173 & 0,8679 & 0,8958 & 0,3618 & 0,8714 & 0,8752 \\ \midrule
     GM & 0,9419 & 0,5786 & 0,4471 & 0,6686 & 0,0709 & 0,4635 & 0,6858 \\ \midrule
     Apple & 0,6186 & 0,3163 & 0,8943 & 0,9303 & 0,7294 & 0,8980 & 0,9301 \\ \midrule
-    S\&P 500 & 0,4585 & 0,4008 & 0,3276 & 0,5879 & 0,1965 & 0,3266 & 0,6042 \\ \midrule
+    S\&P 500 (SPY) & 0,4585 & 0,4008 & 0,3276 & 0,5879 & 0,1965 & 0,3266 & 0,6042 \\ \midrule
     USD/\newline CNH & 0,0551 & 0,1080 & 0,6584 & 0,6469 & 0,1041 & 0,6680 & 0,6188 \\
 \end{longtable}
 }
@@ -296,7 +296,7 @@ della media costante risulta adeguato, in linea con la scelta discussa nella Sez
 
 La Figura \ref{fig:qqplot-residui} confronta i quantili dei residui standardizzati con quelli della $t$ di Student standardizzata con $\nu$ stimato. 
 Per oro, Nucor, GM, Apple e USD/CNH i punti si dispongono lungo la retta, con scostamenti limitati a pochi valori estremi, confermando che la distribuzione $t$ di 
-Student descrive adeguatamente lo spessore delle code. Il caso meno soddisfacente riguarda l'S\&P 500, in cui la coda sinistra risulta più pesante e la 
+Student descrive adeguatamente lo spessore delle code. Il caso meno soddisfacente riguarda l'SPY, in cui la coda sinistra risulta più pesante e la 
 destra più leggera rispetto alla distribuzione teorica di riferimento, segno di un'asimmetria residua che una distribuzione simmetrica non può catturare.
 
 
@@ -337,27 +337,27 @@ la guerra commerciale del 2018--19 e la fase COVID e altri momenti rilevanti, co
     \label{tab:confronto-correlazioni}
     \endlastfoot
 
-    S\&P 500 - Oro & 0,028 & 0,166 & 0,138 & 2,60 & 0,009 \\ \midrule
-    S\&P 500 - USD/CNH & -0,238 & -0,278 & -0,040 & -0,79 & 0,427 \\ \midrule
+    S\&P 500 (SPY) - Oro & 0,028 & 0,166 & 0,138 & 2,60 & 0,009 \\ \midrule
+    S\&P 500 (SPY) - USD/CNH & -0,238 & -0,278 & -0,040 & -0,79 & 0,427 \\ \midrule
     Nucor - GM & 0,396 & 0,220 & -0,176 & -3,65 & $<0,001$ \\
 \end{longtable}
 }
 
 La Tabella \ref{tab:confronto-correlazioni} mostra risposte eterogenee nel passaggio dalla fase pre-dazi (2016--2024) a quella dei dazi (2025--2026). La correlazione 
-tra S\&P 500 e oro aumenta da 0,028 a 0,166 e la differenza è statisticamente significativa ($p = 0,009$).
+tra SPY e oro aumenta da 0,028 a 0,166 e la differenza è statisticamente significativa ($p = 0,009$).
 
-Per Nucor e GM la correlazione si riduce da 0,396 a 0,220 e la riduzione è altamente significativa ($p < 0,001$). La coppia S\&P 500-USD/CNH resta invece moderatamente 
+Per Nucor e GM la correlazione si riduce da 0,396 a 0,220 e la riduzione è altamente significativa ($p < 0,001$). La coppia S\&P 500 (SPY)-USD/CNH resta invece moderatamente 
 negativa e la variazione non è statisticamente distinguibile da zero ($p = 0,427$): in media, il legame tra il cambio e l'azionario statunitense non cambia. 
 Questi valori rappresentano le medie dell'intero periodo e non mostrano come la correlazione cambi nel tempo; per questo si passa ai grafici \emph{rolling}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{grafico_sp500_oro.png}
-    \caption[Correlazione rolling S\&P 500-Oro]{Correlazione \emph{rolling} a 62 sedute tra S\&P 500 e Oro.}
+    \caption[Correlazione rolling S\&P 500 (SPY)-Oro]{Correlazione \emph{rolling} a 62 sedute tra S\&P 500 (SPY) e Oro.}
     \label{fig:corr-sp500-oro}
 \end{figure}
 
-Il grafico in Figura \ref{fig:corr-sp500-oro} mostra la correlazione \emph{rolling} a 62 sedute tra S\&P 500 e oro. Nel periodo pre-dazi la relazione alterna fasi di 
+Il grafico in Figura \ref{fig:corr-sp500-oro} mostra la correlazione \emph{rolling} a 62 sedute tra SPY e oro. Nel periodo pre-dazi la relazione alterna fasi di 
 correlazione prossima a zero o negativa, coerenti con il ruolo di bene rifugio, a fasi di crescita moderata, con occasionali uscite dalle bande. All'inizio del 2025 
 la correlazione presenta una forte discesa, per poi risalire rapidamente fino al massimo dell'intero campione nel 2026. Il rialzo suggerisce che, in una fase degli shock, 
 oro e azionario abbiano risposto a fattori comuni, con una possibile riduzione del beneficio di diversificazione dell'oro nei momenti di stress.
@@ -365,12 +365,12 @@ oro e azionario abbiano risposto a fattori comuni, con una possibile riduzione d
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{grafico_sp500_cnh.png}
-    \caption[Correlazione rolling S\&P 500-USD/CNH]{Correlazione \emph{rolling} a 62 sedute tra S\&P 500 e USD/CNH.}
+    \caption[Correlazione rolling S\&P 500 (SPY)-USD/CNH]{Correlazione \emph{rolling} a 62 sedute tra S\&P 500 (SPY) e USD/CNH.}
     \label{fig:corr-sp500-usdcnh}
 \end{figure}
 
 Il grafico in Figura \ref{fig:corr-sp500-usdcnh} verifica se il cambio USD/CNH segue l'andamento del mercato azionario statunitense. Poiché un aumento di USD/CNH indica 
-un indebolimento della moneta cinese, una correlazione negativa significa che a ribassi dell'S\&P 500 si accompagna un deprezzamento della valuta cinese.
+un indebolimento della moneta cinese, una correlazione negativa significa che a ribassi dell'SPY si accompagna un deprezzamento della valuta cinese.
 
 Fino alla fine del 2024 la correlazione resta prevalentemente negativa; poco prima del periodo dei dazi torna positiva, superando la banda superiore, ma con i primi annunci 
 del 2025 inizia a scendere fino a un minimo di circa $-0,7$ nel 2026. Ciò non è in contrasto con la stabilità della media riportata in tabella, che nasconde una forte 

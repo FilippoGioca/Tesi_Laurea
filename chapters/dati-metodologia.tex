@@ -124,7 +124,7 @@ di mercato più completa in vista dell'entrata in vigore dei dazi fissata per il
 
 Per quantificare l'impatto immediato di questi eventi viene osservata la reazione di mercato a ridosso degli annunci. La Tabella \ref{tab:rendimenti-cumulati} riporta 
 il log-rendimento cumulato (\%) nelle due sedute della finestra di ciascun evento. Il \emph{Liberation Day} (2 aprile) causa i ribassi maggiori 
-(Nucor $-17,6\%$, Apple $-17,3\%$, S\&P 500 $-11,1\%$), mentre l'\emph{escalation} del 9 aprile coincide con forti rialzi per tutti gli strumenti tranne USD/CNH, 
+(Nucor $-17,6\%$, Apple $-17,3\%$, SPY $-11,1\%$), mentre l'\emph{escalation} del 9 aprile coincide con forti rialzi per tutti gli strumenti tranne USD/CNH, 
 dovuti alla sospensione dei dazi reciproci e alla nuova tariffa verso la Cina.
 
 Le reazioni sono eterogenee per segno e dimensione, infatti lo stesso evento provoca reazioni diverse a seconda dello strumento finanziario.
@@ -134,7 +134,7 @@ Le reazioni sono eterogenee per segno e dimensione, infatti lo stesso evento pro
     \footnotesize
     \begin{tabular}{ p{0.16\textwidth} p{0.10\textwidth} p{0.10\textwidth} p{0.10\textwidth} p{0.10\textwidth} p{0.10\textwidth} p{0.10\textwidth} }
         \toprule
-        \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \begin{tabular}{@{}c@{}}\textbf{S\&P 500}\\\textbf{(SPY)}\end{tabular} & \textbf{USD/\newline CNH} \\
+        \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \begin{tabular}{@{}c@{}}\textbf{S\&P 500 (SPY)}\\\textbf{(SPY)}\end{tabular} & \textbf{USD/\newline CNH} \\
         \midrule
         1° febbraio & 1,45 & 1,84 & -1,82 & -1,37 & -0,01 & -0,46 \\ \midrule
         2 aprile & -3,12 & -17,56 & -8,25 & -17,27 & -11,09 & 0,00 \\ \midrule
@@ -213,11 +213,11 @@ di stazionarietà e normalità.
 \footnotesize
 \begin{longtable}{ p{0.15\textwidth} p{0.10\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.10\textwidth} }
 \toprule
-\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/\newline CNH} \\
 \midrule
 \endfirsthead
 \toprule
-\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/\newline CNH} \\
 \midrule
 \endhead
 \midrule
@@ -254,15 +254,15 @@ dai titoli azionari del settore siderurgico e automobilistico, con General Motor
 
 Questa elevata volatilità si riflette anche nei valori estremi: General Motors registra il log-rendimento minimo più basso (-19,02\%), seguita da Nucor (-15,68\%) e 
 Apple (-13,77\%). Questi minimi si concentrano nella fase più acuta della pandemia (16-18 marzo 2020) e sono quindi estranei all'\emph{escalation} tariffaria del 2025-2026, 
-mentre i massimi di Apple e dell'S\&P 500 coincidono con l'annuncio del 9 aprile 2025. Le statistiche della Tabella \ref{tab:stat-descrittive} sono calcolate sull'intero 
+mentre i massimi di Apple e dell'SPY coincidono con l'annuncio del 9 aprile 2025. Le statistiche della Tabella \ref{tab:stat-descrittive} sono calcolate sull'intero 
 campione e incorporano tutti gli episodi di stress che lo attraversano, non solo quelli tariffari: la deviazione standard e la curtosi non possono quindi essere attribuite 
 solamente agli eventi oggetto di studio, e per isolarne l'effetto serve un modello che distingua gli annunci dalle fluttuazioni ordinarie.
 
-L'asimmetria è negativa per tutte le serie ed è particolarmente marcata per l'oro (-0,61), l'S\&P 500 (-0,59) e l'USD/CNH (-0,42): la coda sinistra della distribuzione 
+L'asimmetria è negativa per tutte le serie ed è particolarmente marcata per l'oro (-0,61), l'SPY (-0,59) e l'USD/CNH (-0,42): la coda sinistra della distribuzione 
 incondizionata è più estesa di quella destra. Per i titoli azionari è invece modesta (da -0,05 per General Motors a -0,17 per Nucor). Questa caratteristica non va confusa 
 con l'effetto leva, che riguarda la risposta della volatilità condizionata agli shock e verrà analizzato con le stime dei modelli.
 
-Infine, per tutti gli asset la curtosi in eccesso è positiva (nulla per la distribuzione normale) e compresa tra 4,76 e 14,87, con il valore più alto per l'S\&P 500: 
+Infine, per tutti gli asset la curtosi in eccesso è positiva (nulla per la distribuzione normale) e compresa tra 4,76 e 14,87, con il valore più alto per l'SPY: 
 le distribuzioni sono quindi leptocurtiche.
 
 \begin{longtable}{ p{0.30\textwidth} p{0.30\textwidth} p{0.30\textwidth} }
@@ -291,7 +291,7 @@ Oro & 6074,61 & $< 0,001$ \\ \midrule
 Nucor & 2550,07 & $< 0,001$ \\ \midrule
 GM & 5683,93 & $< 0,001$ \\ \midrule
 Apple & 4770,88 & $< 0,001$ \\ \midrule
-S\&P 500 & 24884,11 & $< 0,001$ \\ \midrule
+S\&P 500 (SPY) & 24884,11 & $< 0,001$ \\ \midrule
 USD/CNH & 2855,94 & $< 0,001$ \\
 \end{longtable}
 
@@ -305,7 +305,7 @@ USD/CNH & 2855,94 & $< 0,001$ \\
         Nucor & -2,27 & 0,461 & -13,66 & $< 0,01$ \\ \midrule
         GM & -2,35 & 0,428 & -13,55 & $< 0,01$ \\ \midrule
         Apple & -2,34 & 0,434 & -13,59 & $< 0,01$ \\ \midrule
-        S\&P 500 & -3,27 & 0,075 & -14,04 & $< 0,01$ \\ \midrule
+        S\&P 500 (SPY) & -3,27 & 0,075 & -14,04 & $< 0,01$ \\ \midrule
         USD/CNH & -1,95 & 0,597 & -12,58 & $< 0,01$ \\
         \bottomrule
     \end{tabular}
@@ -324,7 +324,7 @@ già evidenziate nell'analisi descrittiva.
 
 Per verificare la condizione di stazionarietà richiesta dai modelli GARCH, è stato applicato il test Augmented Dickey-Fuller (ADF). Come evidenziato nella 
 Tabella \ref{tab:test-adf}, il test condotto sui log-prezzi non permette di rifiutare l'ipotesi nulla di radice unitaria al livello di significatività del 5\% per nessuna 
-delle serie analizzate; nel caso dell'S\&P 500, il \emph{p-value} (0,075) rifiuterebbe a un livello di significatività del 10\%, ma non a quello considerato. 
+delle serie analizzate; nel caso dell'SPY, il \emph{p-value} (0,075) rifiuterebbe a un livello di significatività del 10\%, ma non a quello considerato. 
 Tale risultato è coerente con la non stazionarietà dei prezzi. 
 
 Passando invece al test sui rendimenti, la statistica del test restituisce per tutti gli asset un \emph{p-value} inferiore a 0,01. Questo porta a rifiutare l'ipotesi nulla, 
@@ -344,7 +344,7 @@ tre strumenti del paniere selezionato, mentre i grafici per gli asset rimanenti 
     \centering
     % Inserisci qui il nome del file immagine
     \includegraphics[width=\textwidth]{Finalbord3x2.png}
-    \caption[Prezzi di chiusura e log-rendimenti]{Prezzi di chiusura e log-rendimenti giornalieri per S\&P 500, Apple e USD/CNH.}
+    \caption[Prezzi di chiusura e log-rendimenti]{Prezzi di chiusura e log-rendimenti giornalieri per S\&P 500 (SPY), Apple e USD/CNH.}
     \label{fig:prezzi-rendimenti}
 \end{figure}
 
@@ -361,7 +361,7 @@ Questo comportamento corrisponde al fenomeno del \emph{volatility clustering}, d
 
 \subsection{Autocorrelazione e test di Ljung-Box}
 Si procede poi con l'analisi della Funzione di Autocorrelazione (ACF). Dai correlogrammi dei log-rendimenti emerge, per tutti gli asset, una dipendenza seriale lineare di 
-ampiezza contenuta, con poche autocorrelazioni che superano le bande di confidenza, concentrate nei primi ritardi, in particolar modo nell'S\&P 500.
+ampiezza contenuta, con poche autocorrelazioni che superano le bande di confidenza, concentrate nei primi ritardi, in particolar modo nell'SPY.
 
 \begin{figure}[htbp]
     \centering
@@ -372,8 +372,8 @@ ampiezza contenuta, con poche autocorrelazioni che superano le bande di confiden
 \end{figure}
 
 Il test di Ljung-Box (Tabella \ref{tab:ljung-box}) sui log-rendimenti indica che tale dipendenza, seppur debole, è statisticamente significativa: a 5 ritardi l'ipotesi nulla 
-di assenza di autocorrelazione è rifiutata per S\&P 500 e USD/CNH (all'1\%) e per Apple (al 5\%), mentre a 10 ritardi è rifiutata per tutti e sei gli strumenti (\emph{p-value} $< 0,01$). 
-La statistica più elevata si osserva per l'S\&P 500 ($Q(10) = 210,3$), verosimilmente per l'influenza dei periodi di forte volatilità. 
+di assenza di autocorrelazione è rifiutata per SPY e USD/CNH (all'1\%) e per Apple (al 5\%), mentre a 10 ritardi è rifiutata per tutti e sei gli strumenti (\emph{p-value} $< 0,01$). 
+La statistica più elevata si osserva per l'SPY ($Q(10) = 210,3$), verosimilmente per l'influenza dei periodi di forte volatilità. 
 Poiché il test assume varianza costante e in presenza di effetti ARCH tende a sovrastimare la significatività, questi risultati vanno considerati come evidenza di una 
 lieve dipendenza lineare. 
 
@@ -385,12 +385,12 @@ caratteristiche empiriche conferma la presenza di eteroschedasticità condiziona
 \small
 \begin{longtable}{ p{0.14\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
 \toprule
-\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/\newline CNH} \\
 \midrule
 \endfirsthead
 
 \toprule
-\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/\newline CNH} \\
 \midrule
 \endhead
 
@@ -428,12 +428,12 @@ il passaggio dai modelli lineari classici alle specifiche della famiglia GARCH.
 \small
 \begin{longtable}{ p{0.14\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
 \toprule
-\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/\newline CNH} \\
 \midrule
 \endfirsthead
 
 \toprule
-\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500} & \textbf{USD/\newline CNH} \\
+\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/\newline CNH} \\
 \midrule
 \endhead
 

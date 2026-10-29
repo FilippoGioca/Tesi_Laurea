@@ -86,7 +86,7 @@ dove sono stati mostrati solo S\&P 500, Apple e USD/CNH.
 \newpage
 \section{Funzione di autocorrelazione (ACF) e ACF dei residui al quadrato}
 \label{app:acf}
-Di seguito sono riportate le ACF dei log-rendimenti e le ACF dei residui al quadrato ($r_t^2$) degli asset analizzati, a integrazione della Figura~\ref{fig:acf-plot}.
+Di seguito sono riportate le ACF dei log-rendimenti e dei log-rendimenti al quadrato degli asset analizzati, a integrazione della Figura~\ref{fig:acf-plot}.
 
 \begin{figure}[H]
     \centering
@@ -106,7 +106,7 @@ Di seguito sono riportate le ACF dei log-rendimenti e le ACF dei residui al quad
         \includegraphics[width=\linewidth]{ACF_Sq_Nucor.png}
     \end{subfigure}
 
-    \caption[ACF dei log-rendimenti e ACF dei residui al quadrato (Oro e Nucor)]{Funzione di Autocorrelazione (ACF) dei log-rendimenti e dei residui al quadrato ($r_t^2$) per Oro e Nucor. Le linee tratteggiate indicano le bande di confidenza al 95\%.}
+    \caption[ACF dei log-rendimenti e ACF dei log-rendimenti al quadrato (Oro e Nucor)]{Funzione di Autocorrelazione (ACF) dei log-rendimenti e log-rendimenti al quadrato per Oro e Nucor. Le linee tratteggiate indicano le bande di confidenza al 95\%.}
     \label{fig:app-acf-1}
 \end{figure}
 
@@ -128,7 +128,7 @@ Di seguito sono riportate le ACF dei log-rendimenti e le ACF dei residui al quad
         \includegraphics[width=\linewidth]{ACF_Sq_Apple.png}
     \end{subfigure}
 
-    \caption[ACF dei log-rendimenti e ACF dei residui al quadrato (GM e Apple)]{Funzione di Autocorrelazione (ACF) dei log-rendimenti e dei residui al quadrato ($r_t^2$) per GM e Apple. Le linee tratteggiate indicano le bande di confidenza al 95\%.}
+    \caption[ACF dei log-rendimenti e dei log-rendimenti al quadrato (GM e Apple)]{Funzione di Autocorrelazione (ACF) dei log-rendimenti e dei log-rendimenti al quadrato per GM e Apple. Le linee tratteggiate indicano le bande di confidenza al 95\%.}
     \label{fig:app-acf-2}
 \end{figure}
 
@@ -259,8 +259,8 @@ USD/\newline CNH & 335,5 & 318,5 & 290,3 & 21,2 & 18,4 & 0 \\
 \section{Test di significatività e stime con covarianza robusta}
 \label{app:stime-robuste}
 Di seguito vengono riportati, a fini comparativi rispetto alla Tabella \ref{tab:test-congiunti} e alla Tabella \ref{tab:var-volatilita}, i risultati calcolati 
-impiegando la matrice di covarianza robusta. L'esiguità delle osservazioni non nulle per le variabili \emph{dummy} (solamente due giorni per evento) compromette le proprietà 
-asintotiche dello stimatore di Bollerslev-Wooldridge, generando statistiche di Wald palesemente sovradimensionate e instabili.
+impiegando la matrice di covarianza robusta. Il numero ridotto delle osservazioni non nulle per le variabili \emph{dummy} (solamente due giorni per evento) rende inaffidabile  
+lo stimatore di Bollerslev-Wooldridge, generando statistiche di Wald sovradimensionate e poco attendibili.
 
 {
 \footnotesize

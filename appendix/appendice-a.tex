@@ -84,7 +84,7 @@ dove sono stati mostrati solo SPY, Apple e USD/CNH.
  
 
 \newpage
-\section{Funzione di autocorrelazione (ACF) e ACF dei residui al quadrato}
+\section{Funzione di autocorrelazione (ACF)}
 \label{app:acf}
 Di seguito sono riportate le ACF dei log-rendimenti e dei log-rendimenti al quadrato degli asset analizzati, a integrazione della Figura~\ref{fig:acf-plot}.
 
@@ -196,64 +196,45 @@ USD/\newline CNH & 0,2020 & 0,1958 & 0,1857 & 0,0890 & 0,0880 & 0,0814 \\
 \end{longtable}
 }
 
-{
-\footnotesize
-\begin{longtable}{ p{0.13\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
-\toprule
-\textbf{Asset} & \textbf{sGARCH\newline norm} & \textbf{GJR\newline norm} & \textbf{EGARCH\newline norm} & \textbf{sGARCH\newline std} & \textbf{GJR\newline std} & \textbf{EGARCH\newline std} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Asset} & \textbf{sGARCH\newline norm} & \textbf{GJR\newline norm} & \textbf{EGARCH\newline norm} & \textbf{sGARCH\newline std} & \textbf{GJR\newline std} & \textbf{EGARCH\newline std} \\
-\midrule
-\endhead
-\midrule
-\noalign{\vspace{10pt}}
-\caption[]{Differenziale dBIC.} \\
-\endfoot
-\bottomrule
-\noalign{\vspace{10pt}}
-\caption{Differenziale del BIC rispetto al modello ottimale (dBIC).}
-\label{tab:app-dbic-completa}
-\endlastfoot
-Oro & 202,3 & 176,0 & 163,4 & 28,8 & 18,3 & 0 \\ \midrule
-Nucor & 259,8 & 252,6 & 214,0 & 21,1 & 21,7 & 0 \\ \midrule
-GM & 332,0 & 319,5 & 251,5 & 33,1 & 22,7 & 0 \\ \midrule
-Apple & 339,0 & 279,6 & 222,6 & 57,0 & 27,6 & 0 \\ \midrule
-S\&P 500 (SPY) & 296,9 & 230,3 & 165,1 & 98,2 & 30,6 & 0 \\ \midrule
-USD/\newline CNH & 323,7 & 312,5 & 284,4 & 15,3 & 18,4 & 0 \\
-\end{longtable}
-}
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \begin{tabular}{ p{0.13\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
+        \toprule
+        \textbf{Asset} & \textbf{sGARCH\newline norm} & \textbf{GJR\newline norm} & \textbf{EGARCH\newline norm} & \textbf{sGARCH\newline std} & \textbf{GJR\newline std} & \textbf{EGARCH\newline std} \\
+        \midrule
+        Oro & 202,3 & 176,0 & 163,4 & 28,8 & 18,3 & 0 \\ \midrule
+        Nucor & 259,8 & 252,6 & 214,0 & 21,1 & 21,7 & 0 \\ \midrule
+        GM & 332,0 & 319,5 & 251,5 & 33,1 & 22,7 & 0 \\ \midrule
+        Apple & 339,0 & 279,6 & 222,6 & 57,0 & 27,6 & 0 \\ \midrule
+        S\&P 500 (SPY) & 296,9 & 230,3 & 165,1 & 98,2 & 30,6 & 0 \\ \midrule
+        USD/\newline CNH & 323,7 & 312,5 & 284,4 & 15,3 & 18,4 & 0 \\
+        \bottomrule
+    \end{tabular}
+    \vspace{5pt}
+    \caption[Differenziale dBIC]{Differenziale del BIC rispetto al modello ottimale (dBIC).}
+    \label{tab:app-dbic-completa}
+\end{table}
 
-{
-\footnotesize
-\begin{longtable}{ p{0.13\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
-\toprule
-\textbf{Asset} & \textbf{sGARCH\newline norm} & \textbf{GJR\newline norm} & \textbf{EGARCH\newline norm} & \textbf{sGARCH\newline std} & \textbf{GJR\newline std} & \textbf{EGARCH\newline std} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Asset} & \textbf{sGARCH\newline norm} & \textbf{GJR\newline norm} & \textbf{EGARCH\newline norm} & \textbf{sGARCH\newline std} & \textbf{GJR\newline std} & \textbf{EGARCH\newline std} \\
-\midrule
-\endhead
-\midrule
-\noalign{\vspace{10pt}}
-\caption[]{Differenziale dAIC.} \\
-\endfoot
-\bottomrule
-\noalign{\vspace{10pt}}
-\caption{Differenziale dell'AIC rispetto al modello ottimale (dAIC).}
-\label{tab:app-daic-completa}
-\endlastfoot
-Oro & 214,2 & 181,9 & 169,3 & 34,7 & 18,3 & 0 \\ \midrule
-Nucor & 271,6 & 258,5 & 219,9 & 27,0 & 21,7 & 0 \\ \midrule
-GM & 343,8 & 325,4 & 257,4 & 39,0 & 22,7 & 0 \\ \midrule
-Apple & 350,8 & 285,5 & 228,5 & 62,9 & 27,6 & 0 \\ \midrule
-S\&P 500 (SPY) & 308,7 & 236,2 & 171,0 & 104,1 & 30,6 & 0 \\ \midrule
-USD/\newline CNH & 335,5 & 318,5 & 290,3 & 21,2 & 18,4 & 0 \\
-\end{longtable}
-}
-
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \begin{tabular}{ p{0.13\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
+        \toprule
+        \textbf{Asset} & \textbf{sGARCH\newline norm} & \textbf{GJR\newline norm} & \textbf{EGARCH\newline norm} & \textbf{sGARCH\newline std} & \textbf{GJR\newline std} & \textbf{EGARCH\newline std} \\
+        \midrule
+        Oro & 214,2 & 181,9 & 169,3 & 34,7 & 18,3 & 0 \\ \midrule
+        Nucor & 271,6 & 258,5 & 219,9 & 27,0 & 21,7 & 0 \\ \midrule
+        GM & 343,8 & 325,4 & 257,4 & 39,0 & 22,7 & 0 \\ \midrule
+        Apple & 350,8 & 285,5 & 228,5 & 62,9 & 27,6 & 0 \\ \midrule
+        S\&P 500 (SPY) & 308,7 & 236,2 & 171,0 & 104,1 & 30,6 & 0 \\ \midrule
+        USD/\newline CNH & 335,5 & 318,5 & 290,3 & 21,2 & 18,4 & 0 \\
+        \bottomrule
+    \end{tabular}
+    \vspace{5pt}
+    \caption[Differenziale dAIC]{Differenziale dell'AIC rispetto al modello ottimale (dAIC).}
+    \label{tab:app-daic-completa}
+\end{table}
 
 \newpage
 \section{Test di significatività e stime con covarianza robusta}
@@ -291,35 +272,26 @@ lo stimatore di Bollerslev-Wooldridge, generando statistiche di Wald sovradimens
 \end{longtable}
 }
 
-{
-\footnotesize
-\begin{longtable}{ p{0.16\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
-    \toprule
-    \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/\newline CNH} \\
-    \midrule
-    \endfirsthead
-    \toprule
-    \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/\newline CNH} \\
-    \midrule
-    \endhead
-    \midrule
-    \noalign{\vspace{10pt}}
-    \caption[]{Coefficienti logaritmici puri ($\lambda_k$) con standard error robusti.} \\
-    \endfoot
-    \bottomrule
-    \noalign{\vspace{10pt}}
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \begin{tabular}{ p{0.16\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} }
+        \toprule
+        \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/\newline CNH} \\
+        \midrule
+        Anti Fentanyl & -0,045 & 0,349*** & -0,131 & -0,011 & -0,235 & -0,249 \\ \midrule
+        Liberation Day & 0,928*** & 1,559*** & 0,765*** & 2,203*** & 1,994*** & 1,657*** \\ \midrule
+        Escalation & 0,131 & -1,446*** & -0,903*** & -1,191*** & -0,863** & -0,868*** \\ \midrule
+        Vertice Ginevra & -0,308* & -0,151 & -0,089 & -0,411** & 0,103 & -0,544*** \\ \midrule
+        Terre Rare & 0,822*** & 0,589*** & 0,214 & 0,560*** & 0,963*** & -0,181 \\ \midrule
+        Accordo Busan & -0,501** & -0,536*** & -0,115 & -0,871*** & 0,125 & -0,037 \\ \midrule
+        Sentenza CS & 0,198 & -0,106 & -0,016 & -0,307** & 0,100 & 0,701*** \\
+        \bottomrule
+    \end{tabular}
+    \vspace{5pt}
     \caption[Coefficienti logaritmici puri ($\lambda_k$) dell'equazione della varianza condizionata.]{Coefficienti logaritmici puri ($\lambda_k$) dell'equazione della varianza condizionata. \newline Note: *, **, *** indicano significatività al 10\%, 5\% e 1\% (basata su errori standard robusti).}
     \label{tab:app-coeff-robusti}
-    \endlastfoot
-    Anti Fentanyl & -0,045 & 0,349*** & -0,131 & -0,011 & -0,235 & -0,249 \\ \midrule
-    Liberation Day & 0,928*** & 1,559*** & 0,765*** & 2,203*** & 1,994*** & 1,657*** \\ \midrule
-    Escalation & 0,131 & -1,446*** & -0,903*** & -1,191*** & -0,863** & -0,868*** \\ \midrule
-    Vertice Ginevra & -0,308* & -0,151 & -0,089 & -0,411** & 0,103 & -0,544*** \\ \midrule
-    Terre Rare & 0,822*** & 0,589*** & 0,214 & 0,560*** & 0,963*** & -0,181 \\ \midrule
-    Accordo Busan & -0,501** & -0,536*** & -0,115 & -0,871*** & 0,125 & -0,037 \\ \midrule
-    Sentenza CS & 0,198 & -0,106 & -0,016 & -0,307** & 0,100 & 0,701*** \\
-\end{longtable}
-}
+\end{table}
 
 \newpage
 % immagini in riferimento al capitolo 5

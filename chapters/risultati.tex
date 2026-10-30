@@ -97,9 +97,8 @@ delle buone. Per l'oro avviene il contrario, con il ramo destro più alto, mentr
 Il confronto con il GARCH mostra che la parabola simmetrica sovrastima l'effetto degli shock positivi sulle azioni e quello degli shock negativi sull'oro. GJR-GARCH ed EGARCH 
 producono curve simili, con il GJR generalmente più ripido nel ramo sinistro.
 
-Per shock negativi molto grandi, la natura esponenziale della curva fa sì che la volatilità prevista possa superare quella degli altri modelli analizzati, perché per 
-valori elevati dello shock una funzione esponenziale cresce più di una parabola. Poiché l'esponente è lineare nello shock, per valori sufficientemente grandi la curva 
-dell'EGARCH cresce più di una parabola e supera quella degli altri modelli, anche se con i parametri stimati ciò avviene oltre l'intervallo di shock osservato.
+Come anticipato nella Sezione \ref{sec:nic}, la natura esponenziale dell'EGARCH permetterebbe alla curva di superare gli altri modelli in presenza di 
+shock estremi; tuttavia, con i parametri stimati per Apple, oro e USD/CNH, tale sorpasso non si verifica all'interno dell'intervallo di shock osservato. 
 
 \begin{figure}[H]
     \centering
@@ -195,7 +194,7 @@ robusto è riportato in Appendice.
     Anti Fentanyl & -2\% & +19\% & -6\% & -1\% & -11\% & -12\% \\ \midrule
     \emph{Liberation Day} & +59\%** & +118\%** & +47\% & +201\%*** & +171\%*** & +129\%*** \\ \midrule
     \emph{Escalation} & +7\% & -51\%** & -36\% & -45\%* & -35\% & -35\% \\ \midrule
-    Vertice Ginevra & -14\% & -7\% & -4\% & -19\% & +5\% & -24\% \\ \midrule
+    Vertice di Ginevra & -14\% & -7\% & -4\% & -19\% & +5\% & -24\% \\ \midrule
     Terre Rare & +51\%** & +34\%** & +11\% & +32\% & +62\%** & -9\% \\ \midrule
     Accordo Busan & -22\% & -24\%* & -6\% & -35\%** & +6\% & -2\% \\ \midrule
     Sentenza CS & +10\% & -5\% & -1\% & -14\% & +5\% & +42\%* \\
@@ -220,14 +219,14 @@ di ritardo e in proporzione al rendimento realizzato. L'evento del \emph{Liberat
 percentuali, per poi ridursi con l'\emph{escalation} del 9 aprile, in cui il coefficiente negativo corregge l'effetto del primo shock. 
 Per l'oro un movimento simile si verifica anche per la crisi delle terre rare e l'accordo di Busan.
 
-I livelli di volatilità raggiunti in queste finestre risultano superiori a quelli effettivamente realizzati, in quanto, assorbendo l'intero shock 
-all'interno di una finestra di sole due sedute, la struttura EGARCH tende a sovrastimare i picchi estremi. 
+I livelli di volatilità raggiunti in queste finestre risultano superiori a quelli effettivamente realizzati in quanto, 
+concentrando l'effetto dello shock all'interno di una finestra di sole due sedute, la specificazione con variabili dummy può sovrastimare i picchi estremi.
 L'analisi grafica per i restanti asset (Nucor, GM e USD/CNH) è riportata in Appendice alla Sezione \ref{app:sigma}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{fig_sigma.png}
-    \caption[Confronto modelli EGARCH con e senza dummy (S\&P 500 (SPY), Oro, Apple)]{Confronto dei modelli EGARCH con e senza dummy (S\&P 500 (SPY), Oro, Apple).}
+    \caption[Confronto modelli EGARCH con e senza dummy (Oro, Apple, S\&P 500 (SPY))]{Confronto dei modelli EGARCH con e senza dummy (Oro, Apple, S\&P 500 (SPY)).}
     \label{fig:sigma-main}
 \end{figure}
 
@@ -249,34 +248,25 @@ Si applicano i test della Sezione \ref{sec:analisi-esplorativa} (Ljung-Box su $z
 situazione prima e dopo la stima, mentre la distribuzione è verificata con i QQ-plot. A differenza della Sezione \ref{sec:analisi-esplorativa}, dove il rifiuto dell'ipotesi 
 nulla giustificava il ricorso ai modelli GARCH, qui l'ipotesi nulla è che il modello sia adeguato e i \emph{p-value} elevati sono quindi un esito favorevole.
 
-{
-\footnotesize
-\begin{longtable}{ p{0.10\textwidth} p{0.08\textwidth} p{0.08\textwidth} p{0.08\textwidth} p{0.08\textwidth} p{0.08\textwidth} p{0.08\textwidth} p{0.08\textwidth} }
-    \toprule
-    \textbf{Asset} & \textbf{LB $\mathbf{z_t}$ \newline (5)} & \textbf{LB $\mathbf{z_t}$ \newline (10)} & \textbf{LB $\mathbf{z_t^2}$ \newline (5)} & \textbf{LB $\mathbf{z_t^2}$ \newline (10)} & \textbf{ARCH-LM \newline (1)} & \textbf{ARCH-LM \newline (5)} & \textbf{ARCH-LM \newline (10)} \\
-    \midrule
-    \endfirsthead
-    \toprule
-    \textbf{Asset} & \textbf{LB $\mathbf{z_t}$ \newline (5)} & \textbf{LB $\mathbf{z_t}$ \newline (10)} & \textbf{LB $\mathbf{z_t^2}$ \newline (5)} & \textbf{LB $\mathbf{z_t^2}$ \newline (10)} & \textbf{ARCH-LM \newline (1)} & \textbf{ARCH-LM \newline (5)} & \textbf{ARCH-LM \newline (10)} \\
-    \midrule
-    \endhead
-    \midrule
-    \noalign{\vspace{10pt}}
-    \caption[]{\emph{p-value} dei test sui residui standardizzati.} \\
-    \endfoot
-    \bottomrule
-    \noalign{\vspace{10pt}}
-    \caption{\emph{p-value} dei test diagnostici applicati ai residui standardizzati del modello EGARCH-t.}
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \begin{tabular}{ p{0.10\textwidth} p{0.08\textwidth} p{0.08\textwidth} p{0.08\textwidth} p{0.08\textwidth} p{0.08\textwidth} p{0.08\textwidth} p{0.08\textwidth} }
+        \toprule
+        \textbf{Asset} & \textbf{LB $\mathbf{z_t}$ \newline (5)} & \textbf{LB $\mathbf{z_t}$ \newline (10)} & \textbf{LB $\mathbf{z_t^2}$ \newline (5)} & \textbf{LB $\mathbf{z_t^2}$ \newline (10)} & \textbf{ARCH-LM \newline (1)} & \textbf{ARCH-LM \newline (5)} & \textbf{ARCH-LM \newline (10)} \\
+        \midrule
+        Oro & 0,3473 & 0,3434 & 0,0099 & 0,0880 & 0,9819 & 0,0136 & 0,1054 \\ \midrule
+        Nucor & 0,7167 & 0,2173 & 0,8679 & 0,8958 & 0,3618 & 0,8714 & 0,8752 \\ \midrule
+        GM & 0,9419 & 0,5786 & 0,4471 & 0,6686 & 0,0709 & 0,4635 & 0,6858 \\ \midrule
+        Apple & 0,6186 & 0,3163 & 0,8943 & 0,9303 & 0,7294 & 0,8980 & 0,9301 \\ \midrule
+        S\&P 500 (SPY) & 0,4585 & 0,4008 & 0,3276 & 0,5879 & 0,1965 & 0,3266 & 0,6042 \\ \midrule
+        USD/\newline CNH & 0,0551 & 0,1080 & 0,6584 & 0,6469 & 0,1041 & 0,6680 & 0,6188 \\
+        \bottomrule
+    \end{tabular}
+    \vspace{5pt}
+    \caption[\emph{p-value} dei test sui residui standardizzati.]{\emph{p-value} dei test diagnostici applicati ai residui standardizzati del modello EGARCH-t.}
     \label{tab:diagnostica-residui}
-    \endlastfoot
-    Oro & 0,3473 & 0,3434 & 0,0099 & 0,0880 & 0,9819 & 0,0136 & 0,1054 \\ \midrule
-    Nucor & 0,7167 & 0,2173 & 0,8679 & 0,8958 & 0,3618 & 0,8714 & 0,8752 \\ \midrule
-    GM & 0,9419 & 0,5786 & 0,4471 & 0,6686 & 0,0709 & 0,4635 & 0,6858 \\ \midrule
-    Apple & 0,6186 & 0,3163 & 0,8943 & 0,9303 & 0,7294 & 0,8980 & 0,9301 \\ \midrule
-    S\&P 500 (SPY) & 0,4585 & 0,4008 & 0,3276 & 0,5879 & 0,1965 & 0,3266 & 0,6042 \\ \midrule
-    USD/\newline CNH & 0,0551 & 0,1080 & 0,6584 & 0,6469 & 0,1041 & 0,6680 & 0,6188 \\
-\end{longtable}
-}
+\end{table}
 
 La Tabella \ref{tab:diagnostica-residui} riporta i \emph{p-value} dei test sui residui standardizzati, che non evidenziano problemi sul modello EGARCH-t. Solamente due 
 rifiutano l'ipotesi nulla al 5\% e riguardano l'oro al ritardo 5 (Ljung-Box su $z_t^2$, $p = 0,010$, e ARCH-LM, $p = 0,014$), mentre l'ARCH-LM a 1 e a 10 ritardi non 
@@ -303,26 +293,26 @@ destra più leggera rispetto alla distribuzione teorica di riferimento, segno di
 \section{Analisi delle correlazioni rolling}
 \label{sec:correlazioni-rolling}
 Infine, si analizza la correlazione tra gli asset selezionati, limitandosi alle tre coppie la cui analisi potrebbe essere più interessante. L'analisi procede in due 
-passaggi: il primo è una tabella che confronta la correlazione nella fase pre-dazi (2016--2024) con quella del periodo dei dazi (2025--2026), riportando la differenza 
+passaggi: il primo è una tabella che confronta la correlazione nella fase pre-2025 (2016--2024) con quella del periodo dei dazi (2025--2026), riportando la differenza 
 netta tra le due e un test di Fisher per la sua significatività. 
 Il secondo è costituito da grafici della correlazione \emph{rolling} a 62 sedute (circa tre mesi di borsa), calcolata sui residui standardizzati del modello EGARCH(1,1) 
 con distribuzione $t$ di Student e \emph{dummy}, in modo da misurare i co-movimenti al netto della volatilità di ciascun asset.
 
 Le linee rosse verticali corrispondono alle date degli shock tariffari, mentre le linee orizzontali tratteggiate corrispondono al 5° e al 95° percentile della correlazione 
-nel periodo pre-dazi, delimitando l'intervallo contenente i movimenti della correlazione nel 90\% dei casi prima dei dazi. L'uscita da tale intervallo indica una relazione 
-insolita rispetto alla fase pre-dazi, ma non corrisponde a un test in quanto le finestre sovrapposte sono fortemente autocorrelate. Inoltre il periodo pre-dazi comprende 
-la guerra commerciale del 2018--19 e la fase COVID e altri momenti rilevanti, costituendo solo un riferimento e non un periodo privo di tensioni.
+nel periodo pre-2025, delimitando l'intervallo contenente i movimenti della correlazione nel 90\% dei casi prima dei dazi. L'uscita da tale intervallo indica una relazione 
+insolita rispetto alla fase pre-2025, ma non corrisponde a un test in quanto le finestre sovrapposte sono fortemente autocorrelate. Inoltre il periodo pre-2025 comprende 
+la guerra commerciale del 2018--19, la fase COVID e altri momenti rilevanti, costituendo solo un riferimento e non un periodo privo di tensioni.
 
 {
 \footnotesize
 \begin{longtable}{ l p{0.13\textwidth} p{0.12\textwidth} p{0.13\textwidth} p{0.09\textwidth} p{0.10\textwidth} }
     \toprule
-    \textbf{Coppie} & \textbf{Corr.}\newline \textbf{pre-dazi} & \textbf{Corr.}\newline \textbf{periodo}\newline \textbf{dazi} & \textbf{Differenza} & \textbf{z} & \textbf{\emph{p-value}} \\
+    \textbf{Coppie} & \textbf{Corr.}\newline \textbf{pre-2025} & \textbf{Corr.}\newline \textbf{periodo}\newline \textbf{dazi} & \textbf{Differenza} & \textbf{z} & \textbf{\emph{p-value}} \\
     \midrule
     \endfirsthead
 
     \toprule
-    \textbf{Coppie} & \textbf{Corr.}\newline \textbf{pre-dazi} & \textbf{Corr.}\newline \textbf{periodo}\newline \textbf{dazi} & \textbf{Differenza} & \textbf{z} & \textbf{\emph{p-value}} \\
+    \textbf{Coppie} & \textbf{Corr.}\newline \textbf{pre-2025} & \textbf{Corr.}\newline \textbf{periodo}\newline \textbf{dazi} & \textbf{Differenza} & \textbf{z} & \textbf{\emph{p-value}} \\
     \midrule
     \endhead
 
@@ -333,7 +323,7 @@ la guerra commerciale del 2018--19 e la fase COVID e altri momenti rilevanti, co
 
     \bottomrule
     \noalign{\vspace{10pt}}
-    \caption[Confronto delle correlazioni.]{Confronto delle correlazioni. \newline Note: correlazioni statiche calcolate sui residui standardizzati dell'EGARCH(1,1)-t. Fase pre-dazi: dal 1° gennaio 2016 al 31 dicembre 2024; periodo dei dazi: dal 1° gennaio 2025 al 31 agosto 2026. Il test è la differenza di Fisher tra due correlazioni indipendenti ed è approssimato, perché assume osservazioni indipendenti.}
+    \caption[Confronto delle correlazioni.]{Confronto delle correlazioni. \newline Note: correlazioni statiche calcolate sui residui standardizzati dell'EGARCH(1,1)-t. Fase pre-2025: dal 1° gennaio 2016 al 31 dicembre 2024; periodo dei dazi: dal 1° gennaio 2025 al 31 agosto 2026. Il test è la differenza di Fisher tra due correlazioni indipendenti ed è approssimato, perché assume osservazioni indipendenti.}
     \label{tab:confronto-correlazioni}
     \endlastfoot
 
@@ -343,7 +333,7 @@ la guerra commerciale del 2018--19 e la fase COVID e altri momenti rilevanti, co
 \end{longtable}
 }
 
-La Tabella \ref{tab:confronto-correlazioni} mostra risposte eterogenee nel passaggio dalla fase pre-dazi (2016--2024) a quella dei dazi (2025--2026). La correlazione 
+La Tabella \ref{tab:confronto-correlazioni} mostra risposte eterogenee nel passaggio dalla fase pre-2025 (2016--2024) a quella dei dazi (2025--2026). La correlazione 
 tra SPY e oro aumenta da 0,028 a 0,166 e la differenza è statisticamente significativa ($p = 0,009$).
 
 Per Nucor e GM la correlazione si riduce da 0,396 a 0,220 e la riduzione è altamente significativa ($p < 0,001$). La coppia S\&P 500 (SPY)-USD/CNH resta invece moderatamente 
@@ -357,10 +347,10 @@ Questi valori rappresentano le medie dell'intero periodo e non mostrano come la 
     \label{fig:corr-sp500-oro}
 \end{figure}
 
-Il grafico in Figura \ref{fig:corr-sp500-oro} mostra la correlazione \emph{rolling} a 62 sedute tra SPY e oro. Nel periodo pre-dazi la relazione alterna fasi di 
-correlazione prossima a zero o negativa, coerenti con il ruolo di bene rifugio, a fasi di crescita moderata, con occasionali uscite dalle bande. All'inizio del 2025 
-la correlazione presenta una forte discesa, per poi risalire rapidamente fino al massimo dell'intero campione nel 2026. Il rialzo suggerisce che, in una fase degli shock, 
-oro e azionario abbiano risposto a fattori comuni, con una possibile riduzione del beneficio di diversificazione dell'oro nei momenti di stress.
+Il grafico in Figura \ref{fig:corr-sp500-oro} mostra la correlazione \emph{rolling} a 62 sedute tra SPY e oro. Nel periodo pre-2025 la relazione alterna fasi di 
+correlazione prossima a zero o negativa, coerenti con il ruolo di bene rifugio, a fasi di crescita moderata, con occasionali uscite dalle bande. Dopo i primi annunci tariffari, 
+la correlazione scende sotto la banda inferiore: l'oro si muove in direzione opposta all'azionario, in linea con il suo ruolo di bene rifugio. Successivamente la correlazione risale 
+rapidamente e raggiunge nel 2026 il massimo dell'intero campione, superando la banda superiore, il che suggerisce una possibile riduzione del beneficio di diversificazione dell'oro rispetto al periodo precedente.
 
 \begin{figure}[H]
     \centering

@@ -105,16 +105,16 @@ alla leptocurtosi, al \emph{volatility clustering} e all'effetto leva.
 
 
 \subsection{Stazionarietà}
-La stazionarietà è un requisito di base per l'analisi delle serie storiche: un processo è stazionario quando media, varianza e struttura di 
-autocorrelazione restano costanti nel tempo. Quando queste proprietà cambiano nel tempo, la serie è non stazionaria, spesso a causa della 
-presenza di \emph{trend} o radici unitarie. Tale condizione si verifica empiricamente tramite appositi test, come quello di Dickey e 
-Fuller\cite{dickey:estimators} e la sua estensione, l'\gls{adf}.
+In accordo con Hamilton\cite{hamilton:timeseries}, una serie storica si definisce stazionaria in senso debole se la sua media e la 
+varianza sono finite e costanti nel tempo e se la covarianza tra due osservazioni dipende solo dalla loro distanza temporale, risultando indipendente dal 
+momento della rilevazione e implicando una struttura di autocorrelazione stabile nel tempo. Per verificare empiricamente la presenza di radici unitarie, 
+che violerebbero la condizione di stazionarietà, si applicano test come quello di Dickey e Fuller\cite{dickey:estimators} e la sua estensione, l'\gls{adf}.
 
 Per i rendimenti finanziari, la stazionarietà garantisce l'esistenza di una varianza incondizionata finita, attorno alla quale si muove la 
 volatilità condizionata. A seguito di uno shock sui prezzi, l'incertezza non aumenta senza limite, ma tende a tornare progressivamente verso 
 il suo livello medio di lungo periodo.
 
-Nei modelli GARCH che verranno trattati, Bollerslev\cite{bollerslev:garch} mostra che, con coefficienti non negativi, il processo è stazionario 
+Nel modello GARCH, Bollerslev\cite{bollerslev:garch} mostra che, con coefficienti non negativi, il processo è stazionario 
 in senso lato quando la somma dei coefficienti ARCH e GARCH è minore di 1. In questo caso la varianza incondizionata è costante e finita 
 e gli shock di mercato hanno un effetto solo temporaneo sulla volatilità.
 

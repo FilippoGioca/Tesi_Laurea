@@ -20,50 +20,48 @@ statistiche descrittive e l'analisi esplorativa preliminare.
 Per cogliere le diverse dinamiche innescate dai dazi, il campione comprende sei strumenti finanziari appartenenti a categorie di mercato distinte 
 (una materia prima, un indice azionario, una valuta e tre titoli azionari), scelti per verificare se le reazioni sono eterogenee rispetto allo stesso shock tariffario.
 
-\paragraph{Oro}
-Metallo prezioso classificato come materia prima (\emph{commodity}) e inserito nel campione in quanto tradizionalmente considerato un bene rifugio. Si utilizza la 
+\begin{itemize}
+
+\item \textbf{Oro}: Metallo prezioso classificato come materia prima (\emph{commodity}) e inserito nel campione in quanto tradizionalmente considerato un bene rifugio. Si utilizza la 
 quotazione \emph{spot} in dollari per oncia troy. 
 Come definito da Baur e McDermott\cite{baur:gold}, un bene rifugio è un asset non correlato o negativamente correlato con un altro strumento o portafoglio in determinati 
 periodi di stress, ad esempio nei periodi di calo dei mercati azionari. Nel presente contesto la sua inclusione permette di valutare se, e in che misura, la volatilità 
 dell'oro risponde agli shock tariffari, e di confrontarne il comportamento con quello degli altri asset.
 
-\paragraph{S\&P 500}
-Indice che misura la performance di 500 grandi società statunitensi selezionate in base a criteri di dimensione, liquidità e altri requisiti. Il peso di ciascuna azienda 
-all'interno dell'indice è proporzionale al valore totale delle sue azioni liberamente scambiabili sul mercato (\emph{\gls{free-float}}). Rappresenta un 
+\item \textbf{S\&P 500}: Indice che misura la performance di 500 grandi società statunitensi selezionate in base a criteri di dimensione, liquidità e altri requisiti. Il peso di ciascuna azienda 
+all'interno dell'indice è proporzionale al valore totale delle sue azioni liberamente scambiabili sul mercato (\emph{\gls{free-float}})\cite{sp:methodology}. Rappresenta un 
 riferimento consolidato per l'andamento complessivo del mercato azionario statunitense.
 
 Nell'analisi l'indice è rappresentato dall'ETF SPDR S\&P 500 (SPY), che ne replica la performance, poiché i dati dell'indice non erano disponibili nella piattaforma 
 utilizzata. La sua inclusione permette di distinguere la reazione complessiva del mercato azionario ai dazi rispetto alle dinamiche delle singole azioni. I tre titoli 
 azionari considerati fanno parte dell'indice, per cui i loro rendimenti non sono indipendenti da quelli dello SPY.
 
-\paragraph{USD/CNH}
-Tasso di cambio tra il dollaro statunitense e il renminbi quotato sul mercato \emph{offshore}. Il prezzo del CNH si forma sul mercato \emph{offshore} in base alle forze di 
-mercato, mentre il CNY \emph{onshore} è gestito dalla \emph{People's Bank of China} (PBOC) attraverso un tasso centrale di riferimento e una banda di oscillazione giornaliera.
+\item \textbf{USD/CNH}: Tasso di cambio tra il dollaro statunitense e il renminbi quotato sul mercato \emph{offshore}. Il prezzo del CNH si forma sul mercato \emph{offshore} in base alle forze di 
+mercato, mentre il CNY \emph{onshore} è gestito dalla \emph{People's Bank of China} (PBOC) attraverso un tasso centrale di riferimento e una banda di oscillazione giornaliera\cite{bis:cnh}.
 
 L'inclusione del tasso di cambio permette di misurare la reazione del mercato valutario agli shock tariffari. Si è scelto il CNH perché i suoi prezzi riflettono più 
 direttamente la reazione del mercato a questi shock. Inoltre, la serie \emph{offshore} viene quotata anche durante alcune delle festività nazionali cinesi e ciò riduce il 
 rischio di trattare giornate mancanti o rendimenti artificialmente nulli, seguiti da picchi di volatilità alla riapertura del mercato.
 
-\paragraph{Nucor}
-Uno dei maggiori produttori di acciaio e prodotti siderurgici, che utilizza rottami ferrosi come materia prima e opera prevalentemente sul mercato interno nordamericano. 
+\item \textbf{Nucor}: Uno dei maggiori produttori di acciaio e prodotti siderurgici, che utilizza rottami ferrosi come materia prima e opera prevalentemente sul mercato interno nordamericano. 
 I suoi margini di profitto sono sensibili alle decisioni di politica commerciale; il ripristino e l'ampliamento dei dazi sull'acciaio nel 2025 hanno verosimilmente favorito 
 l'azienda limitando l'ingresso nel mercato interno di acciaio estero a basso costo. Una potenziale rimozione di tali dazi potrebbe esporre l'azienda a un forte aumento delle 
-importazioni di materiale straniero, generando una pressione al ribasso sui prezzi dell'acciaio statunitense.
+importazioni di materiale straniero, generando una pressione al ribasso sui prezzi dell'acciaio statunitense\cite{sec:nucor}.
 
-\paragraph{General Motors (GM)}
-Società attiva nella progettazione, produzione e vendita di veicoli, oltre che nella fornitura di servizi basati su software e abbonamenti a livello globale. Molte operazioni 
+\item \textbf{General Motors (GM)}: Società attiva nella progettazione, produzione e vendita di veicoli, oltre che nella fornitura di servizi basati su software e abbonamenti a livello globale. Molte operazioni 
 fondamentali (specialmente in Cina e, per la produzione di batterie, in Nord America) sono gestite tramite \emph{joint venture} e la espongono al rischio politico e 
 commerciale legato alla Cina.
 
 Nel mercato cinese, l'azienda affronta una concorrenza aggressiva da parte di produttori nazionali in forte crescita e vede la propria operatività condizionata dalle 
 continue tensioni commerciali tra USA e Cina. Parallelamente, sul fronte interno, GM subisce l'aumento dei costi di produzione a causa dei dazi americani su acciaio e 
-alluminio, oltre a quelli sulle importazioni di veicoli e componenti.
+alluminio, oltre a quelli sulle importazioni di veicoli e componenti\cite{sec:gm}.
 
-\paragraph{Apple Inc.}
-Una delle società a maggiore capitalizzazione al mondo, operante nel settore tecnologico. Progetta e commercializza elettronica di consumo, ma la quasi totalità della 
-produzione è affidata a partner esterni situati principalmente in Cina continentale, India, Giappone, Corea del Sud, Taiwan e Vietnam. Le restrizioni al commercio 
+\item \textbf{Apple Inc.}: Una delle società a maggiore capitalizzazione al mondo, operante nel settore tecnologico. Progetta e commercializza elettronica di consumo, ma la quasi totalità della 
+produzione è affidata a partner esterni situati principalmente in Cina continentale, India, Giappone, Corea del Sud, Taiwan e Vietnam\cite{sec:apple}. Le restrizioni al commercio 
 internazionale, come i dazi, possono aumentare i costi o limitare la disponibilità dei componenti, delle terre rare e delle altre materie prime necessarie alla produzione. 
 Tale struttura la rende vulnerabile a rincari o a interruzioni della \emph{supply chain} in caso di tensioni commerciali.
+
+\end{itemize}
 
 
 \section{Identificazione degli eventi esogeni}
@@ -74,58 +72,55 @@ le misure tariffarie rivolte a Paesi terzi sono state tralasciate, a meno che no
 Per garantire la coerenza dell'analisi empirica, gli annunci avvenuti a mercati chiusi, durante i fine settimana o nei giorni festivi, sono stati associati alla data della 
 prima sessione di negoziazione utile. Di seguito si riportano gli eventi selezionati.
 
-\paragraph{1° febbraio 2025: Provvedimento anti-Fentanyl}
-L'amministrazione statunitense ha annunciato l'imposizione di nuovi dazi per motivi di sicurezza nazionale e salute pubblica, per contrastare il traffico illegale di 
+\begin{itemize}
+
+\item \textbf{1° febbraio 2025: Provvedimento anti-Fentanyl} L'amministrazione statunitense ha annunciato l'imposizione di nuovi dazi per motivi di sicurezza nazionale e salute pubblica, per contrastare il traffico illegale di 
 Fentanyl. Nello specifico, il provvedimento prevedeva tariffe del 25\% sulle importazioni da Canada e Messico (identificati come principali corridoi di transito) e 
 del 10\% verso la Cina, accusata di non aver bloccato l'esportazione di composti chimici primari. L'entrata in vigore era fissata per martedì 4 febbraio, ma grazie al 
 raggiungimento di un accordo i dazi verso i partner nordamericani sono stati sospesi, a differenza di quelli verso Pechino. Poiché l'annuncio è avvenuto di sabato, 
-lo shock è stato prezzato a partire da lunedì 3 febbraio, data in cui è stata posizionata la variabile indicatrice.
+lo shock è stato prezzato a partire da lunedì 3 febbraio, data in cui è stata posizionata la variabile indicatrice\cite{whitehouse:fentanyl}.
 
-\paragraph{2 aprile 2025: Liberation Day}
-Durante l'evento pubblico \emph{Liberation Day}, il Presidente statunitense ha presentato un importante piano tariffario, articolato in dazi di base e tariffe reciproche, 
+\item \textbf{2 aprile 2025: Liberation Day} Durante l'evento pubblico \emph{Liberation Day}, il Presidente statunitense ha presentato un importante piano tariffario, articolato in dazi di base e tariffe reciproche, 
 con entrata in vigore il 5 e il 9 aprile. Era prevista una tariffa minima del 10\% su tutte le importazioni globali (al netto di specifiche categorie), con un inasprimento 
 verso alcune nazioni, prima fra tutte la Cina, soggetta ad un'aliquota del 34\%. Poiché il discorso è avvenuto alle 16:00 EDT in coincidenza con la chiusura di Wall Street, lo shock si è scaricato interamente alla riapertura 
-dei mercati il giorno successivo, giovedì 3 aprile.
+dei mercati il giorno successivo, giovedì 3 aprile\cite{whitecase:liberation}.
 
-\paragraph{9 aprile 2025: Escalation bilaterale}
-Nella serata dell'8 aprile 2025, a mercati finanziari chiusi, l'amministrazione statunitense ha emanato un ordine esecutivo volto a innalzare l'aliquota sulle importazioni 
+\item \textbf{9 aprile 2025: Escalation bilaterale} Nella serata dell'8 aprile 2025, a mercati finanziari chiusi, l'amministrazione statunitense ha emanato un ordine esecutivo volto a innalzare l'aliquota sulle importazioni 
 dalla Cina all'84\%. Il giorno successivo, in risposta al provvedimento precedente, Pechino ha annunciato l'imposizione di una tariffa ritorsiva dell'84\% sulle merci 
 statunitensi, con decorrenza dal giorno seguente. Come controrisposta gli Stati Uniti hanno sospeso per 90 giorni le tariffe del \emph{Liberation Day} verso la maggior 
 parte dei partner commerciali (mantenendo l'aliquota base del 10\%), innalzando però al 125\% il prelievo verso la Cina. 
-Poiché il provvedimento iniziale è avvenuto a contrattazioni concluse, l'intero shock è stato prezzato il 9 aprile, giornata in cui è stata posizionata la variabile indicatrice.
+Poiché il provvedimento iniziale è avvenuto a contrattazioni concluse, l'intero shock è stato prezzato il 9 aprile, giornata in cui è stata posizionata la variabile indicatrice\cite{whitehouse:escalation}.
 
-\paragraph{12 maggio 2025: Vertice di Ginevra}
-A seguito di un incontro diplomatico tenutosi a Ginevra, i funzionari di Stati Uniti e Cina hanno siglato un primo accordo per allentare le tensioni commerciali. Le due 
+\item \textbf{12 maggio 2025: Vertice di Ginevra} A seguito di un incontro diplomatico tenutosi a Ginevra, i funzionari di Stati Uniti e Cina hanno siglato un primo accordo per allentare le tensioni commerciali. Le due 
 potenze hanno revocato le misure adottate nel mese di aprile, portando l'aliquota al 10\% sulle importazioni statunitensi e al 30\% su quelle cinesi a partire da mercoledì 
 14 maggio, innescando una reazione positiva sui mercati azionari. Poiché la notizia è stata diffusa nella giornata di lunedì 12 maggio, lo shock è stato prezzato in tale 
-seduta, data in cui è stata posizionata la variabile indicatrice.
+seduta, data in cui è stata posizionata la variabile indicatrice\cite{csis:deescalation}.
 
-\paragraph{9-10 ottobre 2025: Crisi delle terre rare}
-Il 9 ottobre il Ministero del Commercio cinese ha annunciato nuove misure sui controlli extraterritoriali per alcuni articoli di fabbricazione estera contenenti terre 
-rare di origine cinese. Il giorno successivo, in risposta alla mossa precedente, il Presidente statunitense ha annunciato un'\emph{escalation} commerciale, minacciando un 
+\item \textbf{9-10 ottobre 2025: Crisi delle terre rare} Il 9 ottobre il Ministero del Commercio cinese ha annunciato nuove misure sui controlli extraterritoriali per alcuni articoli di fabbricazione estera contenenti terre 
+rare di origine cinese\cite{jonesday:rareearth}. Il giorno successivo, in risposta alla mossa precedente, il Presidente statunitense ha annunciato un'\emph{escalation} commerciale, minacciando un 
 dazio aggiuntivo del 100\% sulle importazioni cinesi con decorrenza dal 1° novembre 2025, accompagnato da restrizioni più severe sull'export di tecnologie avanzate e 
 software verso Pechino. Poiché gli eventi si sono concentrati in due giornate consecutive a mercati aperti, l'intero periodo costituisce la finestra temporale esatta in 
-cui è stata posizionata la variabile indicatrice.
+cui è stata posizionata la variabile indicatrice\cite{guardian:tariffs}.
 
-\paragraph{30 ottobre 2025: Accordo di Busan}
-A seguito di un incontro tenutosi a Busan (Corea del Sud) tra il Presidente Donald Trump e il Presidente Xi Jinping, Stati Uniti e Cina hanno annunciato un accordo volto 
+\item \textbf{30 ottobre 2025: Accordo di Busan} A seguito di un incontro tenutosi a Busan (Corea del Sud) tra il Presidente Donald Trump e il Presidente Xi Jinping, Stati Uniti e Cina hanno annunciato un accordo volto 
 a sospendere le misure adottate nel mese di ottobre (la minaccia del dazio al 100\% e i controlli sulle terre rare). L'intesa, inoltre, ha riportato il dazio legato al 
 Fentanyl dal 20\% (provvedimento di marzo) al 10\% e ha impegnato la Cina a sospendere tutti i dazi di ritorsione imposti agli Stati Uniti a partire da marzo 2025. 
-Lo shock è stato prezzato nella medesima seduta del 30 ottobre, data in cui è stata posizionata la variabile indicatrice.
+Lo shock è stato prezzato nella medesima seduta del 30 ottobre, data in cui è stata posizionata la variabile indicatrice\cite{mofo:agreement}.
 
-\paragraph{20 febbraio 2026: Sentenza della Corte Suprema}
-La Corte Suprema degli Stati Uniti ha annullato i dazi imposti nel corso del 2025 alla Cina e ad altri partner commerciali, dichiarando illegittimo l'utilizzo 
+\item \textbf{20 febbraio 2026: Sentenza della Corte Suprema} La Corte Suprema degli Stati Uniti ha annullato i dazi imposti nel corso del 2025 alla Cina e ad altri partner commerciali, dichiarando illegittimo l'utilizzo 
 dell'IEEPA (\emph{International Emergency Economic Powers Act}) e aprendo alla possibilità, per le imprese importatrici, di richiedere rimborsi tariffari. In risposta 
 alla sentenza, l'amministrazione statunitense ha invocato la \emph{Section 122} del \emph{Trade Act} del 1974 (una norma emergenziale per far fronte a gravi deficit della 
 bilancia dei pagamenti), annunciando l'imposizione di un dazio globale del 10\% sulla maggior parte delle importazioni mondiali, con entrata in vigore fissata per martedì 
 24 febbraio 2026. Poiché il 20 febbraio era un venerdì, la finestra di evento, costituita da due sedute, ingloba il fine settimana, permettendo di catturare una reazione 
-di mercato più completa in vista dell'entrata in vigore dei dazi fissata per il martedì successivo.
+di mercato più completa in vista dell'entrata in vigore dei dazi fissata per il martedì successivo\cite{crs:ieepa}.
+
+\end{itemize}
 
 
 Per quantificare l'impatto immediato di questi eventi viene osservata la reazione di mercato a ridosso degli annunci. La Tabella \ref{tab:rendimenti-cumulati} riporta 
 il log-rendimento cumulato (\%) nelle due sedute della finestra di ciascun evento. Il \emph{Liberation Day} (2 aprile) causa i ribassi maggiori 
-(Nucor $-17,6\%$, Apple $-17,3\%$, SPY $-11,1\%$), mentre l'\emph{escalation} del 9 aprile coincide con forti rialzi per tutti gli strumenti tranne USD/CNH, 
-dovuti alla sospensione dei dazi reciproci e alla nuova tariffa verso la Cina.
+(Nucor $-17,6\%$, Apple $-17,3\%$, SPY $-11,1\%$), mentre il 9 aprile, giorno dell'annuncio della sospensione per 90 giorni dei dazi reciproci e dell'aumento 
+delle tariffe verso la Cina, coincide con forti rialzi per tutti gli strumenti tranne USD/CNH.
 
 Le reazioni sono eterogenee per segno e dimensione, infatti lo stesso evento provoca reazioni diverse a seconda dello strumento finanziario.
 
@@ -134,7 +129,7 @@ Le reazioni sono eterogenee per segno e dimensione, infatti lo stesso evento pro
     \footnotesize
     \begin{tabular}{ p{0.16\textwidth} p{0.10\textwidth} p{0.10\textwidth} p{0.10\textwidth} p{0.10\textwidth} p{0.10\textwidth} p{0.10\textwidth} }
         \toprule
-        \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \begin{tabular}{@{}c@{}}\textbf{S\&P 500 (SPY)}\\\textbf{(SPY)}\end{tabular} & \textbf{USD/\newline CNH} \\
+        \textbf{Evento} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \begin{tabular}{@{}c@{}}\textbf{S\&P 500}\\\textbf{(SPY)}\end{tabular} & \textbf{USD/\newline CNH} \\
         \midrule
         1° febbraio & 1,45 & 1,84 & -1,82 & -1,37 & -0,01 & -0,46 \\ \midrule
         2 aprile & -3,12 & -17,56 & -8,25 & -17,27 & -11,09 & 0,00 \\ \midrule
@@ -198,10 +193,10 @@ L'effetto complessivo degli eventi tariffari viene valutato affiancando il test 
 un test di Wald congiunto, ponendo come ipotesi nulla $H_0: \lambda_1 = \dots = \lambda_K = 0$, mentre l'impatto di ogni  
 singolo evento è verificato individualmente tramite le classiche statistiche $t$.
 
-Poiché le variabili dummy si attivano in corrispondenza di sole due osservazioni, lo stimatore robusto della matrice di covarianza
-perde le sue proprietà asintotiche, rischiando di generare statistiche di test instabili e sovradimensionate. Per avere una maggiore 
-affidabilità dei risultati ed evitare il rischio di falsi positivi, i livelli di significatività e i test d'ipotesi si basano solamente 
-sugli errori standard classici.
+Poiché le variabili dummy si attivano in corrispondenza di sole due osservazioni, le proprietà asintotiche su cui si basano le statistiche 
+di test non sono pienamente soddisfatte, né per gli stimatori robusti né per gli errori standard classici. In questa analisi i livelli di 
+significatività e i test d'ipotesi si basano sugli errori standard classici; questa scelta costituisce un limite dello studio e i p-value associati ai 
+singoli eventi vanno letti come indicativi.
 
 
 \section{Analisi preliminare dei dati}
@@ -209,36 +204,27 @@ Prima di procedere con la stima dei modelli della classe GARCH, è necessario an
 esaminato il comportamento dei log-prezzi e rendimenti giornalieri per verificare la presenza dei fatti stilizzati delle serie finanziarie, oltre a testare le ipotesi 
 di stazionarietà e normalità.
 
-{
-\footnotesize
-\begin{longtable}{ p{0.15\textwidth} p{0.10\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.10\textwidth} }
-\toprule
-\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/\newline CNH} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/\newline CNH} \\
-\midrule
-\endhead
-\midrule
-\noalign{\vspace{10pt}}
-\caption[]{Statistiche descrittive dei rendimenti giornalieri.} \\
-\endfoot
-\bottomrule
-\noalign{\vspace{10pt}}
-\caption{Statistiche descrittive dei rendimenti giornalieri (valori percentuali).}
-\label{tab:stat-descrittive}
-\endlastfoot
-\textbf{N} & 2766 & 2679 & 2679 & 2679 & 2679 & 2782 \\ \midrule
-\textbf{Minimo} & -10,3517 & -15,6758 & -19,0227 & -13,7708 & -11,5887 & -2,1249 \\ \midrule
-\textbf{Massimo} & 5,6918 & 14,8375 & 18,1848 & 14,2617 & 9,9863 & 1,7523 \\ \midrule
-\textbf{Media} & 0,0518 & 0,0774 & 0,0438 & 0,0968 & 0,0500 & 0,0008 \\ \midrule
-\textbf{Mediana} & 0,0666 & 0,0991 & 0,0825 & 0,1123 & 0,0693 & 0,0057 \\ \midrule
-\textbf{Dev. Std.} & 1,0057 & 2,2530 & 2,2901 & 1,8211 & 1,1248 & 0,2947 \\ \midrule
-\textbf{Asimmetria} & -0,6106 & -0,1682 & -0,0524 & -0,1238 & -0,5923 & -0,4154 \\ \midrule
-\textbf{Curtosi (ecc.)} & 7,1491 & 4,7620 & 7,1275 & 6,5258 & 14,8702 & 4,8879 \\
-\end{longtable}
-}
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \begin{tabular}{ p{0.15\textwidth} p{0.10\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.11\textwidth} p{0.10\textwidth} }
+        \toprule
+        \textbf{Statistica} & \textbf{Oro} & \textbf{Nucor} & \textbf{GM} & \textbf{Apple} & \textbf{S\&P 500 (SPY)} & \textbf{USD/\newline CNH} \\
+        \midrule
+        \textbf{N} & 2766 & 2679 & 2679 & 2679 & 2679 & 2782 \\ \midrule
+        \textbf{Minimo} & -10,3517 & -15,6758 & -19,0227 & -13,7708 & -11,5887 & -2,1249 \\ \midrule
+        \textbf{Massimo} & 5,6918 & 14,8375 & 18,1848 & 14,2617 & 9,9863 & 1,7523 \\ \midrule
+        \textbf{Media} & 0,0518 & 0,0774 & 0,0438 & 0,0968 & 0,0500 & 0,0008 \\ \midrule
+        \textbf{Mediana} & 0,0666 & 0,0991 & 0,0825 & 0,1123 & 0,0693 & 0,0057 \\ \midrule
+        \textbf{Dev. Std.} & 1,0057 & 2,2530 & 2,2901 & 1,8211 & 1,1248 & 0,2947 \\ \midrule
+        \textbf{Asimmetria} & -0,6106 & -0,1682 & -0,0524 & -0,1238 & -0,5923 & -0,4154 \\ \midrule
+        \textbf{Curtosi (ecc.)} & 7,1491 & 4,7620 & 7,1275 & 6,5258 & 14,8702 & 4,8879 \\
+        \bottomrule
+    \end{tabular}
+    \vspace{5pt}
+    \caption[Statistiche descrittive dei rendimenti giornalieri]{Statistiche descrittive dei rendimenti giornalieri (valori percentuali).}
+    \label{tab:stat-descrittive}
+\end{table}
 {\footnotesize \noindent \emph{Note:} N è il numero di log-rendimenti giornalieri, che varia tra le serie per i diversi calendari di contrattazione. I valori sono espressi in punti percentuali; curtosi in eccesso (K - 3).\par}
 \vspace{1em}
 
@@ -265,38 +251,29 @@ con l'effetto leva, che riguarda la risposta della volatilità condizionata agli
 Infine, per tutti gli asset la curtosi in eccesso è positiva (nulla per la distribuzione normale) e compresa tra 4,76 e 14,87, con il valore più alto per l'SPY: 
 le distribuzioni sono quindi leptocurtiche.
 
-\begin{longtable}{ p{0.30\textwidth} p{0.30\textwidth} p{0.30\textwidth} }
-\toprule
-\textbf{Asset} & \textbf{Statistica JB} & \textbf{\emph{p-value}} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Asset} & \textbf{Statistica JB} & \textbf{\emph{p-value}} \\
-\midrule
-\endhead
-
-\midrule
-\noalign{\vspace{10pt}}
-\caption[]{Test di Jarque-Bera.} \\
-\endfoot
-
-\bottomrule
-\noalign{\vspace{10pt}}
-\caption{Test di Jarque-Bera.}
-\label{tab:jarque-bera}
-\endlastfoot
-
-Oro & 6074,61 & $< 0,001$ \\ \midrule
-Nucor & 2550,07 & $< 0,001$ \\ \midrule
-GM & 5683,93 & $< 0,001$ \\ \midrule
-Apple & 4770,88 & $< 0,001$ \\ \midrule
-S\&P 500 (SPY) & 24884,11 & $< 0,001$ \\ \midrule
-USD/CNH & 2855,94 & $< 0,001$ \\
-\end{longtable}
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \begin{tabular}{ p{0.30\textwidth} p{0.30\textwidth} p{0.30\textwidth} }
+        \toprule
+        \textbf{Asset} & \textbf{Statistica JB} & \textbf{\emph{p-value}} \\
+        \midrule
+        Oro & 6074,61 & $< 0,001$ \\ \midrule
+        Nucor & 2550,07 & $< 0,001$ \\ \midrule
+        GM & 5683,93 & $< 0,001$ \\ \midrule
+        Apple & 4770,88 & $< 0,001$ \\ \midrule
+        S\&P 500 (SPY) & 24884,11 & $< 0,001$ \\ \midrule
+        USD/CNH & 2855,94 & $< 0,001$ \\
+        \bottomrule
+    \end{tabular}
+    \vspace{5pt}
+    \caption[Test di Jarque-Bera]{Test di Jarque-Bera.}
+    \label{tab:jarque-bera}
+\end{table}
 
 \begin{table}[H]
     \centering
+    \footnotesize
     \begin{tabular}{ p{0.20\textwidth} p{0.16\textwidth} p{0.16\textwidth} p{0.16\textwidth} p{0.16\textwidth} }
         \toprule
         \textbf{Asset} & \textbf{Stat. (prezzi)} & \textbf{\emph{p-value} (prezzi)} & \textbf{Stat. (rend.)} & \textbf{\emph{p-value} (rend.)} \\
@@ -322,19 +299,19 @@ a 0,001 e valori della statistica test estremamente elevati. Questo risultato in
 distribuzione degli errori a code pesanti come la $t$ di Student. Il test, valutando congiuntamente asimmetria e curtosi, conferma le caratteristiche della distribuzione 
 già evidenziate nell'analisi descrittiva.
 
-Per verificare la condizione di stazionarietà richiesta dai modelli GARCH, è stato applicato il test Augmented Dickey-Fuller (ADF). Come evidenziato nella 
+Per verificare la stazionarietà della serie, è stato applicato il test Augmented Dickey-Fuller (ADF). Come evidenziato nella 
 Tabella \ref{tab:test-adf}, il test condotto sui log-prezzi non permette di rifiutare l'ipotesi nulla di radice unitaria al livello di significatività del 5\% per nessuna 
 delle serie analizzate; nel caso dell'SPY, il \emph{p-value} (0,075) rifiuterebbe a un livello di significatività del 10\%, ma non a quello considerato. 
-Tale risultato è coerente con la non stazionarietà dei prezzi. 
+Tale risultato è coerente con la non stazionarietà dei prezzi e giustifica l’utilizzo dei rendimenti.
 
 Passando invece al test sui rendimenti, la statistica del test restituisce per tutti gli asset un \emph{p-value} inferiore a 0,01. Questo porta a rifiutare l'ipotesi nulla, 
 indicando che le serie dei rendimenti risultano stazionarie, condizione necessaria per procedere con le stime dei punti successivi.
 
 
-\section{Analisi esplorativa preliminare}
+\section{Verifica degli effetti ARCH}
 \label{sec:analisi-esplorativa}
 Questa sezione esamina la struttura dei log-rendimenti, per verificare se è necessario l'utilizzo di modelli a volatilità condizionata nelle serie prese in considerazione. 
-Inizialmente si osserva l'andamento di prezzi e log-rendimenti per poi proseguire con l'analisi dei correlogrammi (ACF) per i log-rendimenti e per i residui al quadrato, 
+Inizialmente si osserva l'andamento di prezzi e log-rendimenti per poi proseguire con l'analisi dei correlogrammi (ACF) per i log-rendimenti e per i log-rendimenti al quadrato, 
 validata tramite l'applicazione del test di Ljung-Box. Infine, il test ARCH-LM verifica la presenza di effetti ARCH, fornendo evidenza del \emph{volatility clustering}.
 
 Un primo controllo visivo delle serie storiche permette di cogliere le dinamiche strutturali del mercato. La Figura \ref{fig:prezzi-rendimenti} illustra l'andamento per 
@@ -418,7 +395,7 @@ caratteristiche empiriche conferma la presenza di eteroschedasticità condiziona
 
 \subsection{Test ARCH-LM di Engle}
 Per confermare ulteriormente l'utilizzo di modelli GARCH per la modellazione delle serie, è stato condotto il test ARCH-LM considerando 1, 5 e 10 ritardi nella 
-regressione dei residui al quadrato, permettendo di verificare la persistenza del fenomeno su diversi orizzonti temporali. 
+regressione dei log-rendimenti al quadrato, permettendo di verificare la persistenza del fenomeno su diversi orizzonti temporali. 
 
 Tutti i test mostrano statistiche elevate e \emph{p-value} molto piccoli per tutte le serie storiche in esame, indicando la presenza di eteroschedasticità condizionata 
 in tutte le serie e la dipendenza della varianza dagli shock passati. L'esito del test conferma quindi la presenza di effetti ARCH nell'intero campione, giustificando 

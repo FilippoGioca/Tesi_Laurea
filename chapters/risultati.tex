@@ -303,35 +303,26 @@ nel periodo pre-2025, delimitando l'intervallo contenente i movimenti della corr
 insolita rispetto alla fase pre-2025, ma non corrisponde a un test in quanto le finestre sovrapposte sono fortemente autocorrelate. Inoltre il periodo pre-2025 comprende 
 la guerra commerciale del 2018--19, la fase COVID e altri momenti rilevanti, costituendo solo un riferimento e non un periodo privo di tensioni.
 
-{
-\footnotesize
-\begin{longtable}{ l p{0.13\textwidth} p{0.12\textwidth} p{0.13\textwidth} p{0.09\textwidth} p{0.10\textwidth} }
-    \toprule
-    \textbf{Coppie} & \textbf{Corr.}\newline \textbf{pre-2025} & \textbf{Corr.}\newline \textbf{periodo}\newline \textbf{dazi} & \textbf{Differenza} & \textbf{z} & \textbf{\emph{p-value}} \\
-    \midrule
-    \endfirsthead
-
-    \toprule
-    \textbf{Coppie} & \textbf{Corr.}\newline \textbf{pre-2025} & \textbf{Corr.}\newline \textbf{periodo}\newline \textbf{dazi} & \textbf{Differenza} & \textbf{z} & \textbf{\emph{p-value}} \\
-    \midrule
-    \endhead
-
-    \midrule
-    \noalign{\vspace{10pt}}
-    \caption[]{Confronto delle correlazioni statiche.} \\
-    \endfoot
-
-    \bottomrule
-    \noalign{\vspace{10pt}}
-    \caption[Confronto delle correlazioni.]{Confronto delle correlazioni. \newline Note: correlazioni statiche calcolate sui residui standardizzati dell'EGARCH(1,1)-t. Fase pre-2025: dal 1° gennaio 2016 al 31 dicembre 2024; periodo dei dazi: dal 1° gennaio 2025 al 31 agosto 2026. Il test di Fisher confronta due correlazioni indipendenti ed è approssimato, perché assume osservazioni indipendenti.}
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \begin{tabular}{ p{0.28\textwidth} p{0.12\textwidth} p{0.12\textwidth} p{0.12\textwidth} p{0.08\textwidth} p{0.10\textwidth} }
+        \toprule
+        \textbf{Coppie} & \textbf{Corr.}\newline \textbf{pre-2025} & \textbf{Corr.}\newline \textbf{periodo}\newline \textbf{dazi} & \textbf{Differenza} & \textbf{z} & \textbf{\emph{p-value}} \\
+        \midrule
+        S\&P 500 (SPY) - Oro & 0,028 & 0,166 & 0,138 & 2,60 & 0,009 \\ \midrule
+        S\&P 500 (SPY) - USD/CNH & -0,238 & -0,278 & -0,040 & -0,79 & 0,427 \\ \midrule
+        Nucor - GM & 0,396 & 0,220 & -0,176 & -3,65 & $<0,001$ \\
+        \bottomrule
+    \end{tabular}
+    \vspace{5pt}
+    \caption[Confronto delle correlazioni.]{Confronto delle correlazioni.}
     \label{tab:confronto-correlazioni}
-    \endlastfoot
-
-    S\&P 500 (SPY) - Oro & 0,028 & 0,166 & 0,138 & 2,60 & 0,009 \\ \midrule
-    S\&P 500 (SPY) - USD/CNH & -0,238 & -0,278 & -0,040 & -0,79 & 0,427 \\ \midrule
-    Nucor - GM & 0,396 & 0,220 & -0,176 & -3,65 & $<0,001$ \\
-\end{longtable}
-}
+    \vspace{2pt}
+    \begin{flushleft}
+    \emph{Note:} correlazioni statiche calcolate sui residui standardizzati dell'EGARCH(1,1)-t. Fase pre-2025: dal 1° gennaio 2016 al 31 dicembre 2024; periodo dei dazi: dal 1° gennaio 2025 al 31 agosto 2026. Il test di Fisher confronta due correlazioni indipendenti ed è approssimato, perché assume osservazioni indipendenti.
+    \end{flushleft}
+\end{table}
 
 La Tabella \ref{tab:confronto-correlazioni} mostra risposte eterogenee nel passaggio dalla fase pre-2025 (2016--2024) a quella dei dazi (2025--2026). La correlazione 
 tra SPY e oro aumenta da 0,028 a 0,166 e la differenza è statisticamente significativa ($p = 0,009$).
